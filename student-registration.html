@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration - QELE 2026</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <header class="main-header" id="main-header">
+        <div class="container">
+            <a href="index.html" class="logo"><img src="https://res.cloudinary.com/dj3vhocuf/image/upload/v1761210698/logo500x250_i8opbv.png" alt="QELE 2026 Logo"></a>
+            <button class="nav-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
+            </button>
+            <nav id="main-nav">
+                 <ul>
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link">About Expo</a></li>
+                    <li class="has-dropdown">
+                        <a href="#" class="nav-link">Visit <i class="fas fa-angle-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="why-attend.html">Why Attend</a></li>
+                            <li><a href="plan-your-trip.html">Plan Your Trip</a></li>
+                            <li><a href="workshops.html">Agenda</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <a href="#" class="nav-link">For Students <i class="fas fa-angle-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="student-registration.html">Student Registration</a></li>
+                            <li><a href="career-counselling.html">Career Counselling</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <a href="why-exhibit.html" class="nav-link">For Exhibitors <i class="fas fa-angle-down"></i></a>
+                         <ul class="dropdown-menu">
+                            <li><a href="why-exhibit.html">Why Exhibit</a></li>
+                            <li><a href="booth-features.html">Booth Features</a></li>
+                             <li><a href="booth-registration.html">Book Your Booth</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <a href="sponsorship-tiers.html" class="nav-link">For Sponsors <i class="fas fa-angle-down"></i></a>
+                         <ul class="dropdown-menu">
+                            <li><a href="sponsorship-tiers.html">Sponsorship Tiers</a></li>
+                            <li><a href="brand-exposure.html">Brand Exposure</a></li>
+                            <li><a href="sponsorship-registration.html">Become a Sponsor</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header-ctas">
+                <a href="booth-registration.html" class="btn btn-primary btn-sm">Book a Booth</a>
+                <a href="sponsorship-registration.html" class="btn btn-primary btn-sm">Sponsor Now</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Student Registration</h1>
+                <p>Secure your free spot at QELE 2026 and connect with your future.</p>
+            </div>
+        </section>
+        
+        <section id="student-registration-form-section">
+            <div class="container" style="max-width: 800px;">
+                <h2>Your Journey Starts Here</h2>
+                <p class="subtitle">Fill out the form below to get your free entry pass. We can't wait to see you!</p>
+                
+                <div id="student-form-success" style="display: none; text-align: center; background: var(--white); padding: 2.5rem; border-radius: 10px; border: 1px solid var(--border-color); box-shadow: var(--shadow);">
+                     <i class="fas fa-check-circle" style="font-size: 3rem; color: #4db6ac; margin-bottom: 1rem;" aria-hidden="true"></i>
+                     <h3>Registration Confirmed!</h3>
+                     <p>Thank you for registering for QELE 2026. Your free pass has been sent to your email address. See you at the event!</p>
+                     <a href="index.html" class="btn btn-primary" style="margin-top: 1rem;">Back to Home</a>
+                </div>
+
+                <form id="student-registration-form" novalidate style="background: var(--white); padding: 2.5rem; border-radius: 10px; border: 1px solid var(--border-color); color: var(--text-color); box-shadow: var(--shadow);">
+                    <input type="hidden" name="form_source" value="Student Registration">
+                    <div class="form-row">
+                        <
