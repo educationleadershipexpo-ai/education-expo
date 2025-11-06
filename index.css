@@ -650,8 +650,6 @@ section {
 #home-partners .logo-item img {
     height: 70px;
     max-height: 70px;
-    filter: grayscale(100%);
-    opacity: 0.8;
     transition: all 0.3s ease;
 }
 
