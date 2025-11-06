@@ -1,3510 +1,1462 @@
 
-:root {
-    --gradient: linear-gradient(to right, #d12386, #711fb8);
-    --primary-font: 'Poppins', sans-serif;
-    --heading-font: 'Montserrat', sans-serif;
-    --text-color: #333;
-    --bg-color: #ffffff;
-    --surface-color: #f8f9fa;
-    --white: #fff;
-    --border-color: #dee2e6;
-    --shadow: 0 5px 15px rgba(0,0,0,0.1);
-
-    --status-available: #b2e2d5;
-    --status-reserved: #fde293;
-    --status-sold: #f7c5d2;
-    --status-available-dark: #32816B;
-    --status-reserved-dark: #9A7714;
-    --status-sold-dark: #9F4D63;
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: var(--primary-font);
-    color: var(--text-color);
-    background-color: var(--bg-color);
-    line-height: 1.6;
-    font-size: 16px;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-h1, h2, h3, h4 {
-    font-family: var(--heading-font);
-    font-weight: 800;
-    line-height: 1.2;
-    margin-bottom: 1rem;
-}
-
-h1 { font-size: 3rem; color: var(--white); text-shadow: 2px 2px 8px rgba(0,0,0,0.7); }
-h2 { font-size: 2.5rem; text-align: center; margin-bottom: 3rem; }
-h3 { font-size: 2rem; text-align: center; margin-bottom: 2rem; margin-top: 3rem; }
-h4 { font-size: 1.5rem; margin-bottom: 0.5rem; }
-p { margin-bottom: 1rem; }
-
-section {
-    padding: 80px 0;
-}
-.bg-surface {
-    background-color: var(--surface-color);
-}
-
-
-/* --- Accessibility --- */
-:focus-visible {
-    outline: 3px solid #711fb8;
-    outline-offset: 2px;
-    box-shadow: 0 0 0 5px rgba(113, 31, 184, 0.4);
-    border-radius: 4px; /* Added for consistency */
-}
-
-.btn:focus-visible, .zoom-btn:focus-visible {
-    outline-offset: 1px;
-}
-
-/* --- Header --- */
-.main-header {
-    background: var(--white);
-    box-shadow: var(--shadow);
-    padding: 1rem 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.main-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1.5rem;
-    max-width: 1400px;
-}
-
-.logo {
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-}
-.logo img {
-    height: 65px;
-    width: auto;
-    object-fit: contain;
-}
-.logo:focus-visible {
-    outline-offset: 4px;
-}
-
-
-#main-nav {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-}
-
-#main-nav > ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1.8rem;
-    flex-wrap: nowrap;
-}
-
-.nav-link {
-    text-decoration: none;
-    color: var(--text-color);
-    font-weight: 700;
-    transition: color 0.3s;
-    font-size: 0.95rem;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    position: relative;
-    padding-bottom: 5px;
-    white-space: nowrap;
-}
-.nav-link:hover {
-    color: #d12386;
-}
-
-.nav-link.active {
-    color: #d12386;
-}
-.nav-link.active::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: #d12386;
-    border-radius: 2px;
-}
-
-
-.header-ctas {
-    display: flex;
-    gap: 0.75rem;
-    flex-shrink: 0;
-}
-
-
-/* Dropdown Menu */
-.has-dropdown {
-    position: relative;
-}
-
-.dropdown-menu {
-    display: block;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%) translateY(10px);
-    background: var(--white);
-    list-style: none;
-    padding: 0.5rem 0;
-    margin: 0;
-    margin-top: 0.75rem;
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-    min-width: 220px;
-    z-index: 1001;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.has-dropdown.dropdown-open > .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    margin-left: 50%;
-    transform: translateX(-50%) translateY(0);
-}
-
-.dropdown-menu li {
-}
-
-.dropdown-menu a {
-    display: block;
-    padding: 0.75rem 1.5rem;
-    color: var(--text-color);
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 0.95rem;
-    transition: background-color 0.2s, color 0.2s;
-    white-space: nowrap;
-}
-
-.dropdown-menu a:hover {
-    background-color: var(--surface-color);
-    color: #d12386;
-}
-
-
-/* Mobile Nav Toggle */
-.nav-toggle {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    z-index: 1001;
-}
-.nav-toggle:focus-visible {
-    outline-offset: 4px;
-}
-
-.hamburger-box {
-    width: 30px;
-    height: 24px;
-    display: inline-block;
-    position: relative;
-}
-
-.hamburger-inner {
-    display: block;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.hamburger-inner,
-.hamburger-inner::before,
-.hamburger-inner::after {
-    width: 30px;
-    height: 3px;
-    background-color: var(--text-color);
-    border-radius: 4px;
-    position: absolute;
-    transition-property: transform;
-    transition-duration: 0.15s;
-    transition-timing-function: ease;
-}
-
-.hamburger-inner::before,
-.hamburger-inner::after {
-    content: "";
-    display: block;
-}
-
-.hamburger-inner::before {
-    top: -10px;
-}
-
-.hamburger-inner::after {
-    bottom: -10px;
-}
-
-.main-header.nav-open .hamburger-inner {
-    transform: rotate(45deg);
-}
-
-.main-header.nav-open .hamburger-inner::before {
-    top: 0;
-    opacity: 0;
-}
-
-.main-header.nav-open .hamburger-inner::after {
-    bottom: 0;
-    transform: rotate(-90deg);
-}
-
-/* Mobile Nav Overlay */
-.main-header.nav-open::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 998;
-}
-
-
-/* --- Buttons --- */
-.btn {
-    display: inline-block;
-    padding: 12px 24px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 700;
-    font-family: var(--heading-font);
-    text-align: center;
-    border: 2px solid transparent;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    white-space: nowrap;
-}
-
-.btn-primary {
-    background: var(--gradient);
-    background-size: 200% auto;
-    color: var(--white);
-}
-
-.btn-primary::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -150%;
-    width: 120%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-    transform: skewX(-25deg);
-    transition: left 0.7s cubic-bezier(0.23, 1, 0.320, 1);
-    z-index: 1;
-}
-
-.btn-primary:hover {
-    background-position: right center;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(113, 31, 184, 0.4);
-}
-
-.btn-primary:hover::after {
-    left: 130%;
-}
-
-.btn-secondary {
-    background: var(--bg-color);
-    border: 2px solid;
-    border-image-slice: 1;
-    border-image-source: var(--gradient);
-    color: #711fb8;
-}
-
-.btn-secondary:hover {
-    background: var(--gradient);
-    color: var(--white);
-    border-image-source: none; /* Hide border image when background is filled */
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(113, 31, 184, 0.4);
-}
-
-.btn-sm {
-    padding: 8px 16px;
-    font-size: 0.9rem;
-}
-
-.btn.disabled, .btn:disabled {
-    background: #e9ecef;
-    color: #6c757d;
-    cursor: not-allowed;
-    opacity: 0.7;
-    transform: none !important;
-    box-shadow: none !important;
-    border-color: #dee2e6;
-    background-image: none;
-}
-
-.btn-outline-light {
-    background: transparent;
-    border: 2px solid var(--white);
-    color: var(--white);
-}
-.btn-outline-light:hover {
-    background: var(--white);
-    color: #101c35; /* A dark color for contrast */
-}
-
-.btn-whatsapp {
-    background-color: #25D366;
-    color: var(--white);
-    border-color: #25D366;
-}
-.btn-whatsapp:hover {
-    background-color: #128C7E;
-    border-color: #128C7E;
-    color: var(--white);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
-}
-.btn-whatsapp i {
-    margin-right: 0.5rem;
-}
-
-.btn-outline-dark {
-    background: transparent;
-    border: 2px solid #101c35;
-    color: #101c35;
-}
-.btn-outline-dark:hover {
-    background: #101c35;
-    color: var(--white);
-}
-
-
-/* --- Hero Section --- */
-#hero {
-    position: relative;
-    color: var(--white);
-    padding: 100px 0;
-    background-size: cover;
-    background-position: center;
-    text-align: center;
-}
-
-#hero-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1;
-}
-
-#hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(16, 28, 53, 0.7);
-    z-index: 2;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 3;
-}
-
-.hero-mascot {
-    position: absolute;
-    bottom: -60px;
-    right: 50px;
-    width: 300px;
-    height: auto;
-    z-index: 4;
-    pointer-events: none;
-     right: 6%;
-}
-
-.hero-text {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.hero-text p {
-    font-size: 1.2rem;
-    opacity: 0.9;
-    max-width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-}
-.cta-group { margin: 2rem 0; display: flex; gap: 1rem; align-items: center; justify-content: center; flex-wrap: wrap; }
-
-.urgency-trigger { margin: 1rem 0; font-size: 1rem; }
-
-/* Countdown Timer */
-#countdown-timer {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1.5rem;
-    justify-content: center;
-}
-
-#countdown-timer h4 {
-    background: rgba(255, 255, 255, 0.15);
-    padding: 1rem 2rem;
-    border-radius: 10px;
-    width: 100%;
-    text-align: center;
-}
-
-.timer-unit {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 1rem;
-    border-radius: 10px;
-    text-align: center;
-    min-width: 90px;
-    flex-grow: 1;
-    max-width: 120px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.timer-unit span {
-    display: block;
-    font-size: 2.5rem;
-    font-weight: 700;
-    font-family: var(--heading-font);
-    line-height: 1;
-}
-
-.timer-unit p {
-    margin: 0;
-    font-size: 0.8rem;
-    opacity: 0.9;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.timer-unit.updated {
-    animation: pulse-glow 0.6s ease-out;
-}
-
-@keyframes pulse-glow {
-    0% { transform: scale(1); box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); }
-    50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(255, 255, 255, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.2); }
-    100% { transform: scale(1); box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); }
-}
-
-/* --- Scrolling Banner --- */
-.scrolling-banner {
-    background: var(--gradient);
-    padding: 1rem 0;
-    overflow: hidden;
-    white-space: nowrap;
-    position: relative;
-    z-index: 3;
-}
-
-.scrolling-text {
-    display: inline-block;
-    animation: scroll-left 40s linear infinite;
-}
-
-.scrolling-text span {
-    color: var(--white);
-    font-size: 1.2rem;
-    font-weight: 700;
-    font-family: var(--heading-font);
-    text-transform: uppercase;
-    padding: 0 2rem;
-}
-
-@keyframes scroll-left {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%);
-    }
-}
-
-
-/* --- Page Header --- */
-.page-header {
-    background: var(--gradient);
-    color: var(--white);
-    padding: 60px 0;
-    text-align: center;
-}
-.page-header h1 {
-    font-size: 2.8rem;
-    margin-bottom: 0.5rem;
-}
-.page-header p {
-    font-size: 1.1rem;
-    max-width: 700px;
-    margin: 0 auto;
-    opacity: 0.9;
-}
-
-
-/* --- General Section Styles --- */
-.subtitle { text-align: center; font-size: 1.2rem; margin-top: -2rem; margin-bottom: 3rem; max-width: 700px; margin-left: auto; margin-right: auto;}
-.section-cta { text-align: center; margin-top: 3rem; }
-
-/* About Expo Section */
-#why-qatar, #market-opportunity {
-    padding-top: 40px;
-}
-
-/* Partners Section - NEW SCROLLER STYLES */
-#home-partners {
-    padding: 60px 0;
-    background-color: var(--bg-color);
-}
-#home-partners h2 {
-    margin-bottom: 2rem;
-}
-
-.logo-scroller {
-    max-width: 100%;
-    overflow: hidden;
-    position: relative;
-}
-
-/* Gradient fade on the sides */
-.logo-scroller::before,
-.logo-scroller::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100px;
-    z-index: 2;
-    pointer-events: none;
-}
-.logo-scroller::before {
-    left: 0;
-    background: linear-gradient(to right, var(--bg-color) 0%, transparent 100%);
-}
-.logo-scroller::after {
-    right: 0;
-    background: linear-gradient(to left, var(--bg-color) 0%, transparent 100%);
-}
-
-.logo-scroller__inner {
-    display: flex;
-    gap: 4rem;
-    width: max-content;
-    animation: scroll-logos 40s linear infinite;
-}
-
-@keyframes scroll-logos {
-  to {
-    transform: translate(calc(-50% - 2rem)); 
-  }
-}
-
-.logo-item {
-    text-align: center;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.logo-item img {
-    max-height: 60px;
-    width: auto;
-    max-width: 160px;
-    object-fit: contain;
-    transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
-    filter: grayscale(100%);
-    opacity: 0.7;
-}
-
-.logo-item a:hover img, .logo-item img:hover {
-    transform: scale(1.1);
-    filter: grayscale(0%);
-    opacity: 1;
-}
-
-/* Specific overrides if needed */
-#home-partners .logo-item img.sheraton-logo {
-    max-height: 90px;
-}
-#home-partners .logo-item img.eventbrite-logo {
-    max-height: 40px;
-}
-
-/* Pause animation on hover */
-.logo-scroller:hover .logo-scroller__inner {
-    animation-play-state: paused;
-}
-
-
-/* Market Opportunity Section */
-.market-opportunity-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-}
-.stat-card {
-    background: var(--white);
-    padding: 2rem;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: var(--shadow);
-}
-.stat-card i {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-.stat-card h4 { font-size: 2rem; margin-bottom: 0.5rem; }
-.stat-card p { margin: 0; font-size: 0.9rem; }
-
-/* Why Qatar Section */
-#why-qatar { background-color: transparent; }
-.why-qatar-content { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
-.why-qatar-text ul { list-style: none; padding: 0; }
-.why-qatar-text li {
-    font-size: 1.1rem;
-    padding-left: 2.5rem;
-    position: relative;
-    margin-bottom: 1.5rem;
-}
-.why-qatar-text li::before {
-    content: '\f058';
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 900;
-    position: absolute;
-    left: 0;
-    top: 0;
-    font-size: 1.5rem;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-.why-qatar-image img { width: 100%; border-radius: 10px; box-shadow: var(--shadow); }
-
-/* Exhibitor Benefits Section */
-.benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
-.benefit-card {
-    background: var(--white);
-    padding: 2.2rem 2rem;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-    display: flex;
-    flex-direction: column;
-}
-.benefit-card:hover { transform: translateY(-10px); }
-.benefit-card i {
-    font-size: 3rem;
-    margin-bottom: 1.2rem;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
-}
-.benefit-card h3 {
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 0 1rem;
-    white-space: nowrap;
-}
-.benefit-card p { font-size: 0.95rem; margin-bottom: 0; }
-
-/* Who Is Attending Section */
-#who-is-attending { 
-    background: var(--gradient); 
-    color: var(--white); 
-}
-#who-is-attending h2 { 
-    color: var(--white); 
-}
-#who-is-attending .subtitle {
-    color: rgba(255, 255, 255, 0.9);
-}
-
-/* Increase container width to make cards larger */
-#who-is-attending .container {
-    max-width: 1400px;
-}
-
-/* --- NEW Impact Stats Section (Redesigned) --- */
-.impact-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 1rem;
-    margin-top: 3rem;
-}
-
-.impact-card {
-    position: relative;
-    aspect-ratio: 202 / 227;
-    border-radius: 16px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 1.2rem;
-    color: var(--white);
-    background-size: cover;
-    background-position: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.impact-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-}
-
-.impact-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(180deg, rgba(25, 38, 65, 0) 20%, rgba(25, 38, 65, 0.9) 80%, #192641 100%);
-    z-index: 1;
-}
-
-.impact-number,
-.impact-label {
-    position: relative;
-    z-index: 2;
-    margin: 0;
-    text-align: left;
-}
-
-.impact-number {
-    font-size: 2.5rem;
-    font-weight: 700;
-    font-family: var(--heading-font);
-    line-height: 1.1;
-    /* Animation styles */
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-#who-is-attending.is-visible .impact-number {
-    opacity: 1;
-    transform: translateY(0);
-}
-/* Stagger the animation */
-#who-is-attending.is-visible .impact-card:nth-child(2) .impact-number { transition-delay: 0.1s; }
-#who-is-attending.is-visible .impact-card:nth-child(3) .impact-number { transition-delay: 0.2s; }
-#who-is-attending.is-visible .impact-card:nth-child(4) .impact-number { transition-delay: 0.3s; }
-#who-is-attending.is-visible .impact-card:nth-child(5) .impact-number { transition-delay: 0.4s; }
-#who-is-attending.is-visible .impact-card:nth-child(6) .impact-number { transition-delay: 0.5s; }
-
-
-.impact-label {
-    font-size: 0.9rem;
-    font-weight: 400;
-    opacity: 0.9;
-    margin-top: 0.25rem;
-}
-
-
-/* Decision Makers Section */
-.decision-makers-layout {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: 3rem;
-    align-items: center;
-}
-.decision-makers-stats .stat-group {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    padding: 1rem;
-    border-radius: 10px;
-    background: var(--white);
-    box-shadow: var(--shadow);
-}
-.decision-makers-stats .stat-group span {
-    font-size: 2.5rem;
-    font-weight: 800;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    line-height: 1;
-}
-.decision-makers-stats .stat-group p { margin: 0; line-height: 1.4; }
-.decision-makers-chart .chart-item { margin-bottom: 1rem; }
-.decision-makers-chart .chart-label { display: block; margin-bottom: 0.5rem; font-weight: 700; }
-.chart-bar-container { background: #e9ecef; border-radius: 50px; }
-.chart-bar {
-    background: var(--gradient);
-    padding: 0.5rem 1rem;
-    border-radius: 50px;
-    color: var(--white);
-    text-align: right;
-    font-weight: 700;
-    font-size: 0.9rem;
-}
-
-/* --- Keynote Speakers Section --- */
-.speakers-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-}
-.speaker-card {
-    background: var(--white);
-    padding: 1.5rem;
-    border-radius: 15px;
-    box-shadow: var(--shadow);
-    text-align: center;
-    position: relative;
-    transition: transform 0.3s, box-shadow 0.3s;
-    display: flex;
-    flex-direction: column;
-}
-.speaker-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-}
-.speaker-info {
-    flex-grow: 1;
-}
-.speaker-photo {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin: 0 auto 1.5rem;
-    border: 4px solid var(--white);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-.speaker-card h4 {
-    font-size: 1.2rem;
-    margin-bottom: 0.25rem;
-    font-weight: 700;
-    color: var(--text-color);
-}
-.speaker-title {
-    font-weight: 700;
-    font-size: 1rem;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 0.5rem;
-}
-.speaker-org {
-    color: #666;
-    font-size: 0.9rem;
-    margin-bottom: 1.5rem;
-}
-.speaker-tag {
-    display: inline-block;
-    background-color: #f2e7fc;
-    color: #711fb8;
-    padding: 6px 15px;
-    border-radius: 50px;
-    font-size: 0.8rem;
-    font-weight: 700;
-}
-.speaker-linkedin {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    width: 30px;
-    height: 30px;
-    background-color: #e9ecef;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #6c757d;
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: all 0.3s;
-}
-.speaker-linkedin:hover {
-    background-color: #0077b5;
-    color: var(--white);
-}
-
-
-/* --- Testimonials Section --- */
-#testimonials {
-    background-color: var(--surface-color);
-}
-#testimonials .container {
-    position: relative;
-}
-.testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
-}
-.testimonial-card {
-    background: var(--white);
-    padding: 2.5rem 2rem;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-    display: flex;
-    flex-direction: column;
-}
-.testimonial-card i.fa-quote-left {
-    font-size: 2rem;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 1rem;
-}
-.testimonial-card blockquote {
-    font-style: italic;
-    color: #555;
-    margin: 0 0 1.5rem;
-    border-left: 3px solid #d12386;
-    padding-left: 1.5rem;
-    flex-grow: 1;
-}
-.testimonial-author {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-top: auto;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border-color);
-}
-.testimonial-author img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-.testimonial-author strong {
-    display: block;
-    font-size: 1rem;
-}
-.testimonial-author span {
-    font-size: 0.85rem;
-    color: #777;
-}
-
-.testimonial-author > div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: 60px;
-}
-.testimonials-mascot {
-    position: absolute;
-    width: 200px;
-    height: auto;
-    top: -45px;
-    z-index: 5;
-    pointer-events: none;
-}
-
-
-/* --- Sponsorship & Booths (Redesigned) --- */
-.gradient-headline { background: var(--gradient); color: var(--white); padding: 0.5rem 2rem; border-radius: 50px; display: inline-block; font-size: 1.8rem; margin: 0 auto 1.5rem;}
-#booth-packages { background-color: var(--surface-color); }
-
-.packages-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-    justify-content: center;
-    align-items: stretch; /* Make cards same height */
-}
-
-.package-card {
-    background: var(--white);
-    border-radius: 15px;
-    box-shadow: var(--shadow);
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s, box-shadow 0.3s;
-    position: relative;
-    border: 1px solid var(--border-color);
-    overflow: hidden;
-}
-
-.package-card:hover { 
-    transform: translateY(-10px); 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
-}
-
-.package-card.popular, .package-card.best-visibility {
-    border: 2px solid #711fb8;
-}
-@media (min-width: 1025px) {
-    .package-card.popular:hover {
-        transform: translateY(-10px) scale(1.03);
-    }
-}
-
-.popular-badge {
-    position: absolute;
-    top: 20px;
-    right: -45px;
-    background: var(--gradient);
-    color: var(--white);
-    padding: 8px 40px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    transform: rotate(45deg);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-.package-card__header {
-    padding: 2rem 1.5rem;
-    text-align: center;
-    border-bottom: 1px solid var(--border-color);
-    background-color: #fdfcff;
-}
-.package-card__header i {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-.package-card__header h3 {
-    font-size: 1.5rem;
-    margin: 0 0 0.5rem;
-    font-weight: 800;
-}
-.package-card__size {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #555;
-    margin: 0;
-}
-
-.package-card__body {
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-
-.package-card__features {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 2rem;
-    flex-grow: 1;
-}
-.package-card__features li {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-    font-size: 0.95rem;
-    line-height: 1.5;
-    color: #444;
-}
-.package-card__features li i {
-    color: #d12386;
-    margin-top: 4px;
-}
-
-.package-card .btn {
-    margin-top: auto;
-    width: 100%;
-}
-
-.urgency-cta-section {
-    margin-top: 16rem;
-    padding: 2.5rem;
-    background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.pexels.com/photos/2608517/pexels-photo-2608517.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2&fm=webp') center/cover;
-    border-radius: 15px;
-    box-shadow: var(--shadow);
-    text-align: center;
-    border: 1px solid var(--border-color);
-    position: relative;
-    overflow: visible;
-}
-.urgency-cta-section h3 {
-    font-size: 2rem;
-    margin-top: 0;
-    margin-bottom: 1rem;
-}
-.urgency-cta-section h3 i {
-    color: #d12386;
-    margin-right: 0.5rem;
-}
-.urgency-cta-section p {
-    max-width: 600px;
-    margin: 0 auto 1rem;
-    font-size: 1.1rem;
-}
-
-.urgency-cta-section .countdown-label {
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--text-color);
-}
-
-#early-bird-countdown {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    margin: 0.5rem auto 0;
-    max-width: 450px;
-}
-#early-bird-countdown .timer-unit {
-    background: rgba(0,0,0,0.05);
-    border: 1px solid rgba(0,0,0,0.1);
-    padding: 1rem;
-    border-radius: 10px;
-    text-align: center;
-    min-width: 80px;
-    flex-grow: 1;
-}
-#early-bird-countdown .timer-unit span {
-    display: block;
-    font-size: 2rem;
-    font-weight: 700;
-    font-family: var(--heading-font);
-    line-height: 1;
-    color: #711fb8;
-}
-#early-bird-countdown .timer-unit p {
-    margin: 0;
-    font-size: 0.75rem;
-    opacity: 0.8;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--text-color);
-}
-#early-bird-countdown h4 {
-    color: var(--text-color);
-    text-align: center;
-    width: 100%;
-}
-
-.prime-booth-counter {
-    margin: 1.5rem 0 0;
-    font-weight: 700;
-    font-size: 1.1rem;
-}
-.prime-booth-counter p {
-    margin: 0;
-}
-.prime-booth-counter span {
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 1.5rem;
-    vertical-align: middle;
-}
-
-.urgency-cta-section .btn {
-    margin-top: 2rem;
-}
-
-
-/* --- Sponsorship Tiers (NEW V3 Styles) --- */
-#sponsorship-details h2, #sponsorship-details h3,
-#exclusive-branding h2, #exclusive-branding h3 {
-    text-align: left;
-}
-#sponsorship-details .subtitle,
-#exclusive-branding .subtitle {
-    text-align: left;
-    margin-left: 0;
-}
-
-.tiers-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    gap: 2rem;
-    align-items: stretch; /* crucial for equal height cards */
-    justify-content: center;
-}
-.tier-card {
-    background: var(--white);
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.05);
-    display: flex;
-    flex-direction: column;
-    border: 1px solid var(--border-color);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.tier-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.07), 0 15px 30px rgba(0,0,0,0.07);
-}
-
-.tier-header {
-    padding: 2rem;
-    color: var(--white);
-}
-.tier-card.platinum .tier-header { background: #101c35; }
-.tier-card.gold .tier-header { background: #ffc107; color: var(--text-color); }
-.tier-card.startup .tier-header { background: var(--gradient); }
-
-.tier-header h3 {
-    font-size: 1.8rem;
-    color: inherit;
-    margin-bottom: 0.25rem;
-    text-align: left;
-}
-.tier-subtitle {
-    font-weight: 700;
-    opacity: 0.9;
-    margin: 0;
-}
-.tier-body {
-    padding: 1.5rem 2rem;
-    flex-grow: 1; 
-    display: flex;
-    flex-direction: column;
-}
-.tier-description {
-    margin-bottom: 1.5rem;
-    color: #444;
-}
-.tier-card h4 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    text-align: left;
-}
-.tier-benefits {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 1.5rem;
-    flex-grow: 1; /* Make the list grow to push footer down */
-}
-.tier-benefits li {
-    padding-left: 2rem;
-    position: relative;
-    margin-bottom: 0.75rem;
-    font-size: 0.95rem;
-}
-.tier-benefits li::before {
-    content: '\f00c';
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 900;
-    position: absolute;
-    left: 0;
-    top: 4px;
-    color: #d12386;
-}
-/* A simple way to create columns with CSS */
-.tier-benefits.two-column-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75rem 1.5rem;
-}
-.tier-benefits.two-column-list li {
-    margin-bottom: 0; /* Remove bottom margin for grid items */
-}
-.tier-footer {
-    padding: 0 2rem 2rem;
-    margin-top: auto; /* Pushes footer to the bottom */
-}
-.tier-footer .btn {
-    width: 100%;
-}
-
-.sponsorship-addons-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-}
-.sponsorship-addons-grid .a-la-carte-card {
-    background: var(--surface-color);
-    padding: 2.5rem 2rem;
-    border-radius: 15px;
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-    border: 1px solid transparent;
-}
-.sponsorship-addons-grid .a-la-carte-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow);
-    background: var(--white);
-    border-color: var(--border-color);
-}
-.sponsorship-addons-grid .a-la-carte-card i {
-    font-size: 3rem;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 1.5rem;
-}
-.sponsorship-addons-grid .a-la-carte-card h4 {
-    font-size: 1.3rem;
-    margin-bottom: 0.5rem;
-    text-align: center;
-}
-.sponsorship-addons-grid .a-la-carte-card p {
-    font-size: 0.95rem;
-    color: #555;
-    margin-bottom: 0;
-}
-
-
-/* --- NEW Sponsorship Page V2 Styles --- */
-/* Sponsorship Intro Section */
-#sponsorship-intro .market-opportunity-grid {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-}
-#sponsorship-intro .stat-card {
-    background: var(--surface-color);
-}
-#sponsorship-intro h2 {
-    text-align: left;
-}
-#sponsorship-intro .subtitle {
-    text-align: left;
-    margin-left: 0;
-}
-
-/* Sponsor FAQ */
-#sponsor-faq h2 {
-    text-align: left;
-    margin-bottom: 1rem;
-}
-#sponsor-faq .faq-accordion {
-    max-width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 2rem;
-}
-
-/* Final CTA Section */
-#final-cta {
-    background: var(--gradient);
-    color: var(--white);
-}
-#final-cta h2, #final-cta p {
-    color: var(--white);
-    text-align: center;
-}
-#final-cta .cta-group {
-    margin-top: 2.5rem;
-}
-#final-cta h2 {
-    font-size: 2.5rem;
-}
-
-
-/* --- 3 Ways to Join Section --- */
-#three-ways-to-join { background-color: var(--white); }
-.ways-to-join-grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-    gap: 2rem; 
-    align-items: stretch;
-}
-.way-card {
-    border-radius: 10px;
-    box-shadow: 0 8px 25px rgba(184, 43, 144, 0.15);
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s, box-shadow 0.3s;
-    position: relative;
-    background: var(--white);
-    overflow: hidden;
-    border: 2px solid black;
-}
-.way-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 35px rgba(113, 31, 184, 0.25);
-}
-.way-card img { 
-    width: 100%; 
-    height: 220px;
-    object-fit: cover;
-}
-.way-card-content {
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-.way-card-content h3 {
-    margin: 0 0 0.5rem; 
-    font-size: 1.6rem;
-}
-.way-card-content p {
-    padding: 0;
-    margin: 0 0 1.5rem;
-    flex-grow: 1;
-    color: #555;
-}
-.way-card-cta {
-    margin-top: auto;
-}
-.way-card .btn {
-    width: 80%;
-    margin: 0 auto;
-}
-
-/* Styles for differentiated cards */
-.way-card--speak {
-}
-
-@media (min-width: 992px) {
-    .ways-to-join-grid {
-        align-items: center; /* Center items vertically for scale effect */
-    }
-    .way-card--speak {
-        transform: scale(1.05);
-        z-index: 5;
-    }
-    .way-card--speak:hover {
-        transform: scale(1.08) translateY(-8px);
-    }
-}
-
-.way-card-badge {
-    position: absolute;
-    top: 15px;
-    right: -40px;
-    background: var(--gradient);
-    color: var(--white);
-    padding: 6px 40px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    transform: rotate(45deg);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    z-index: 2;
-}
-
-.way-card--sponsor {
-    background: linear-gradient(135deg, #d12386, #711fb8);
-    color: var(--white);
-    box-shadow: 0 8px 25px rgba(113, 31, 184, 0.25);
-}
-
-.way-card--sponsor:hover {
-    box-shadow: 0 12px 35px rgba(113, 31, 184, 0.35);
-}
-
-.way-card--sponsor .way-card-content h3 {
-    color: var(--white);
-}
-
-.way-card--sponsor .way-card-content p {
-    color: rgba(255, 255, 255, 0.8);
-}
-
-/* Unified button style for the "3 Ways to Join" section */
-#three-ways-to-join .way-card .btn {
-    background: #101c35;
-    color: white;
-    border-color: #fff;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-#three-ways-to-join .way-card .btn:hover {
-    background-color: white;
-    color: black;
-}
-
-
-/* --- Who Should Exhibit Section --- */
-#who-should-exhibit .container {
-    position: relative;
-}
-.exhibit-mascot {
-    position: absolute;
-    width: 180px;
-    height: auto;
-    top: -50px;
-    right: 9%;
-    z-index: 5;
-    pointer-events: none;
-}
-.exhibitor-types-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    max-width: 900px;
-    margin: 0 auto;
-}
-.exhibitor-type-card {
-    background: var(--white);
-    border: 1px solid var(--border-color);
-    padding: 2rem 1rem;
-    border-radius: 10px;
-    text-align: center;
-    font-weight: 700;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-.exhibitor-type-card i {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-.exhibitor-type-card p {
-    margin: 0;
-    font-size: 1rem;
-}
-
-/* --- Lead Capture Section --- */
-.lead-capture-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-}
-.lead-capture-text h2, .lead-capture-text h3 {
-    text-align: left;
-}
-.lead-capture-text h2 {
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 0.5rem;
-}
-.lead-capture-text h3 {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-.lead-capture-features {
-    list-style: none;
-    padding: 0;
-    margin: 2rem 0;
-}
-.lead-capture-features li {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
-}
-.lead-capture-features i {
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 1.3rem;
-    margin-top: 4px;
-}
-.lead-capture-image img {
-    width: 100%;
-    border-radius: 15px;
-    box-shadow: var(--shadow);
-    padding: 1rem;
-    background: var(--white);
-    border: 1px solid var(--border-color);
-}
-
-
-/* --- NEW 2D FLOOR PLAN --- */
-#floor-plan-container {
-    display: grid;
-    grid-template-columns: 1fr 350px;
-    gap: 2rem;
-    background-color: var(--white);
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: var(--shadow);
-}
-
-.floor-plan-main {
-    background-color: var(--surface-color);
-    padding: 1rem;
-    border-radius: 10px;
-    position: relative;
-    overflow: hidden;
-}
-
-#floor-plan-map {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 5px;
-    position: relative;
-}
-
-.booth {
-    aspect-ratio: 1 / 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #333;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.3s ease;
-}
-
-.booth:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 15px rgba(0,0,0,0.3);
-    z-index: 10;
-}
-
-.booth.available { background-color: var(--status-available); color: var(--status-available-dark); }
-.booth.reserved { background-color: var(--status-reserved); color: var(--status-reserved-dark); }
-.booth.sold { background-color: var(--status-sold); color: var(--status-sold-dark); cursor: not-allowed;}
-
-.booth.hidden {
-    opacity: 0.2;
-    pointer-events: none;
-}
-
-/* Tooltip */
-#floor-plan-tooltip {
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.85);
-    color: var(--white);
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-    display: none;
-    pointer-events: none;
-    z-index: 100;
-    font-size: 0.9rem;
-    white-space: nowrap;
-    transition: opacity 0.2s;
-}
-#floor-plan-tooltip strong {
-    font-size: 1rem;
-    display: block;
-    margin-bottom: 0.5rem;
-}
-#floor-plan-tooltip p {
-    margin: 0.25rem 0;
-    color: #ddd;
-}
-#floor-plan-tooltip p span {
-    font-weight: bold;
-    color: var(--white);
-    text-transform: capitalize;
-}
-#floor-plan-tooltip .status-available { color: #81e9d1; }
-#floor-plan-tooltip .status-reserved { color: #fce8b3; }
-#floor-plan-tooltip .status-sold { color: #f8c5d3; }
-
-/* Sidebar */
-.floor-plan-sidebar {
-    background-color: var(--surface-color);
-    padding: 1.5rem;
-    border-radius: 10px;
-}
-.floor-plan-sidebar h4 {
-    font-size: 1.2rem;
-    margin-top: 0;
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 0.75rem;
-}
-.status-legend {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 2rem;
-}
-.status-legend li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.75rem;
-    background-color: var(--white);
-    border-radius: 8px;
-    margin-bottom: 0.5rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-}
-.status-legend .legend-label {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-weight: 600;
-}
-.legend-dot {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-}
-.legend-dot.available { background-color: var(--status-available); }
-.legend-dot.reserved { background-color: var(--status-reserved); }
-.legend-dot.sold { background-color: var(--status-sold); }
-.legend-count {
-    background-color: #e9ecef;
-    padding: 2px 8px;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 700;
-}
-.filter-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-.fp-filter-btn {
-    flex-grow: 1;
-    background: var(--white);
-    border: 1px solid var(--border-color);
-    color: var(--text-color);
-    padding: 8px 12px;
-    border-radius: 50px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: var(--heading-font);
-    font-size: 0.9rem;
-}
-.fp-filter-btn:hover {
-    background-color: #e2e6ea;
-}
-.fp-filter-btn.active {
-    background: var(--gradient);
-    color: var(--white);
-    border-color: transparent;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-
-/* --- General Form Styles --- */
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    align-items: start;
-}
-.form-group {
-    margin-bottom: 1.5rem;
-    position: relative;
-}
-
-label {
-    display: block;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    font-size: 0.9rem;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="date"],
-input[type="number"],
-textarea,
-select {
-    width: 100%;
-    padding: 12px 15px;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    font-family: var(--primary-font);
-    font-size: 1rem;
-    transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="tel"]:focus,
-input[type="date"]:focus,
-input[type="number"]:focus,
-textarea:focus,
-select:focus {
-    outline: none;
-    border-color: #711fb8;
-    box-shadow: 0 0 0 3px rgba(113, 31, 184, 0.2);
-}
-
-input.invalid,
-select.invalid,
-textarea.invalid {
-    border-color: #e74c3c;
-}
-
-.error-message {
-    color: #e74c3c;
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin-top: 5px;
-    display: none;
-}
-
-.form-group-consent {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-}
-.form-group-consent input[type="checkbox"] {
-    margin-top: 5px;
-    width: auto;
-    flex-shrink: 0;
-}
-.form-group-consent label {
-    font-weight: normal;
-    font-size: 0.85rem;
-    margin-bottom: 0;
-}
-
-/* Student Registration Form - Areas of Interest */
-.interest-checkbox-group {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 0.5rem 1.5rem;
-}
-
-.interest-checkbox-item {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.interest-checkbox-item input[type="checkbox"] {
-    width: auto;
-    margin-top: 0;
-    flex-shrink: 0;
-}
-
-.interest-checkbox-item label {
-    font-weight: normal;
-    font-size: 0.95rem;
-    margin: 0;
-}
-
-
-/* --- Contact Page Styles (New) --- */
-#contact-methods {
-    padding-bottom: 40px;
-}
-
-.contact-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.contact-card {
-    background: var(--white);
-    padding: 2.5rem 2rem;
-    border-radius: 15px;
-    text-align: center;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border-color);
-    transition: transform 0.3s, box-shadow 0.3s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.contact-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-
-.contact-card i {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.contact-card h4 {
-    font-size: 1.3rem;
-    margin-bottom: 0.75rem;
-}
-
-.contact-card p {
-    font-size: 0.95rem;
-    color: #555;
-    margin-bottom: 1.5rem;
-    flex-grow: 1; /* Makes p take up space to align buttons */
-}
-
-.content-card .btn-primary {
-    margin-top: 2rem;
-}
-
-
-.contact-card .btn {
-    margin-top: auto;
-    width: 80%;
-}
-
-a.contact-email {
-    margin-top: auto;
-    font-weight: 700;
-    color: var(--text-color);
-    text-decoration: none;
-    transition: color 0.3s;
-    word-break: break-word;
-}
-
-a.contact-email:hover {
-    color: #d12386;
-    text-decoration: underline;
-}
-
-.contact-form-wrapper {
-    background: var(--white);
-    padding: 3rem;
-    border-radius: 15px;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border-color);
-}
-
-#contact-page-form-section h2, #contact-page-form-section .subtitle {
-    text-align: center;
-}
-
-#contact-form {
-    text-align: left;
-}
-
-#form-success-message {
-    text-align: center;
-    padding: 2rem;
-    border: 1px solid #b2e2d5;
-    background-color: #f0f9f8;
-    border-radius: 10px;
-}
-#form-success-message h3 {
-    text-align: center;
-}
-
-/* --- Content Grid for generic pages (like career counselling) --- */
-.content-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-.content-card {
-    background: var(--white);
-    padding: 2.5rem 2rem;
-    border-radius: 15px;
-    box-shadow: var(--shadow);
-    text-align: center;
-    border: 1px solid var(--border-color);
-    transition: transform 0.3s, box-shadow 0.3s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.content-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-
-.content-card h3 {
-    font-size: 1.4rem;
-    margin-top: 0;
-    margin-bottom: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    font-weight: 800;
-}
-
-.content-card h3 i {
-    font-size: 2.5rem;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-/* Specific override for visa page cards to prevent title wrapping */
-#visa-entry .content-card h3 {
-    white-space: nowrap;
-}
-
-.content-card p {
-    color: #555;
-    font-size: 1rem;
-    margin-bottom: 0;
-}
-
-.content-card .btn {
-    margin-top: auto;
-    width: 80%;
-}
-
-
-/* --- FAQ --- */
-.faq-accordion {
-    max-width: 800px;
-    margin: 0 auto;
-}
-.faq-item {
-    background: var(--white);
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    margin-bottom: 1rem;
-    overflow: hidden;
-}
-.faq-question {
-    width: 100%;
-    background: none;
-    border: none;
-    text-align: left;
-    padding: 1.5rem;
-    font-size: 1.1rem;
-    font-weight: 700;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: var(--heading-font);
-}
-.faq-question i {
-    transition: transform 0.3s ease;
-}
-.faq-item.open .faq-question i {
-    transform: rotate(45deg);
-}
-.faq-answer {
-    padding: 0 1.5rem 1.5rem;
-    display: none;
-}
-.faq-item.open .faq-answer {
-    display: block;
-}
-.faq-answer p:last-child {
-    margin-bottom: 0;
-}
-
-
-/* --- Footer --- */
-.main-footer {
-    background-color: #101c35;
-    color: rgba(255, 255, 255, 0.8);
-    padding: 60px 0 0;
-}
-.footer-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1.5fr;
-    gap: 3rem;
-    padding-bottom: 40px;
-    align-items: start;
-}
-.footer-col .logo img {
-    height: 80px;
-    margin-bottom: 1rem;
-}
-.footer-col h3 {
-    color: var(--white);
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
-    text-align: left;
-    margin-top: 0;
-}
-.footer-links {
-    list-style: none;
-}
-.footer-links li {
-    margin-bottom: 0.75rem;
-}
-.footer-links a {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    transition: color 0.3s;
-}
-.footer-links a:hover {
-    color: var(--white);
-}
-.footer-contact-info {
-    list-style: none;
-}
-.footer-contact-info li {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-}
-.footer-contact-info a {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-}
-.footer-contact-info a:hover {
-    color: var(--white);
-}
-.social-links {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1.5rem;
-}
-.social-links a {
-    color: var(--white);
-    font-size: 1.2rem;
-    transition: transform 0.3s;
-}
-.social-links a:hover {
-    transform: translateY(-3px);
-}
-.footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 20px 0;
-    text-align: center;
-    font-size: 0.9rem;
-}
-.footer-bottom p {
-    margin: 0;
-}
-
-
-/* --- WhatsApp FAB --- */
-.whatsapp-fab {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    background-color: #25D366;
-    color: var(--white);
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5rem;
-    z-index: 999;
-    transition: transform 0.3s, box-shadow 0.3s;
-    text-decoration: none;
-    animation: whatsapp-blink 1.5s infinite;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.whatsapp-fab:hover {
-    animation: none;
-    transform: scale(1.1);
-    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
-}
-
-@keyframes whatsapp-blink {
-    0% {
-        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
-    }
-    100% {
-        box-shadow: 0 0 0 25px rgba(37, 211, 102, 0);
-    }
-}
-
-
-/* --- Modal Styles --- */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-.modal-overlay.visible {
-    opacity: 1;
-    visibility: visible;
-}
-.modal-content {
-    background: var(--white);
-    padding: 2.5rem;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    max-width: 500px;
-    width: 90%;
-    position: relative;
-    transform: scale(0.95);
-    transition: transform 0.3s ease;
-}
-.modal-overlay.visible .modal-content {
-    transform: scale(1);
-}
-.modal-close-btn {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: none;
-    border: none;
-    font-size: 1.8rem;
-    cursor: pointer;
-    color: #999;
-}
-
-/* Exit Intent Modal Specifics */
-.exit-intent-content {
-    text-align: center;
-}
-.exit-intent-content h3 {
-    margin-top: 0;
-}
-
-/* Booth Details Modal Specifics */
-.modal-divider {
-    height: 1px;
-    background: var(--border-color);
-    margin: 1.5rem 0;
-}
-.modal-benefits-list {
-    list-style: none;
-    padding: 0;
-}
-.modal-benefits-list li {
-    display: flex;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
-}
-.modal-benefits-list i {
-    color: #d12386;
-    margin-top: 4px;
-}
-.modal-status-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.status-tag {
-    padding: 5px 12px;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 0.9rem;
-    text-transform: capitalize;
-}
-.status-tag.available { background-color: var(--status-available); color: var(--status-available-dark); }
-.status-tag.reserved { background-color: var(--status-reserved); color: var(--status-reserved-dark); }
-.status-tag.sold { background-color: var(--status-sold); color: var(--status-sold-dark); }
-
-/* --- Mobile Sticky Bar --- */
-#mobile-sticky-bar {
-    display: none;
-}
-
-/* --- Coming Soon Page --- */
-.coming-soon-section {
-    padding: 100px 0;
-    min-height: 50vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.coming-soon-content {
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.coming-soon-content .fa-clock,
-.coming-soon-content .fa-exclamation-triangle {
-    font-size: 4rem;
-    color: var(--text-color);
-    opacity: 0.8;
-    margin-bottom: 2rem;
-}
-
-.coming-soon-content h2 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-
-.coming-soon-content p {
-    font-size: 1.1rem;
-    color: #555;
-    margin-bottom: 2.5rem;
-}
-
-/* --- Brand Exposure Page Styles --- */
-#audience-reach .stat-card {
-    background-color: var(--surface-color);
-}
-
-/* NEW: Target Audience Persona Section */
-#target-audience {
-    padding-top: 40px;
-}
-.audience-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-}
-.audience-card {
-    background: var(--white);
-    padding: 2.5rem 2rem;
-    border-radius: 15px;
-    text-align: center;
-    border: 1px solid var(--border-color);
-    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-    display: flex;
-    flex-direction: column;
-}
-.audience-card:hover {
-    transform: translateY(-10px);
-    box-shadow: var(--shadow);
-    border-color: #d12386;
-}
-.audience-card i {
-    font-size: 3rem;
-    margin-bottom: 1.5rem;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-.audience-card h4 {
-    font-size: 1.3rem;
-    margin-bottom: 0.75rem;
-    text-align: center;
-}
-.audience-card p {
-    font-size: 0.95rem;
-    color: #555;
-    margin-bottom: 0;
-    flex-grow: 1;
-}
-
-.exposure-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    margin-top: 3rem;
-}
-
-.exposure-item {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: center;
-    background: var(--white);
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: var(--shadow);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.exposure-item:hover {
-    transform: scale(1.02);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-.exposure-item:nth-child(even) .exposure-image {
-    order: 2;
-}
-
-.exposure-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-.exposure-text h3 {
-    text-align: left;
-    font-size: 1.8rem;
-    margin-top: 0;
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.exposure-text h3 i {
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.exposure-benefits {
-    list-style: none;
-    padding: 0;
-    margin-top: 1.5rem;
-}
-
-.exposure-benefits li {
-    padding-left: 2rem;
-    position: relative;
-    margin-bottom: 0.75rem;
-}
-.exposure-benefits li::before {
-    content: '\f058'; /* Font Awesome check-circle */
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 900;
-    position: absolute;
-    left: 0;
-    top: 3px;
-    color: #d12386;
-}
-
-/* Marketing Timeline */
-#marketing-timeline-section {
-    padding-top: 40px;
-}
-.marketing-timeline {
-    position: relative;
-    max-width: 800px;
-    margin: 3rem auto 0;
-}
-
-.marketing-timeline::before {
-    content: '';
-    position: absolute;
-    left: 20px;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: linear-gradient(to bottom, #d12386, #711fb8);
-    border-radius: 2px;
-}
-
-.timeline-item {
-    position: relative;
-    padding-left: 60px;
-    margin-bottom: 3rem;
-}
-.timeline-item:last-child {
-    margin-bottom: 0;
-}
-
-.timeline-icon {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--gradient);
-    color: var(--white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    border: 3px solid var(--white);
-    box-shadow: 0 0 0 5px var(--bg-color), 0 0 15px rgba(113, 31, 184, 0.5);
-}
-
-.timeline-content h4 {
-    text-align: left;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    font-size: 1.3rem;
-}
-.timeline-content p {
-    margin: 0;
-    color: #555;
-}
-
-/* --- Speaker Registration Form Styles --- */
-#speaker-registration-form-section fieldset {
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    padding: 1.5rem 2rem;
-    margin-bottom: 2rem;
-}
-#speaker-registration-form-section legend {
-    font-family: var(--heading-font);
-    font-weight: 800;
-    font-size: 1.3rem;
-    padding: 0 0.5rem;
-    margin-left: -0.5rem;
-}
-.session-selection-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem 2rem;
-}
-.session-checkbox-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-}
-.session-checkbox-item input[type="checkbox"] {
-    width: auto;
-    margin-top: 5px;
-    flex-shrink: 0;
-}
-.session-checkbox-item label {
-    font-weight: normal;
-    font-size: 0.9rem;
-    margin: 0;
-}
-
-/* Visually hide an element but keep it accessible */
-.visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-}
-
-/* New File Upload UI on the form */
-.file-upload-ui {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-.file-upload-btn {
-    flex-shrink: 0;
-}
-.file-upload-btn i {
-    margin-right: 0.5rem;
-}
-.file-name-display {
-    font-style: italic;
-    color: #555;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-#speaker-registration-form-section .form-group-consent {
-    display: block;
-}
-#speaker-registration-form-section .form-group-consent label {
-    margin-bottom: 0.75rem;
-}
-.consent-group {
-    display: flex;
-    gap: 2rem;
-}
-.consent-radio-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-.consent-radio-item input[type="radio"] {
-    width: auto;
-}
-.consent-radio-item label {
-    margin: 0;
-    font-weight: normal;
-    margin-top: 8px;
-}
-
-
-/* --- Responsive Styles --- */
-@media (max-width: 1200px) {
-    .main-header .container {
-        padding: 0 1rem;
-    }
-    #main-nav > ul {
-        gap: 1.2rem;
-    }
-    .nav-link {
-        font-size: 0.9rem;
-    }
-    .header-ctas {
-        display: none;
-    }
-    .lead-capture-grid {
-        gap: 2rem;
-    }
-    .impact-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    .hero-mascot {
-        width: 220px;
-        right: 20px;
-        bottom: -30px;
-    }
-    .exhibit-mascot {
-        top: 50px;
-        right: 5%;
-    }
-}
-
-@media (max-width: 992px) {
-    h1 { font-size: 2.5rem; }
-    h2 { font-size: 2.2rem; }
-    section { padding: 60px 0; }
-
-    .nav-toggle {
-        display: block;
+    document.addEventListener('DOMContentLoaded', () => {
+
+    // --- Reusable Form Validation Helpers ---
+    const showError = (input: HTMLElement, message: string) => {
+        const formGroup = input.closest('.form-group, .form-group-consent, .interest-group-container');
+        if (!formGroup) return;
+        const errorElement = formGroup.querySelector('.error-message') as HTMLElement;
+        if (errorElement) {
+            errorElement.innerText = message;
+            errorElement.style.display = 'block';
+        }
+        // FIX: Cast `input` to `HTMLInputElement` to safely access the 'type' property.
+        if (input.tagName.toLowerCase() !== 'div' && (input as HTMLInputElement).type !== 'file' && !input.closest('.consent-group')) {
+            input.classList.add('invalid');
+        }
+    };
+
+    const clearError = (input: HTMLElement) => {
+        const formGroup = input.closest('.form-group, .form-group-consent, .interest-group-container');
+         if (!formGroup) return;
+        const errorElement = formGroup.querySelector('.error-message') as HTMLElement;
+        if (errorElement) {
+            errorElement.innerText = '';
+            errorElement.style.display = 'none';
+        }
+        // FIX: Cast `input` to `HTMLInputElement` to safely access the 'type' property.
+         if (input.tagName.toLowerCase() !== 'div' && (input as HTMLInputElement).type !== 'file' && !input.closest('.consent-group')) {
+            input.classList.remove('invalid');
+        }
+    };
+
+    /**
+     * Converts a file to a Base64 encoded string, resizing and compressing it first.
+     * This is crucial to prevent "Failed to fetch" errors when sending large image
+     * data to Google Apps Script, which has payload size limits.
+     * @param file The file to convert.
+     * @returns A promise that resolves with the Base64 string of the processed JPEG image.
+     */
+    const fileToBase64 = (file: File): Promise<string> => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = (event) => {
+                const img = new Image();
+                img.src = event.target?.result as string;
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const maxWidth = 800; // Max width for the resized image
+                    let { width, height } = img;
+
+                    if (width > maxWidth) {
+                        const ratio = maxWidth / width;
+                        width = maxWidth;
+                        height = height * ratio;
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    if (!ctx) {
+                        return reject(new Error('Could not get canvas context'));
+                    }
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    // Get the data URL for the resized image as a compressed JPEG
+                    const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+                    
+                    // Strip the prefix "data:image/jpeg;base64,"
+                    const base64 = dataUrl.split(',')[1];
+                    resolve(base64);
+                };
+                img.onerror = (error) => reject(error);
+            };
+            reader.onerror = (error) => reject(error);
+        });
+    };
+
+    // --- Universal Real-Time Validator ---
+    const validateField = (field: HTMLElement): boolean => {
+        if (!field) return true;
+        let isValid = true;
+        const input = field as HTMLInputElement;
+        const select = field as HTMLSelectElement;
+        const checkbox = field as HTMLInputElement;
+        const textarea = field as HTMLTextAreaElement;
+
+        const value = input.value?.trim();
+        clearError(field);
+
+        switch (field.id) {
+            case 'form-name':
+            case 'form-booth-name':
+            case 'form-student-name':
+            case 'form-sponsor-name':
+            case 'form-speaker-name':
+            case 'deck-form-name':
+            case 'form-school-contact-name':
+                if (value === '') {
+                    showError(field, 'Name is required.');
+                    isValid = false;
+                }
+                break;
+            
+            case 'form-organization':
+            case 'form-booth-company':
+            case 'form-student-school':
+            case 'form-sponsor-company':
+            case 'form-speaker-job-org':
+            case 'deck-form-organization':
+            case 'form-school-name':
+                if (value === '') {
+                    const fieldName = (field.id.includes('booth') || field.id.includes('sponsor')) ? 'Company' : (field.id.includes('student') || field.id.includes('school')) ? 'School/Institution' : 'Organization';
+                    showError(field, `${fieldName} is required.`);
+                    isValid = false;
+                }
+                break;
+                
+            case 'form-email':
+            case 'form-booth-email':
+            case 'form-student-email':
+            case 'form-sponsor-email':
+            case 'form-speaker-email':
+            case 'deck-form-email':
+            case 'form-school-email':
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (value === '') {
+                    showError(field, 'Email is required.');
+                    isValid = false;
+                } else if (!emailRegex.test(value)) {
+                    showError(field, 'Please enter a valid email address.');
+                    isValid = false;
+                }
+                break;
+            
+            case 'form-phone':
+            case 'form-student-phone':
+            case 'form-booth-phone':
+            case 'form-sponsor-phone':
+            case 'form-speaker-phone':
+            case 'deck-form-phone':
+            case 'form-school-phone':
+                const phoneRegex = /^\+?[\d\s()-]+$/;
+                 if ((field.hasAttribute('required') && value === '')) {
+                    showError(field, 'Mobile number is required.');
+                    isValid = false;
+                } else if (value !== '' && !phoneRegex.test(value)) {
+                    showError(field, 'Please enter a valid phone number.');
+                    isValid = false;
+                }
+                break;
+
+            case 'form-booth-title':
+            case 'form-sponsor-title':
+            case 'deck-form-designation':
+                 if (value === '') {
+                    const fieldName = (field.id === 'form-sponsor-title') ? 'Position' : (field.id === 'deck-form-designation') ? 'Designation' : 'Job Title';
+                    showError(field, `${fieldName} is required.`);
+                    isValid = false;
+                }
+                break;
+            
+            case 'form-booth-website':
+            case 'form-sponsor-website':
+            case 'form-speaker-linkedin':
+                const urlRegex = /^(https?:\/\/)?([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?$/i;
+                if (field.hasAttribute('required') && value === '') {
+                     showError(field, 'Website is required.');
+                     isValid = false;
+                } else if (value !== '' && !urlRegex.test(value)) {
+                    showError(field, 'Please enter a valid website URL.');
+                    isValid = false;
+                }
+                break;
+
+            case 'form-speaker-headshot-upload':
+                const files = input.files;
+                if (!files || files.length === 0) {
+                    showError(field, 'A professional headshot is required.');
+                    isValid = false;
+                } else {
+                    const file = files[0];
+                    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+                    const maxSize = 10 * 1024 * 1024; // 10 MB
+
+                    if (!allowedTypes.includes(file.type)) {
+                        showError(field, 'Invalid file type. Please upload a JPG, PNG, or WEBP image.');
+                        isValid = false;
+                    } else if (file.size > maxSize) {
+                        showError(field, 'File is too large. Maximum size is 10 MB.');
+                        isValid = false;
+                    }
+                }
+                break;
+
+            case 'form-sponsor-message':
+            case 'form-speaker-why':
+            case 'form-speaker-bio':
+                if (textarea.value.trim() === '') {
+                    showError(field, 'This field is required.');
+                    isValid = false;
+                }
+                break;
+            
+            case 'form-interest':
+            case 'form-booth-package':
+            case 'form-booth-source':
+            case 'form-student-nationality':
+            case 'form-student-grade':
+            case 'form-student-source':
+            case 'form-booth-country':
+            case 'form-booth-company-field':
+            case 'form-sponsor-country':
+            case 'form-sponsor-company-field':
+            case 'form-speaker-country':
+            case 'form-school-country':
+            case 'form-school-visit-date':
+                if (select.value === '') {
+                    showError(field, 'Please make a selection.');
+                    isValid = false;
+                }
+                break;
+            
+            case 'form-school-student-count':
+                if (value === '' || parseInt(value) < 1) {
+                    showError(field, 'Please enter a valid number of students.');
+                    isValid = false;
+                }
+                break;
+            case 'form-school-grade-level':
+                if (value === '') {
+                    showError(field, 'Please specify the grade level(s).');
+                    isValid = false;
+                }
+                break;
+
+            case 'form-student-dob':
+                if (input.value === '') {
+                     showError(field, 'Date of birth is required.');
+                     isValid = false;
+                }
+                break;
+            
+            case 'form-booth-consent':
+            case 'form-student-consent':
+            case 'form-sponsor-consent':
+            case 'form-school-consent':
+                if (!checkbox.checked) {
+                    showError(checkbox, 'You must provide consent to register.');
+                    isValid = false;
+                }
+                break;
+        }
+        return isValid;
     }
 
-    #main-nav {
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 300px;
-        height: 100%;
-        background: var(--white);
-        transform: translateX(100%);
-        transition: transform 0.3s ease-in-out;
-        z-index: 999;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        padding-top: 0;
-    }
-    .main-header.nav-open #main-nav {
-        transform: translateX(0);
+
+    // --- Active Nav Link Highlighting ---
+    function highlightActiveNav() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const navLinks = document.querySelectorAll('#main-nav a.nav-link');
+
+        navLinks.forEach(link => {
+            const linkPage = (link as HTMLAnchorElement).href.split('/').pop();
+
+            if (linkPage === currentPage) {
+                link.classList.add('active');
+                
+                // For dropdowns, also highlight the parent
+                const parentDropdown = link.closest('.has-dropdown');
+                if (parentDropdown) {
+                    parentDropdown.querySelector('a.nav-link')?.classList.add('active');
+                }
+            }
+        });
     }
 
-    #main-nav > ul {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0;
-        width: 100%;
-        overflow-y: auto;
-        flex: 1; /* This is the key: allow this element to grow and shrink */
-        min-height: 0; /* This is the fix: prevents content from overflowing the flex container */
-    }
-    #main-nav li {
-        width: 100%;
-        border-bottom: 1px solid var(--border-color);
-    }
-    .nav-link {
-        padding: 1rem 1.5rem;
-        width: 100%;
-        justify-content: space-between;
-    }
-    .nav-link.active::after {
-        display: none;
-    }
-    .dropdown-menu {
-        position: static;
-        transform: none;
-        box-shadow: none;
-        border-radius: 0;
-        border-top: 1px solid var(--border-color);
-        min-width: 100%;
-        padding: 0;
-        margin: 0;
-        display: none;
-    }
-    .has-dropdown.dropdown-open > .dropdown-menu {
-        display: block;
-    }
-    .dropdown-menu a {
-        padding-left: 2.5rem;
-        margin-left: auto;
-        background-color: var(--surface-color);
-    }
 
-    .why-qatar-content, .decision-makers-layout, .lead-capture-grid, .footer-grid {
-        grid-template-columns: 1fr;
-    }
-    .packages-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .lead-capture-image {
-        order: -1;
-    }
-    #floor-plan-container {
-        grid-template-columns: 1fr;
-    }
-    .form-row {
-        grid-template-columns: 1fr;
+    // --- Mobile Navigation Logic ---
+    function initializeMobileNav() {
+        const header = document.getElementById('main-header');
+        const navToggle = document.querySelector('.nav-toggle') as HTMLButtonElement;
+        const mainNav = document.getElementById('main-nav');
+
+        if (!header || !navToggle || !mainNav) return;
+
+        // --- NEW: Inject mobile nav header and footer if they don't exist ---
+        if (!mainNav.querySelector('.mobile-nav-logo')) {
+            const mobileNavHeader = document.createElement('a');
+            mobileNavHeader.href = "index.html";
+            mobileNavHeader.classList.add('mobile-nav-logo');
+            const logoImg = document.createElement('img');
+            logoImg.src = "https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto/v1761210698/logo500x250_i8opbv.webp";
+            logoImg.alt = "Qatar Education Expo 2026 Logo";
+            mobileNavHeader.appendChild(logoImg);
+            mainNav.prepend(mobileNavHeader);
+        }
+
+        if (!mainNav.querySelector('.mobile-nav-ctas')) {
+            const mobileNavCtas = document.createElement('div');
+            mobileNavCtas.classList.add('mobile-nav-ctas');
+            
+            const boothBtn = document.createElement('a');
+            boothBtn.href = "booth-registration.html";
+            boothBtn.className = "btn btn-primary";
+            boothBtn.textContent = "Book a Booth";
+
+            const sponsorBtn = document.createElement('a');
+            sponsorBtn.href = "sponsorship-registration.html";
+            sponsorBtn.className = "btn btn-primary";
+            sponsorBtn.textContent = "Sponsor Now";
+
+            mobileNavCtas.appendChild(boothBtn);
+            mobileNavCtas.appendChild(sponsorBtn);
+            mainNav.appendChild(mobileNavCtas);
+        }
+        // --- END NEW ---
+
+        navToggle.addEventListener('click', () => {
+        header.classList.toggle('nav-open');
+        const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+        navToggle.setAttribute('aria-expanded', String(!isExpanded));
+        
+        if (header.classList.contains('nav-open')) {
+            (mainNav.querySelector('a') as HTMLAnchorElement)?.focus();
+        } else {
+            navToggle.focus();
+        }
+        });
+
+        // Close menu when a link is clicked
+        mainNav.addEventListener('click', (e) => {
+            const link = (e.target as HTMLElement).closest('a');
+            if (!link) return;
+            
+            // If it's a dropdown toggle, the dropdown logic will handle it, so we don't close the main nav.
+            if (link.parentElement?.classList.contains('has-dropdown') && window.innerWidth <= 992) {
+                // Check if it's the main link of the dropdown, not a sub-link
+                if(link.classList.contains('nav-link')) {
+                    return; 
+                }
+            }
+
+            // If it's a regular link inside the mobile nav, close it.
+            if (header.classList.contains('nav-open')) {
+                header.classList.remove('nav-open');
+                navToggle.setAttribute('aria-expanded', 'false');
+                navToggle.focus();
+            }
+        });
     }
     
-    .footer-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
+    // --- Dropdown Navigation Logic ---
+    function initializeDropdowns() {
+        const dropdowns = document.querySelectorAll('.has-dropdown');
+
+        dropdowns.forEach((dropdown, index) => {
+            const toggle = dropdown.querySelector('a') as HTMLAnchorElement;
+            const menu = dropdown.querySelector('.dropdown-menu') as HTMLElement;
+
+            if (!toggle || !menu) return;
+
+            // Setup ARIA attributes
+            const menuId = `dropdown-menu-${index}`;
+            toggle.setAttribute('aria-haspopup', 'true');
+            toggle.setAttribute('aria-expanded', 'false');
+            menu.id = menuId;
+            toggle.setAttribute('aria-controls', menuId);
+
+            // Universal click handler for both mobile and desktop
+            toggle.addEventListener('click', (e) => {
+                // On mobile, prevent navigation and toggle the dropdown menu.
+                // On desktop, the link's default navigation behavior is prevented to allow
+                // a consistent click-to-toggle experience across devices.
+                e.preventDefault();
+                
+                const isCurrentlyOpen = dropdown.classList.contains('dropdown-open');
+
+                // First, close all other open dropdowns for a cleaner experience.
+                document.querySelectorAll('.has-dropdown.dropdown-open').forEach(openDropdown => {
+                    if (openDropdown !== dropdown) {
+                        openDropdown.classList.remove('dropdown-open');
+                        openDropdown.querySelector('a')?.setAttribute('aria-expanded', 'false');
+                    }
+                });
+
+                // Then, explicitly set the state of the clicked dropdown.
+                // This is a more robust way of toggling and fixes the reported mobile issue
+                // where a second click would not close the menu.
+                if (isCurrentlyOpen) {
+                    dropdown.classList.remove('dropdown-open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                } else {
+                    dropdown.classList.add('dropdown-open');
+                    toggle.setAttribute('aria-expanded', 'true');
+                }
+            });
+        });
+        
+        // This listener closes any open dropdown when a click happens anywhere outside a dropdown toggle.
+        document.addEventListener('click', (e) => {
+            const target = e.target as HTMLElement;
+            
+            // If the click is on a dropdown toggle, its own listener will handle it.
+            // We do nothing here to avoid immediately closing the menu that was just opened.
+            if (target.closest('.has-dropdown > a')) {
+                return;
+            }
+            
+            // If the click is anywhere else, close all open dropdowns.
+            document.querySelectorAll('.has-dropdown.dropdown-open').forEach(openDropdown => {
+                openDropdown.classList.remove('dropdown-open');
+                openDropdown.querySelector('a')?.setAttribute('aria-expanded', 'false');
+            });
+        });
     }
 
-    .exposure-item {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-    .exposure-item:nth-child(even) .exposure-image {
-        order: -1; /* Reset order for stacking */
-    }
+    // --- Countdown Timer Logic ---
+    function initializeMainCountdown() {
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+        const countdownContainer = document.getElementById('countdown-timer');
 
-    .hero-mascot {
-        display: none;
-    }
-    .exhibit-mascot {
-        display: none;
-    }
-    .testimonials-mascot {
-        display: none;
-    }
-}
+        if (daysEl && hoursEl && minutesEl && secondsEl && countdownContainer) {
+            const countdownDate = new Date('2026-04-19T08:00:00').getTime();
 
-@media (max-width: 768px) {
-    #hero { padding: 80px 0; }
-    .timer-unit span { font-size: 2rem; }
-    .timer-unit { min-width: 70px; padding: 0.8rem; }
-    #countdown-timer { gap: 0.5rem; }
+            const triggerUpdateAnimation = (element: HTMLElement | null) => {
+                if (!element) return;
+                const parentUnit = element.closest('.timer-unit');
+                if (parentUnit) {
+                    parentUnit.classList.add('updated');
+                    parentUnit.addEventListener('animationend', () => {
+                        parentUnit.classList.remove('updated');
+                    }, { once: true });
+                }
+            };
 
-    .benefits-grid, .packages-grid { grid-template-columns: 1fr; }
-    .benefit-card h3 { min-height: auto; }
+            const timerInterval = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = countdownDate - now;
+
+                if (distance < 0) {
+                    clearInterval(timerInterval);
+                    countdownContainer.innerHTML = '<h4>The event has started!</h4>';
+                    return;
+                }
+
+                const days = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(2, '0');
+                const hours = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+                const minutes = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+                const seconds = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
+                
+                if (daysEl.textContent !== days) {
+                    daysEl.textContent = days;
+                    triggerUpdateAnimation(daysEl);
+                }
+                if (hoursEl.textContent !== hours) {
+                    hoursEl.textContent = hours;
+                    triggerUpdateAnimation(hoursEl);
+                }
+                if (minutesEl.textContent !== minutes) {
+                    minutesEl.textContent = minutes;
+                    triggerUpdateAnimation(minutesEl);
+                }
+                if (secondsEl.textContent !== seconds) {
+                    secondsEl.textContent = seconds;
+                    triggerUpdateAnimation(secondsEl);
+                }
+            }, 1000);
+        }
+    }
     
-    .marketing-timeline::before { left: 15px; }
-    .timeline-item { padding-left: 50px; }
-    .timeline-icon { 
-        width: 30px; 
-        height: 30px; 
-        font-size: 1rem;
-        box-shadow: 0 0 0 3px var(--bg-color);
+    // --- Early Bird Countdown Timer ---
+    function initializeEarlyBirdCountdown() {
+        const countdownContainer = document.getElementById('early-bird-countdown');
+        if (!countdownContainer) return;
+
+        const daysEl = document.getElementById('eb-days');
+        const hoursEl = document.getElementById('eb-hours');
+        const minutesEl = document.getElementById('eb-minutes');
+        const secondsEl = document.getElementById('eb-seconds');
+
+        if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
+
+        // The early bird offer ends on the morning of Nov 20, 2025.
+        const countdownDate = new Date('2025-11-20T08:00:00').getTime();
+
+        const timerInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+
+            if (distance < 0) {
+                clearInterval(timerInterval);
+                countdownContainer.innerHTML = '<h4>The early bird offer has ended!</h4>';
+                return;
+            }
+
+            const days = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(2, '0');
+            const hours = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+            const minutes = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+            const seconds = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
+            
+            daysEl.textContent = days;
+            hoursEl.textContent = hours;
+            minutesEl.textContent = minutes;
+            secondsEl.textContent = seconds;
+
+        }, 1000);
     }
 
-    #mobile-sticky-bar {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background: var(--white);
-        box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-        z-index: 990;
-        display: flex;
-        justify-content: space-around;
-        padding: 5px 0;
+
+    // --- Form Initializers ---
+    function initializeContactForm() {
+        const form = document.getElementById('contact-form') as HTMLFormElement;
+        const successMessage = document.getElementById('form-success-message');
+        if (!form || !successMessage) return;
+
+        const inputs: HTMLElement[] = Array.from(form.querySelectorAll('[required]'));
+        inputs.forEach(input => {
+            const eventType = input.tagName.toLowerCase() === 'select' ? 'change' : 'input';
+            input.addEventListener(eventType, () => validateField(input));
+        });
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const isFormValid = inputs.map(input => validateField(input)).every(Boolean);
+
+            if (isFormValid) {
+                const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+                if (submitButton) {
+                    submitButton.disabled = true;
+                    submitButton.textContent = 'Submitting...';
+                }
+
+                const googleSheetWebAppUrl = 'https://script.google.com/macros/s/AKfycbxUS76iFHL00oqCytiDjvpPfY9wONwwttdI00R6nhhoAkyED2ogZviUb3yXXRDAqAs7tg/exec';
+                const basinEndpoint = 'https://usebasin.com/f/8b6d8aeec167';
+
+                try {
+                    const formData = new FormData(form);
+                    
+                    const googleSheetResponse = await fetch(googleSheetWebAppUrl, {
+                        method: 'POST',
+                        body: new URLSearchParams(formData as any)
+                    });
+
+                    if (!googleSheetResponse.ok) {
+                        throw new Error(`Google Sheets submission failed. Status: ${googleSheetResponse.status}`);
+                    }
+
+                    const result = await googleSheetResponse.json();
+                    if (result.result !== 'success') {
+                        throw new Error(result.error || 'The script returned an unknown error. Please check the sheet name and headers.');
+                    }
+
+                    fetch(basinEndpoint, {
+                        method: 'POST',
+                        body: formData,
+                        headers: { 'Accept': 'application/json' }
+                    }).catch(err => {
+                        console.error('Basin form submission failed:', err);
+                    });
+
+                    // --- Trigger download AFTER successful submission ---
+                    if ((form.querySelector('#form-interest') as HTMLSelectElement)?.value === 'exhibiting') {
+                        const link = document.createElement('a');
+                        link.href = 'assets/EduExpoQatar2026-Sponsorship-Deck.pdf';
+                        link.download = 'EduExpoQatar2026-Sponsorship-Deck.pdf';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    }
+
+                    form.style.display = 'none';
+                    successMessage.style.display = 'block';
+                    window.scrollTo(0, 0);
+
+                } catch (error) {
+                    console.error('Submission error:', error);
+                    alert('Sorry, there was a problem with your inquiry. Please check your network connection and try again. Error: ' + (error as Error).message);
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Submit Inquiry';
+                    }
+                }
+            } else {
+                const firstInvalidField = form.querySelector('.invalid, .error-message[style*="block"]');
+                if (firstInvalidField) {
+                    firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        });
     }
-    .mobile-cta-btn {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-        color: var(--text-color);
-        font-size: 0.7rem;
-        padding: 5px;
-        transition: color 0.3s;
+
+    function initializeStudentRegistrationForm() {
+        const form = document.getElementById('student-registration-form') as HTMLFormElement;
+        const successMessage = document.getElementById('student-form-success');
+        if (!form || !successMessage) return;
+
+        const inputs: HTMLElement[] = Array.from(form.querySelectorAll('[required]'));
+        const interestsContainer = document.getElementById('form-student-interests');
+        const otherCheckbox = document.getElementById('interest-other') as HTMLInputElement;
+        const otherInterestGroup = document.getElementById('other-interest-group') as HTMLElement;
+        const otherTextInput = document.getElementById('interest-other-text') as HTMLInputElement;
+
+        if (otherCheckbox && otherInterestGroup && otherTextInput) {
+            otherCheckbox.addEventListener('change', () => {
+                otherInterestGroup.style.display = otherCheckbox.checked ? 'block' : 'none';
+                if (!otherCheckbox.checked) {
+                    otherTextInput.value = ''; // Clear value when unchecked
+                    clearError(otherTextInput); // Also clear potential errors
+                }
+            });
+        }
+
+        const validateInterestCheckboxes = (): boolean => {
+            if (!interestsContainer) return true;
+            const checkedCheckboxes = interestsContainer.querySelectorAll('input[type="checkbox"]:checked');
+            const isGroupValid = checkedCheckboxes.length > 0;
+
+            if (!isGroupValid) {
+                showError(interestsContainer, 'Please select at least one area of interest.');
+                return false;
+            }
+
+            clearError(interestsContainer);
+
+            if (otherCheckbox?.checked && otherTextInput?.value.trim() === '') {
+                showError(otherTextInput, 'Please specify your area of interest.');
+                return false;
+            }
+
+            if (otherTextInput) clearError(otherTextInput);
+
+            return true;
+        };
+
+        inputs.forEach(input => {
+            const eventType = ['select-one', 'date', 'checkbox'].includes((input as HTMLInputElement).type) ? 'change' : 'input';
+            input.addEventListener(eventType, () => validateField(input));
+        });
+
+        interestsContainer?.addEventListener('change', validateInterestCheckboxes);
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const isFormValid = inputs.map(input => validateField(input)).every(Boolean);
+            const areCheckboxesValid = validateInterestCheckboxes();
+
+            if (isFormValid && areCheckboxesValid) {
+                const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+                if (submitButton) {
+                    submitButton.disabled = true;
+                    submitButton.textContent = 'Submitting...';
+                }
+
+                // =========================================================================================
+                // --- ROBUST GOOGLE SHEETS INTEGRATION ---
+                // =========================================================================================
+                // !! CRITICAL INSTRUCTIONS !!
+                // 1. Follow the guide in the documentation to create and deploy your Google Apps Script.
+                // 2. Make sure you select "Anyone" for "Who has access".
+                // 3. After deploying, Google will give you a new "Web app URL".
+                // 4. **PASTE THE NEW URL BELOW** to replace the placeholder.
+                //
+                // The old URL 'AK...Na' will not work if you have made changes or if permissions are wrong.
+                // A new deployment is ALWAYS required.
+                // =========================================================================================
+                const googleSheetWebAppUrl = 'https://script.google.com/macros/s/AKfycbwHIEFWVu-5cIqrbW8pV5MSobkrTEq05kxi7aTcIwkfAGpC6ulVoo3tlrq16y3qoZXs/exec';
+
+                // FIX: Removed redundant developer check for a placeholder URL, which was causing a TypeScript error
+                // because the comparison against a hardcoded URL would always be false.
+                
+                try {
+                    const formData = new FormData(form);
+                    const response = await fetch(googleSheetWebAppUrl, {
+                        method: 'POST',
+                        body: new URLSearchParams(formData as any)
+                    });
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        if (result.result === 'success') {
+                            // The script confirmed the data was saved!
+                            form.style.display = 'none';
+                            successMessage.style.display = 'block';
+                            window.scrollTo(0, 0);
+                        } else {
+                            // The script reported an error (e.g., sheet not found).
+                            throw new Error(result.error || 'The script returned an unknown error.');
+                        }
+                    } else {
+                        // The network request itself failed (e.g., URL is wrong, server error).
+                        throw new Error(`Submission failed. Status: ${response.status}`);
+                    }
+                } catch (error) {
+                    console.error('Submission Error:', error);
+                    alert('Sorry, there was a problem with your registration. Please check your network connection and try again. If the problem persists, contact support. Error: ' + (error as Error).message);
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Register Now';
+                    }
+                }
+            } else {
+                const firstInvalidField = form.querySelector('.invalid, .error-message[style*="block"]');
+                if (firstInvalidField) {
+                    firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        });
     }
-    .mobile-cta-btn i {
-        font-size: 1.2rem;
-        margin-bottom: 3px;
+    
+    function initializeBoothRegistrationForm() {
+        const form = document.getElementById('booth-registration-form') as HTMLFormElement;
+        const successMessage = document.getElementById('booth-form-success');
+        if (!form || !successMessage) return;
+
+        const inputs: HTMLElement[] = Array.from(form.querySelectorAll('[required]'));
+        const packageSelect = document.getElementById('form-booth-package') as HTMLSelectElement;
+        const boothIdInput = document.getElementById('form-booth-id') as HTMLInputElement;
+
+        // Pre-fill form from URL parameters
+        try {
+            const urlParams = new URLSearchParams(window.location.search);
+            const pkg = urlParams.get('package');
+            const boothId = urlParams.get('boothId');
+            
+            if (pkg && packageSelect) {
+                const option = Array.from(packageSelect.options).find(opt => opt.value.toLowerCase() === pkg.toLowerCase());
+                if(option) option.selected = true;
+            }
+            if (boothId && boothIdInput) boothIdInput.value = boothId;
+        } catch (e) {
+            console.error("Error processing URL parameters:", e);
+        }
+
+        inputs.forEach(input => {
+            const eventType = ['select-one', 'checkbox'].includes((input as HTMLInputElement).type) ? 'change' : 'input';
+            input.addEventListener(eventType, () => validateField(input));
+        });
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const isFormValid = inputs.map(input => validateField(input)).every(Boolean);
+
+            if (isFormValid) {
+                const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+                if (submitButton) {
+                    submitButton.disabled = true;
+                    submitButton.textContent = 'Submitting...';
+                }
+
+                // =========================================================================================
+                // --- ROBUST GOOGLE SHEETS INTEGRATION FOR BOOTH REGISTRATIONS ---
+                // =========================================================================================
+                // !! CRITICAL INSTRUCTIONS !!
+                // 1. Create a new, separate Google Sheet for booth registrations.
+                // 2. IMPORTANT: Rename the first sheet (the tab at the bottom) to exactly "BoothRegistrations".
+                // 3. In the first row of the "BoothRegistrations" sheet, add these exact headers:
+                //    Timestamp, form_source, name, country, phone, email, website, company, job_title, company_field, package, booth_id, source, message, consent
+                // 4. Go to Extensions > Apps Script and paste the universal script code.
+                // 5. Click Deploy > New deployment.
+                // 6. Choose "Web app", set "Who has access" to "Anyone", and click Deploy.
+                // 7. Copy the NEW Web app URL and paste it into the constant below.
+                // =========================================================================================
+                const googleSheetWebAppUrl = 'https://script.google.com/macros/s/AKfycbxW3MBK-rPB1L2rOKMQ9mqkeGagcrnDcFpT7cZYvEFy4WzNxxnU2ZzLnMAQGwvSZZaQ/exec';
+                
+                try {
+                    const formData = new FormData(form);
+                    const response = await fetch(googleSheetWebAppUrl, {
+                        method: 'POST',
+                        body: new URLSearchParams(formData as any)
+                    });
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        if (result.result === 'success') {
+                            // The script confirmed the data was saved!
+                            form.style.display = 'none';
+                            successMessage.style.display = 'block';
+                            window.scrollTo(0, 0);
+                        } else {
+                            // The script reported an error (e.g., sheet not found).
+                            throw new Error(result.error || 'The script returned an unknown error.');
+                        }
+                    } else {
+                        // The network request itself failed.
+                        throw new Error(`Submission failed. Status: ${response.status}`);
+                    }
+                } catch (error) {
+                    console.error('Booth Registration Error:', error);
+                    alert('Sorry, there was a problem with your registration. Please check your network connection and try again. If the problem persists, contact support. Error: ' + (error as Error).message);
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Submit Registration';
+                    }
+                }
+            } else {
+                const firstInvalidField = form.querySelector('.invalid, .error-message[style*="block"]');
+                if (firstInvalidField) {
+                    firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        });
     }
-    .mobile-cta-btn:hover {
-        color: #d12386;
+
+    function initializeSponsorshipRegistrationForm() {
+        const form = document.getElementById('sponsorship-registration-form') as HTMLFormElement;
+        const successMessage = document.getElementById('sponsor-form-success');
+        if (!form || !successMessage) return;
+    
+        const inputs: HTMLElement[] = Array.from(form.querySelectorAll('[required]'));
+        inputs.forEach(input => {
+            const eventType = ['select-one', 'textarea', 'checkbox'].includes((input as HTMLInputElement).type) ? 'change' : 'input';
+            input.addEventListener(eventType, () => validateField(input));
+        });
+    
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+    
+            const isFormValid = inputs.map(input => validateField(input)).every(Boolean);
+    
+            if (isFormValid) {
+                const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+                if (submitButton) {
+                    submitButton.disabled = true;
+                    submitButton.textContent = 'Submitting...';
+                }
+    
+                // =========================================================================================
+                // --- ROBUST GOOGLE SHEETS INTEGRATION FOR SPONSORSHIPS ---
+                // =========================================================================================
+                // !! CRITICAL INSTRUCTIONS !!
+                // 1. Create a new, separate Google Sheet for sponsorship inquiries.
+                // 2. IMPORTANT: Rename the first sheet (the tab at the bottom) to exactly "SponsorshipRegistrations".
+                // 3. In the first row of the "SponsorshipRegistrations" sheet, add these exact headers:
+                //    Timestamp, form_source, name, country, phone, email, website, company, job_title, company_field, message, consent
+                // 4. Go to Extensions > Apps Script and paste the universal script code provided in the documentation.
+                // 5. Click Deploy > New deployment.
+                // 6. Choose "Web app", set "Who has access" to "Anyone", and click Deploy.
+                // 7. Authorize the script when prompted.
+                // 8. Copy the NEW Web app URL and provide it in the next prompt so I can insert it below.
+                // =========================================================================================
+                const googleSheetWebAppUrl = 'https://script.google.com/macros/s/AKfycbwq3S7GQikOlmmWhh5d3aIkC8uTWtIG6UnXcaPzmwdlZ8m5b3kIRKgafYW9zQV1rB-u/exec';
+    
+                try {
+                    // FIX: Removed redundant developer check for a placeholder URL. Since the URL is
+                    // now hardcoded, this comparison would always be false and was flagged as an
+                    // error by the TypeScript compiler.
+                    const formData = new FormData(form);
+                    const response = await fetch(googleSheetWebAppUrl, {
+                        method: 'POST',
+                        body: new URLSearchParams(formData as any)
+                    });
+    
+                    if (response.ok) {
+                        const result = await response.json();
+                        if (result.result === 'success') {
+                            form.style.display = 'none';
+                            successMessage.style.display = 'block';
+                            window.scrollTo(0, 0);
+                        } else {
+                            throw new Error(result.error || 'The script returned an unknown error.');
+                        }
+                    } else {
+                        throw new Error(`Submission failed. Status: ${response.status}`);
+                    }
+                } catch (error) {
+                    console.error('Sponsorship Inquiry Error:', error);
+                    alert('Sorry, there was a problem with your inquiry. Please check your network and try again. Error: ' + (error as Error).message);
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Submit Inquiry';
+                    }
+                }
+            } else {
+                const firstInvalidField = form.querySelector('.invalid, .error-message[style*="block"]');
+                if (firstInvalidField) {
+                    firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        });
     }
-    body {
-        padding-bottom: 60px; /* Space for sticky bar */
+
+    function initializeSpeakerRegistrationForm() {
+        const form = document.getElementById('speaker-registration-form') as HTMLFormElement;
+        const successMessage = document.getElementById('speaker-form-success');
+        if (!form || !successMessage) return;
+
+        const inputs: HTMLElement[] = Array.from(form.querySelectorAll('input[required], select[required], textarea[required]'));
+        const day1Container = document.getElementById('session-day1-group');
+        const day2Container = document.getElementById('session-day2-group');
+        const consentPromoGroup = document.getElementById('consent-promotional-group');
+        const consentRecordGroup = document.getElementById('consent-recording-group');
+        
+        // --- Simplified File Upload Logic ---
+        const fileInput = document.getElementById('form-speaker-headshot-upload') as HTMLInputElement;
+        const fileNameDisplay = document.getElementById('file-name-display') as HTMLElement;
+        
+        if (fileInput && fileNameDisplay) {
+            fileInput.addEventListener('change', () => {
+                if (fileInput.files && fileInput.files.length > 0) {
+                    fileNameDisplay.textContent = fileInput.files[0].name;
+                } else {
+                    fileNameDisplay.textContent = 'No file chosen';
+                }
+                // Trigger validation to show errors immediately if any
+                validateField(fileInput);
+            });
+        }
+        // --- End Simplified File Upload Logic ---
+
+
+        const customValidation = (): boolean => {
+            let allValid = true;
+
+            const day1Checked = day1Container?.querySelectorAll('input[type="checkbox"]:checked').length > 0;
+            const day2Checked = day2Container?.querySelectorAll('input[type="checkbox"]:checked').length > 0;
+            if (day1Container && day2Container && !day1Checked && !day2Checked) {
+                showError(day1Container, 'Please select at least one session from Day 1 or Day 2.');
+                allValid = false;
+            } else {
+                if(day1Container) clearError(day1Container);
+                if(day2Container) clearError(day2Container);
+            }
+
+            const promoChecked = consentPromoGroup?.querySelector('input[type="radio"]:checked');
+            if(consentPromoGroup && !promoChecked) {
+                showError(consentPromoGroup, 'Please select an option.');
+                allValid = false;
+            } else if (consentPromoGroup) {
+                 clearError(consentPromoGroup);
+            }
+            
+            const recordChecked = consentRecordGroup?.querySelector('input[type="radio"]:checked');
+            if(consentRecordGroup && !recordChecked) {
+                showError(consentRecordGroup, 'Please select an option.');
+                allValid = false;
+            } else if (consentRecordGroup) {
+                 clearError(consentRecordGroup);
+            }
+
+            return allValid;
+        };
+        
+        inputs.forEach(input => {
+            const eventType = ['select-one', 'textarea', 'checkbox', 'file', 'radio'].includes((input as HTMLInputElement).type) ? 'change' : 'input';
+            input.addEventListener(eventType, () => validateField(input));
+        });
+        
+        day1Container?.addEventListener('change', customValidation);
+        day2Container?.addEventListener('change', customValidation);
+        consentPromoGroup?.addEventListener('change', customValidation);
+        consentRecordGroup?.addEventListener('change', customValidation);
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const isFormValid = inputs.map(input => validateField(input)).every(Boolean);
+            const isCustomValid = customValidation();
+
+            if (isFormValid && isCustomValid) {
+                const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+                if (submitButton) {
+                    submitButton.disabled = true;
+                    submitButton.textContent = 'Submitting...';
+                }
+                
+                // =========================================================================================
+                // --- ROBUST GOOGLE SHEETS INTEGRATION FOR SPEAKERS ---
+                // =========================================================================================
+                // !! CRITICAL UPDATE FOR GOOGLE DRIVE UPLOAD !!
+                // 1. In your Google Sheet, rename the sheet tab to "SpeakerRegistrations".
+                // 2. IMPORTANT: You must have a column named `headshot_link` where the final Google Drive link will be stored.
+                // 3. The headers in the first row should be exactly as follows (order matters):
+                //    Timestamp, form_source, name, job_title_organization, email, phone, linkedin_website, country, session-day1, session-day2, why_speak, bio, headshot_link, past_experience, consent-promotional, consent-recording
+                // 4. You MUST update your Google Apps Script to handle the file upload. 
+                //    The form will send `headshot_filename`, `headshot_mimetype`, and `headshot_base64`.
+                //    Your script should use this data to create a file in Google Drive and store its URL in the `headshot_link` column.
+                //    A sample script has been provided in the response.
+                // 5. Deploy/re-deploy your Apps Script with "Anyone" access and paste the new URL below.
+                // =========================================================================================
+                const googleSheetWebAppUrl = 'https://script.google.com/macros/s/AKfycbzObRjQD4ck7tQ02_N9IY9SWtXWFGCVUhrq8eSmGsC7jC1rnSrY2rXe3npuuwgTEnJd/exec';
+
+                const sheetFormData = new FormData(form);
+                const file = fileInput.files ? fileInput.files[0] : null;
+                
+                try {
+                    if (file) {
+                        // Resize, compress, and convert file to base64 to prevent fetch errors
+                        const base64String = await fileToBase64(file);
+                        
+                        // Since we convert to JPEG, the mimetype and filename should be updated for the script
+                        const originalFilename = file.name.substring(0, file.name.lastIndexOf('.') > 0 ? file.name.lastIndexOf('.') : file.name.length);
+                        const newFilename = `${originalFilename}.jpg`;
+
+                        sheetFormData.append('headshot_filename', newFilename);
+                        sheetFormData.append('headshot_mimetype', 'image/jpeg');
+                        sheetFormData.append('headshot_base64', base64String);
+                    }
+                    // The original file input is not needed by the script
+                    sheetFormData.delete('headshot_upload');
+
+                    const response = await fetch(googleSheetWebAppUrl, {
+                        method: 'POST',
+                        body: new URLSearchParams(sheetFormData as any)
+                    });
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        if (result.result === 'success') {
+                            form.style.display = 'none';
+                            successMessage.style.display = 'block';
+                            window.scrollTo(0, 0);
+                        } else {
+                            throw new Error(result.error || 'The script returned an unknown error.');
+                        }
+                    } else {
+                        throw new Error(`Submission failed. Status: ${response.status}`);
+                    }
+                } catch (error) {
+                    console.error('Speaker Submission Error:', error);
+                    alert('Sorry, there was a problem with your application. Please check your network and try again. Error: ' + (error as Error).message);
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Submit Application';
+                    }
+                }
+
+            } else {
+                const firstInvalidField = form.querySelector('.invalid, .error-message[style*="block"]');
+                if (firstInvalidField) {
+                    firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        });
     }
-    .whatsapp-fab {
-        bottom: 80px;
+
+    function initializeSchoolGroupRegistrationForm() {
+        const form = document.getElementById('school-group-registration-form') as HTMLFormElement;
+        const successMessage = document.getElementById('school-group-form-success');
+        if (!form || !successMessage) return;
+
+        const inputs: HTMLElement[] = Array.from(form.querySelectorAll('[required]'));
+        inputs.forEach(input => {
+            const eventType = ['select-one', 'checkbox', 'number'].includes((input as HTMLInputElement).type) ? 'change' : 'input';
+            input.addEventListener(eventType, () => validateField(input));
+        });
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const isFormValid = inputs.map(input => validateField(input)).every(Boolean);
+            const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+            if (isFormValid) {
+                if (submitButton) {
+                    submitButton.disabled = true;
+                    submitButton.textContent = 'Submitting...';
+                }
+
+                // =========================================================================================
+                // --- GOOGLE SHEETS INTEGRATION FOR SCHOOL GROUPS ---
+                // =========================================================================================
+                const googleSheetWebAppUrl = 'https://script.google.com/macros/s/AKfycbzgCIAubolBckuU5yjgeThOWg4iI4pVPDtkMt-jMI1murfQf_Vbah8k7EKWaTT-89cICA/exec';
+                
+                try {
+                    const formData = new FormData(form);
+                    const response = await fetch(googleSheetWebAppUrl, {
+                        method: 'POST',
+                        body: new URLSearchParams(formData as any)
+                    });
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        if (result.result === 'success') {
+                            form.style.display = 'none';
+                            successMessage.style.display = 'block';
+                            window.scrollTo(0, 0);
+                        } else {
+                            throw new Error(result.error || 'The script returned an unknown error.');
+                        }
+                    } else {
+                        throw new Error(`Submission failed. Status: ${response.status}`);
+                    }
+                } catch (error) {
+                    console.error('School Group Registration Error:', error);
+                    alert('Sorry, there was a problem with your registration. Please check your network and try again. Error: ' + (error as Error).message);
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Submit Group Registration';
+                    }
+                }
+            } else {
+                const firstInvalidField = form.querySelector('.invalid, .error-message[style*="block"]');
+                if (firstInvalidField) {
+                    firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        });
     }
-    .tier-benefits.two-column-list {
-        grid-template-columns: 1fr;
+
+    // --- FAQ Accordion ---
+    function initializeFaqAccordion() {
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.closest('.faq-item');
+                if (item) {
+                    const isOpened = item.classList.toggle('open');
+                    button.setAttribute('aria-expanded', String(isOpened));
+                }
+            });
+        });
     }
-    .exhibitor-types-grid {
-        grid-template-columns: repeat(2, 1fr);
-        max-width: 500px;
+
+    // --- Exit Intent Modal ---
+    function initializeExitIntentModal() {
+        const modal = document.getElementById('exit-intent-modal');
+        if (!modal) return;
+
+        const closeModalBtn = modal.querySelector('.modal-close-btn');
+        const modalShownInSession = sessionStorage.getItem('exitModalShown') === 'true';
+
+        if (modalShownInSession) {
+            return; // Don't set up anything if it's already been shown
+        }
+
+        const showModal = () => {
+            modal.classList.add('visible');
+            sessionStorage.setItem('exitModalShown', 'true');
+            // Clean up all triggers once shown
+            document.removeEventListener('mouseout', handleMouseOut);
+            window.removeEventListener('scroll', handleScroll);
+        };
+
+        const hideModal = () => {
+            modal.classList.remove('visible');
+        };
+
+        const handleMouseOut = (e: MouseEvent) => {
+            // Check if mouse is leaving the viewport top
+            if (e.clientY <= 0 && e.relatedTarget == null) {
+                showModal();
+            }
+        };
+
+        const handleScroll = () => {
+            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            if (scrollPercent >= 50) {
+                showModal();
+            }
+        };
+
+        // Add triggers
+        document.addEventListener('mouseout', handleMouseOut);
+        window.addEventListener('scroll', handleScroll);
+
+        // Add closing event listeners
+        closeModalBtn?.addEventListener('click', hideModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                hideModal();
+            }
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('visible')) {
+                hideModal();
+            }
+        });
     }
-    .impact-grid {
-        grid-template-columns: repeat(2, 1fr);
+    
+    // --- Home Page Partner Logos ---
+    function initializeHomePartners() {
+        const logoScrollerInner = document.getElementById('home-partners-grid');
+        if (!logoScrollerInner) return;
+
+        const partners = [
+            { src: 'https://cdn.asp.events/CLIENT_Mark_All_D856883D_926F_07B7_E9D09EE4984A0639/sites/inclusive-education-mena/media/Logos/Ed-logo.png', alt: 'Ministry of Education Logo', customClass: 'moe-logo' },
+            { src: 'https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto/v1761216928/Blue_Bold_Office_Idea_Logo_50_x_50_px_10_l68irx.webp', alt: 'Sheraton Grand Doha Logo' },
+            { src: 'https://i0.wp.com/blog.10times.com/wp-content/uploads/2019/09/cropped-10times-logo-hd.png?fit=3077%2C937&ssl=1', alt: '10times Logo' },
+            { src: 'https://www.eventbrite.com/blog/wp-content/uploads/2025/02/Eventbrite_Hero-Lock-up_Brite-Orange.png', alt: 'Eventbrite Logo', customClass: 'eventbrite-logo' },
+            { src: 'https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto/v1762105728/NB.hiloop.official.logo_1_wwcxzh.webp', alt: 'Hi Loop Logo' },
+            { src: 'https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto/v1762148595/Untitled_design_-_2025-11-03T111231.113_eejcdu.webp', alt: 'Lovable Logo' },
+            { src: 'https://res.cloudinary.com/dj3vhocuf/image/upload/v1762451007/Untitled_design_-_2025-11-06T231151.489_xy7rwx.png', alt: 'Marhaba Information Guide Logo', href: 'https://marhaba.qa/' }
+        ];
+        
+        logoScrollerInner.innerHTML = '';
+
+        const allPartnerElements = [...partners, ...partners].map((partner, index) => {
+            const logoItem = document.createElement('div');
+            logoItem.className = 'logo-item';
+            
+            const img = document.createElement('img');
+            img.src = partner.src;
+            img.alt = partner.alt;
+
+            if (partner.alt === 'Sheraton Grand Doha Logo') {
+                img.classList.add('sheraton-logo');
+            }
+             if (partner.customClass) {
+                img.classList.add(partner.customClass);
+            }
+            
+            // Add aria-hidden to the duplicated logos for accessibility
+            if (index >= partners.length) {
+                logoItem.setAttribute('aria-hidden', 'true');
+            }
+            
+            if (partner.href) {
+                const link = document.createElement('a');
+                link.href = partner.href;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                link.appendChild(img);
+                logoItem.appendChild(link);
+            } else {
+                logoItem.appendChild(img);
+            }
+            return logoItem;
+        });
+
+        logoScrollerInner.append(...allPartnerElements);
     }
-}
 
-@media (max-width: 576px) {
-    .container { padding: 0 15px; }
-    h1 { font-size: 2rem; }
-    .footer-grid {
-        grid-template-columns: 1fr;
+    // --- Agenda Page Tabs ---
+    function initializeAgendaTabs() {
+        const tabsContainer = document.querySelector('.agenda-tabs');
+        if (!tabsContainer) return;
+
+        const tabButtons = tabsContainer.querySelectorAll('.tab-btn');
+        const contentPanels = document.querySelectorAll('.agenda-content');
+
+        tabsContainer.addEventListener('click', (e) => {
+            const clickedButton = (e.target as HTMLElement).closest('.tab-btn');
+            if (!clickedButton) return;
+
+            const tabId = (clickedButton as HTMLElement).dataset.tab;
+            
+            // Update buttons
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            clickedButton.classList.add('active');
+
+            // Update content panels
+            contentPanels.forEach(panel => {
+                panel.classList.toggle('active', panel.id === tabId);
+            });
+        });
     }
-    .contact-cards-grid {
-        grid-template-columns: 1fr;
+
+    // --- Brand Exposure Page: 360 Marketing Ecosystem Tabs ---
+    function initializeExposureTabs() {
+        const tabsContainer = document.querySelector('.exposure-tabs-container');
+        if (!tabsContainer) return;
+
+        const tabButtons = tabsContainer.querySelectorAll('.exposure-tab-btn');
+        const contentPanels = tabsContainer.querySelectorAll('.exposure-content');
+
+        tabsContainer.addEventListener('click', (e) => {
+            const clickedButton = (e.target as HTMLElement).closest('.exposure-tab-btn');
+            if (!clickedButton) return;
+
+            const tabId = (clickedButton as HTMLElement).dataset.tab;
+            
+            // Update buttons
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            clickedButton.classList.add('active');
+
+            // Update content panels
+            contentPanels.forEach(panel => {
+                panel.classList.toggle('active', panel.id === tabId);
+            });
+        });
     }
-    .session-selection-grid {
-        grid-template-columns: 1fr;
+
+    // --- NEW: Impact Stats Number Animation on Scroll ---
+    function initializeImpactStats() {
+        const impactSection = document.getElementById('who-is-attending');
+        if (!impactSection) return;
+
+        const animateCountUp = (el: HTMLElement) => {
+            const target = parseInt(el.dataset.target || '0', 10);
+            if (isNaN(target)) return;
+            
+            // To prevent re-animating if it's already done
+            if (el.dataset.animated === 'true') return;
+            el.dataset.animated = 'true';
+            
+            el.textContent = '0+'; // Start from 0 for animation effect
+
+            const duration = 2000; // 2 seconds
+            const frameDuration = 1000 / 60; // 60fps
+            const totalFrames = Math.round(duration / frameDuration);
+            let frame = 0;
+
+            const counter = setInterval(() => {
+                frame++;
+                const progress = frame / totalFrames;
+                // Use an ease-out function for a smoother end
+                const easedProgress = 1 - Math.pow(1 - progress, 3);
+                const currentCount = Math.round(target * easedProgress);
+
+                el.textContent = currentCount.toLocaleString() + '+';
+
+                if (frame === totalFrames) {
+                    clearInterval(counter);
+                    el.textContent = target.toLocaleString() + '+'; // Ensure final value is accurate
+                }
+            }, frameDuration);
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    impactSection.classList.add('is-visible');
+                    const numbers = impactSection.querySelectorAll('.impact-number');
+                    numbers.forEach(num => animateCountUp(num as HTMLElement));
+                    observer.unobserve(impactSection); // Animate only once
+                }
+            });
+        }, {
+            threshold: 0.4 // Trigger when 40% of the element is visible
+        });
+
+        observer.observe(impactSection);
     }
-    .exhibitor-types-grid {
-        grid-template-columns: 1fr;
-        max-width: 320px;
+
+    // --- NEW: Deck Request Modal & Form ---
+    function initializeDeckRequestModal() {
+        const openBtn = document.getElementById('open-deck-form-btn');
+        const exitModal = document.getElementById('exit-intent-modal');
+        const deckModal = document.getElementById('deck-request-modal');
+        
+        if (!deckModal) return; // Exit if the main modal isn't on the page
+
+        const closeBtn = deckModal.querySelector('.modal-close-btn');
+
+        const showDeckModal = () => {
+            if(exitModal) exitModal.classList.remove('visible');
+            deckModal.classList.add('visible');
+        };
+
+        const hideDeckModal = () => {
+            deckModal.classList.remove('visible');
+        };
+
+        // This listener is crucial for buttons on ALL pages.
+        // We use document.addEventListener to catch clicks even if the button is not present on the current page initially.
+        document.addEventListener('click', (e) => {
+            if ((e.target as HTMLElement).id === 'open-deck-form-btn') {
+                showDeckModal();
+            }
+        });
+
+        closeBtn?.addEventListener('click', hideDeckModal);
+
+        deckModal.addEventListener('click', (e) => {
+            if (e.target === deckModal) {
+                hideDeckModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && deckModal.classList.contains('visible')) {
+                hideDeckModal();
+            }
+        });
     }
-    /* Responsive adjustments for impact cards on smaller grids */
-    .impact-number {
-        font-size: 2.2rem;
+
+    function initializeDeckRequestForm() {
+        const form = document.getElementById('deck-request-form') as HTMLFormElement;
+        const successView = document.getElementById('deck-form-success');
+        const formContainer = document.getElementById('deck-form-container');
+
+        if (!form || !successView || !formContainer) return;
+
+        const requiredFields: HTMLElement[] = Array.from(form.querySelectorAll('[required]'));
+
+        requiredFields.forEach(field => {
+            field.addEventListener('input', () => validateField(field));
+            field.addEventListener('change', () => validateField(field));
+        });
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const isFormValid = requiredFields.map(field => validateField(field)).every(Boolean);
+
+            if (isFormValid) {
+                const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+                submitButton.disabled = true;
+                submitButton.textContent = 'Submitting...';
+
+                // This is the dedicated endpoint for deck requests.
+                const googleSheetWebAppUrl = 'https://script.google.com/macros/s/AKfycbzcmND809zEePZzvOLxxM1GolqWM1Lrh11JV9tdprNxSgkp-u0sjlxRzqXtmjDQDtn_2Q/exec';
+
+                try {
+                    const formData = new FormData(form);
+                    
+                    const response = await fetch(googleSheetWebAppUrl, {
+                        method: 'POST',
+                        body: new URLSearchParams(formData as any)
+                    });
+
+                    if (!response.ok) throw new Error(`Network response was not ok. Status: ${response.status}`);
+                    
+                    const result = await response.json();
+                    if (result.result !== 'success') throw new Error(result.error || 'The script returned an unknown error.');
+
+                    // Trigger download
+                    const link = document.createElement('a');
+                    link.href = 'assets/EduExpoQatar2026-Sponsorship-Deck.pdf';
+                    link.download = 'EduExpoQatar2026-Sponsorship-Deck.pdf';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    // Show success message
+                    formContainer.style.display = 'none';
+                    successView.style.display = 'block';
+
+                } catch (error) {
+                    console.error('Deck Request Submission Error:', error);
+                    alert('Sorry, there was a problem submitting your request. Please try again. Error: ' + (error as Error).message);
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Download Now';
+                }
+            } else {
+                const firstInvalidField = form.querySelector('.invalid, .error-message[style*="block"]');
+                if (firstInvalidField) {
+                    (firstInvalidField.closest('.form-group') as HTMLElement)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        });
     }
-    .impact-label {
-        font-size: 0.9rem;
-    }
-}
 
-/* --- Guidance Process Section --- */
-.guidance-process {
-    max-width: 800px;
-    margin: 3rem auto 0;
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-}
-
-.guidance-step {
-    text-align: left;
-}
-
-.guidance-step .step-indicator {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.5rem;
-}
-
-.step-indicator .step-number {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #999;
-}
-
-.step-indicator i {
-    font-size: 1.1rem;
-    color: var(--text-color);
-}
-
-.guidance-step h3 {
-    text-align: left;
-    font-size: 1.8rem;
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-    font-weight: 800;
-}
-
-.guidance-step p {
-    margin-bottom: 0;
-    color: #555;
-    font-size: 1rem;
-    line-height: 1.7;
-}
-
-/* --- Agenda Page (Redesigned) --- */
-#agenda {
-    padding-top: 40px;
-}
-
-.agenda-container {
-    max-width: 1000px;
-}
-
-.agenda-tabs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 2rem;
-    background-color: var(--surface-color);
-    border-radius: 50px;
-    padding: 5px;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
-}
-
-.agenda-tabs .tab-btn {
-    flex: 1;
-    padding: 1rem;
-    border: none;
-    background: transparent;
-    font-size: 1.1rem;
-    font-weight: 700;
-    font-family: var(--heading-font);
-    cursor: pointer;
-    border-radius: 50px;
-    transition: all 0.3s ease;
-    color: var(--text-color);
-}
-
-.agenda-tabs .tab-btn:hover {
-    background-color: rgba(0,0,0,0.05);
-}
-
-.agenda-tabs .tab-btn.active {
-    background: var(--gradient);
-    color: var(--white);
-    box-shadow: var(--shadow);
-}
-
-.agenda-content {
-    display: none;
-}
-.agenda-content.active {
-    display: block;
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.agenda-timeline {
-    border-left: 3px solid var(--border-color);
-    padding-left: 2rem;
-}
-
-.timeline-block {
-    display: grid;
-    grid-template-columns: 150px 1fr;
-    gap: 2rem;
-    position: relative;
-    padding-bottom: 3rem;
-}
-
-.timeline-block::before {
-    content: '';
-    position: absolute;
-    left: -2rem;
-    top: 15px;
-    transform: translateX(-50%);
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--white);
-    border: 4px solid #711fb8;
-    z-index: 1;
-}
-
-.timeline-time h3 {
-    text-align: left;
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-    font-size: 1.3rem;
-    position: sticky;
-    top: 120px;
-}
-
-.timeline-time span {
-    font-weight: 700;
-    color: #777;
-}
-
-.timeline-events {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.timeline-events .track-title {
-    font-family: var(--heading-font);
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--surface-color);
-    color: #711fb8;
-}
-.timeline-events .track-title:first-child {
-    margin-top: 0;
-}
-
-.session-card {
-    background: var(--white);
-    border-radius: 10px;
-    padding: 1.5rem;
-    box-shadow: var(--shadow);
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    border-left: 5px solid #ccc;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.session-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-}
-
-.session-icon {
-    flex-shrink: 0;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--surface-color);
-    font-size: 1.5rem;
-}
-
-.session-content h4 {
-    margin: 0 0 0.25rem;
-    font-size: 1.05rem;
-    font-family: var(--primary-font);
-    font-weight: 700;
-}
-
-.session-content p {
-    margin: 0;
-    color: #555;
-    font-size: 0.9rem;
-}
-
-.session-tag {
-    position: absolute;
-    top: 10px;
-    right: -35px;
-    background: #6c757d;
-    color: var(--white);
-    padding: 5px 30px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    transform: rotate(45deg);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-}
-
-.session-card.keynote { background: var(--gradient); color: var(--white); border-color: #d12386; }
-.session-card.keynote .session-icon { background: rgba(255,255,255,0.2); color: var(--white); }
-.session-card.keynote .session-content p { color: rgba(255,255,255,0.8); }
-
-.session-card.panel { border-color: #17a2b8; }
-.session-card.panel .session-icon { color: #17a2b8; }
-
-.session-card.track { border-color: #ffc107; }
-.session-card.track .session-icon { color: #ffc107; }
-
-.session-card.break { border-color: #6c757d; }
-.session-card.break .session-icon { color: #6c757d; }
-
-.session-card.closed { border-color: #dc3545; }
-.session-card.closed .session-icon { color: #dc3545; }
-
-.session-card.award { background: linear-gradient(to right, #f2c94c, #f2994a); color: var(--text-color); border-color: #f2994a; }
-.session-card.award .session-icon { background: rgba(255,255,255,0.4); color: #a06c14; }
-
-#event-highlights h2, #event-highlights .subtitle { text-align: center; }
-#event-highlights .content-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-#event-highlights .content-card { padding: 2rem 1.5rem; }
-#event-highlights .content-card h3 { font-size: 1.1rem; min-height: 0; flex-grow: 1; justify-content: center; }
-#event-highlights .content-card h3 i { font-size: 2rem; margin-bottom: 0.75rem; }
-
-@media(max-width: 768px) {
-    .agenda-tabs { flex-direction: column; border-radius: 10px; }
-    .agenda-tabs .tab-btn { font-size: 1rem; }
-    .timeline-block { grid-template-columns: 1fr; gap: 1.5rem; padding-left: 1.5rem; }
-    .agenda-timeline { padding-left: 1rem; }
-    .timeline-block::before { left: -1rem; }
-    .timeline-time { padding-bottom: 1rem; border-bottom: 1px solid var(--border-color); }
-    .timeline-time h3 { position: static; }
-    .session-tag { top: 5px; right: -40px; font-size: 0.7rem; }
-}
-
-/* --- About Page Font Size Increase --- */
-.about-page #market-opportunity .subtitle {
-    font-size: 1.3rem;
-}
-
-.about-page .stat-card p {
-    font-size: 1rem;
-}
-
-.about-page .why-qatar-text li {
-    font-size: 1.2rem;
-}
-
-/* --- Brand Exposure Page Redesign --- */
-/* Impact Dashboard - REMOVED */
-
-/* Audience Persona Cards with Avatars */
-#target-audience .audience-card {
-    padding: 0;
-    text-align: left;
-    overflow: hidden;
-}
-.audience-avatar {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    display: block;
-}
-.audience-card-content {
-    padding: 1.5rem;
-}
-#target-audience .audience-card h4 {
-    text-align: left;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-#target-audience .audience-card i {
-    font-size: 1.3rem;
-    margin-bottom: 0;
-}
-
-/* 360 Marketing Ecosystem Tabs */
-#marketing-ecosystem {
-    padding-top: 40px;
-}
-.exposure-tabs-container {
-    background: var(--white);
-    border-radius: 15px;
-    box-shadow: var(--shadow);
-    margin-top: 3rem;
-}
-.exposure-tabs {
-    display: flex;
-    background-color: var(--surface-color);
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-}
-.exposure-tab-btn {
-    flex: 1;
-    padding: 1.25rem 1rem;
-    border: none;
-    background: transparent;
-    font-size: 1.1rem;
-    font-weight: 700;
-    font-family: var(--heading-font);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    color: #555;
-    border-bottom: 3px solid transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-}
-.exposure-tab-btn:hover {
-    color: var(--text-color);
-    background-color: #e9ecef;
-}
-.exposure-tab-btn.active {
-    color: #711fb8;
-    border-bottom-color: #711fb8;
-    background: var(--white);
-}
-
-.exposure-content-panels {
-    padding: 2.5rem;
-}
-.exposure-content {
-    display: none;
-    animation: fadeIn 0.5s ease-in-out;
-}
-.exposure-content.active {
-    display: block;
-}
-.exposure-content h3 {
-    text-align: center;
-    font-size: 1.6rem;
-    margin-top: 0;
-    margin-bottom: 2rem;
-}
-.exposure-panel-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-}
-.exposure-benefit-item {
-    text-align: center;
-}
-.exposure-benefit-item i {
-    font-size: 2rem;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 1rem;
-}
-.exposure-benefit-item h4 {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-    text-align: center;
-}
-.exposure-benefit-item p {
-    font-size: 0.9rem;
-    color: #555;
-    margin: 0;
-}
-
-@media (max-width: 768px) {
-    /* Brand Exposure Page Responsive */
-    .exposure-tabs {
-        flex-direction: column;
-        border-radius: 10px;
-    }
-    .exposure-tab-btn {
-        border-bottom: 1px solid var(--border-color);
-        border-radius: 0;
-    }
-    .exposure-tab-btn.active {
-        border-bottom-color: #711fb8;
-    }
-    .exposure-content-panels {
-        padding: 1.5rem;
-    }
-    .audience-avatar {
-        height: 150px;
-    }
-}
-
-/* --- Exhibitor Benefits Mascot --- */
-#exhibitor-benefits .container {
-    position: relative;
-}
-
-.benefits-mascot {
-    position: absolute;
-    width: 180px;
-    height: auto;
-    right: 6%;
-    left: 20px;
-    top: -85px;
-    z-index: 5;
-    pointer-events: none;
-    transform: scaleX(-1);
-}
-
-/* --- About Page Mascot --- */
-#about-expo .container {
-    position: relative;
-}
-.market-mascot {
-    position: absolute;
-    width: 120px;
-    height: auto;
-    top: -105px;
-    right: 40px;
-    z-index: 5;
-    pointer-events: none;
-}
-
-/* --- Why Attend Page Mascot --- */
-#why-attend-benefits .container {
-    position: relative;
-}
-.why-attend-mascot {
-    position: absolute;
-    width: 260px;
-    height: auto;
-    top: -35px;
-    left: 0px;
-    z-index: 5;
-    pointer-events: none;
-}
-
-/* --- Why Attend Page Footer Mascot --- */
-#decision-makers .container {
-    position: relative;
-}
-.footer-mascot {
-    position: absolute;
-    width: 180px;
-    height: auto;
-    bottom: -105px;
-    right: -150px;
-    z-index: 5;
-    pointer-events: none;
-}
-
-/* --- Plan Your Trip Page Mascot --- */
-.content-card.hayya-card {
-    position: relative;
-    overflow: visible; /* Allow mascot to overflow */
-}
-
-.visa-mascot {
-    position: absolute;
-    width: 300px;
-    height: auto;
-    top: -350px;
-    left: -20px;
-    right: -30px;
-    z-index: 5;
-    pointer-events: none;
-}
-
-/* --- Agenda Page Mascot --- */
-.admission-zone-card {
-    position: relative;
-    overflow: visible;
-}
-
-.agenda-mascot {
-    position: absolute;
-    width: 180px;
-    height: auto;
-    top: -160px;
-    left: 70%;
-    transform: translateX(-50%);
-    z-index: 5;
-    pointer-events: none;
-}
-
-/* --- Student Registration Page Mascot --- */
-.student-reg-mascot {
-    position: absolute;
-    width: 230px;
-    height: auto;
-    top: 110px;
-    bottom: 150px;
-    right: 5%;
-    z-index: 5;
-    pointer-events: none;
-}
-
-/* --- Booth Registration Page Mascot --- */
-.booth-reg-mascot {
-    position: absolute;
-    width: 230px;
-    height: auto;
-    top: 110px;
-    right: 5%;
-    z-index: 5;
-    pointer-events: none;
-}
-
-/* --- Sponsorship Registration Page Mascot --- */
-.sponsorship-reg-mascot {
-    position: absolute;
-    width: 230px;
-    height: auto;
-    top: 110px;
-    right: 5%;
-    z-index: 5;
-    pointer-events: none;
-}
-
-/* --- School Group Registration Page Mascot --- */
-.school-group-reg-mascot {
-    position: absolute;
-    width: 230px;
-    height: auto;
-    top: 110px;
-    right: 5%;
-    z-index: 5;
-    pointer-events: none;
-}
-
-/* --- Speaker Registration Page Mascot --- */
-.speaker-reg-mascot {
-    position: absolute;
-    width: 230px;
-    height: auto;
-    top: 110px;
-    right: 5%;
-    z-index: 5;
-    pointer-events: none;
-}
-
-
-/* --- Why Exhibit Page Mascot --- */
-.benefit-card.partnership-card-with-mascot {
-    position: relative;
-    overflow: visible;
-}
-.card-top-mascot {
-    position: absolute;
-    width: 240px;
-    height: auto;
-    top: -190px;
-    left: 60%;
-    transform: translateX(-50%);
-    z-index: 5;
-    pointer-events: none;
-}
-
-.exhibit-footer-mascot {
-    position: absolute;
-    width: 230px;
-    height: auto;
-    bottom: -105px;
-    left: -110px;
-    z-index: 5;
-    pointer-events: none;
-}
-
-/* --- Booth Features Page Mascot --- */
-.booth-features-mascot {
-    position: absolute;
-    width: 300px;
-    height: auto;
-    top: -240px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 5;
-    pointer-events: none;
-}
-
-/* --- Hackathon Page Mascot --- */
-.hackathon-intro-mascot {
-    position: absolute;
-    width: 200px;
-    height: auto;
-    top: -150px;
-    right: -220px;
-    z-index: 5;
-    pointer-events: none;
-}
-
-/* --- Sponsorship Tiers Page Mascot --- */
-.tier-card.startup-card-with-mascot {
-    position: relative;
-    overflow: visible;
-}
-
-.tier-mascot {
-    position: absolute;
-    width: 180px;
-    height: auto;
-    top: -160px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 5;
-    pointer-events: none;
-}
-
-.impressions-card-with-mascot {
-    position: relative;
-    overflow: visible;
-}
-
-.sponsorship-intro-mascot {
-    position: absolute;
-    width: 250px;
-    height: auto;
-    top: -200px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 5;
-    pointer-events: none;
-}
-
-/* --- Brand Exposure Page Mascot --- */
-.countries-card-with-mascot {
-    position: relative;
+    // --- Page Load Initializers ---
+    highlightActiveNav();
+    initializeMobileNav();
+    initializeDropdowns();
+    initializeMainCountdown();
+    initializeContactForm(); 
+    initializeStudentRegistrationForm();
+    initializeBoothRegistrationForm();
+    initializeSponsorshipRegistrationForm();
+    initializeSpeakerRegistrationForm();
+    initializeSchoolGroupRegistrationForm();
+    initializeFaqAccordion();
+    initializeExitIntentModal();
+    initializeDeckRequestModal();
+    initializeDeckRequestForm();
+    initializeEarlyBirdCountdown();
+    initializeHomePartners();
+    initializeAgendaTabs();
+    initializeExposureTabs();
+    initializeImpactStats();
+});
