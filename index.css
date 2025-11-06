@@ -3637,3 +3637,85 @@ position: absolute;
         text-align: center;
     }
 }
+
+
+/* --- Language Switcher --- */
+.language-switcher {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: 1rem; /* Add some space from the last nav item */
+}
+
+.language-switcher .nav-link {
+    color: #888;
+    padding-bottom: 5px;
+    position: relative; /* For the active state underline */
+}
+
+.language-switcher .nav-link:hover {
+    color: var(--text-color);
+}
+
+.language-switcher .nav-link.lang-active {
+    color: var(--text-color);
+    font-weight: 700;
+    cursor: default;
+}
+
+.language-switcher .nav-link.lang-active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--text-color);
+    border-radius: 1px;
+}
+
+/* Override to remove main nav link active state from language switcher */
+.language-switcher .nav-link.active::after {
+    display: none;
+}
+
+.language-switcher .lang-separator {
+    color: #ccc;
+    align-self: center;
+    padding-bottom: 5px;
+}
+
+/* RTL Support (Placeholder for future Arabic version) */
+/*
+html[dir="rtl"] {
+    --text-align-start: right;
+    --text-align-end: left;
+}
+html[dir="rtl"] .main-header .container {
+    flex-direction: row-reverse;
+}
+html[dir="rtl"] #main-nav > ul {
+    flex-direction: row-reverse;
+}
+html[dir="rtl"] .has-dropdown i {
+    transform: rotate(180deg);
+}
+*/
+
+@media (max-width: 992px) {
+    .language-switcher {
+        padding: 1rem 1.5rem;
+        margin-left: 0;
+        width: 100%;
+        justify-content: center;
+        border-top: 1px solid var(--border-color);
+        order: 99; /* Push it towards the bottom of the nav stack */
+    }
+    .language-switcher .nav-link,
+    .language-switcher .lang-separator {
+        padding-bottom: 0;
+    }
+    .language-switcher .nav-link.lang-active::after {
+        display: none; /* No underline on mobile */
+    }
+}
