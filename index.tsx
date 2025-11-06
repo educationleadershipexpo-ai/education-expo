@@ -1182,7 +1182,7 @@
 
         const partners = [
             { src: 'https://cdn.asp.events/CLIENT_Mark_All_D856883D_926F_07B7_E9D09EE4984A0639/sites/inclusive-education-mena/media/Logos/Ed-logo.png', alt: 'Edarabia Logo' },
-            { src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Sheraton_Hotels_and_Resorts_logo.svg/2560px-Sheraton_Hotels_and_Resorts_logo.svg.png', alt: 'Sheraton Hotels & Resorts Logo' },
+            { src: 'https://res.cloudinary.com/dj3vhocuf/image/upload/v1761216928/Blue_Bold_Office_Idea_Logo_50_x_50_px_10_l68irx.png', alt: 'Sheraton Hotels & Resorts Logo' },
             { src: 'https://i0.wp.com/blog.10times.com/wp-content/uploads/2019/09/cropped-10times-logo-hd.png?fit=3077%2C937&ssl=1', alt: '10times Logo' },
             { src: 'https://www.eventbrite.com/blog/wp-content/uploads/2025/02/Eventbrite_Hero-Lock-up_Brite-Orange.png', alt: 'Eventbrite Logo', customClass: 'eventbrite-logo' },
             { src: 'https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto/v1762105728/NB.hiloop.official.logo_1_wwcxzh.webp', alt: 'Hi Loop Logo' },
