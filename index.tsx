@@ -1,5 +1,4 @@
 
-
     declare var Panzoom: any;
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -143,7 +142,7 @@
             case 'form-speaker-phone':
             case 'deck-form-phone':
             case 'form-school-phone':
-                const phoneRegex = /^[\d\s()+-]+$/;
+                const phoneRegex = /^\+?[\d\s()-]+$/;
                  if ((field.hasAttribute('required') && value === '')) {
                     showError(field, 'Mobile number is required.');
                     isValid = false;
@@ -294,7 +293,7 @@
             mobileNavHeader.classList.add('mobile-nav-logo');
             const logoImg = document.createElement('img');
             logoImg.src = "https://res.cloudinary.com/dj3vhocuf/image/upload/v1761210698/logo500x250_i8opbv.png";
-            logoImg.alt = "QELE 2026 Logo";
+            logoImg.alt = "Qatar Education Expo 2026 Logo";
             mobileNavHeader.appendChild(logoImg);
             mainNav.prepend(mobileNavHeader);
         }
@@ -561,8 +560,8 @@
                     // --- Trigger download AFTER successful submission ---
                     if ((form.querySelector('#form-interest') as HTMLSelectElement)?.value === 'exhibiting') {
                         const link = document.createElement('a');
-                        link.href = 'assets/QELE2026-Sponsorship-Deck.pdf';
-                        link.download = 'QELE2026-Sponsorship-Deck.pdf';
+                        link.href = 'assets/EduExpoQatar2026-Sponsorship-Deck.pdf';
+                        link.download = 'EduExpoQatar2026-Sponsorship-Deck.pdf';
                         document.body.appendChild(link);
                         link.click();
                         document.body.removeChild(link);
@@ -1050,26 +1049,18 @@
             event.preventDefault();
 
             const isFormValid = inputs.map(input => validateField(input)).every(Boolean);
+            const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
 
             if (isFormValid) {
-                const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
                 if (submitButton) {
                     submitButton.disabled = true;
                     submitButton.textContent = 'Submitting...';
                 }
 
                 // =========================================================================================
-                // --- ROBUST GOOGLE SHEETS INTEGRATION FOR SCHOOL GROUPS ---
+                // --- GOOGLE SHEETS INTEGRATION FOR SCHOOL GROUPS ---
                 // =========================================================================================
-                // !! CRITICAL INSTRUCTIONS !!
-                // 1. Create a new, separate Google Sheet for school group registrations.
-                // 2. Rename the first sheet to "SchoolGroupRegistrations".
-                // 3. In the first row, add these exact headers:
-                //    Timestamp, form_source, school_name, contact_name, country, email, phone, student_count, grade_level, visit_date, message, consent
-                // 4. Go to Extensions > Apps Script and paste the universal script code.
-                // 5. Deploy a new web app, set access to "Anyone", and paste the new URL below.
-                // =========================================================================================
-                const googleSheetWebAppUrl = 'https://script.google.com/macros/s/AKfycbw7gUfTjZ9Q9c9jJvR7n8X3y2A1b0C4d5E6f7G8h9i0j/exec';
+                const googleSheetWebAppUrl = 'https://script.google.com/macros/s/AKfycbzgCIAubolBckuU5yjgeThOWg4iI4pVPDtkMt-jMI1murfQf_Vbah8k7EKWaTT-89cICA/exec';
                 
                 try {
                     const formData = new FormData(form);
@@ -1551,8 +1542,8 @@
 
                     // Trigger download
                     const link = document.createElement('a');
-                    link.href = 'assets/QELE2026-Sponsorship-Deck.pdf';
-                    link.download = 'QELE2026-Sponsorship-Deck.pdf';
+                    link.href = 'assets/EduExpoQatar2026-Sponsorship-Deck.pdf';
+                    link.download = 'EduExpoQatar2026-Sponsorship-Deck.pdf';
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
