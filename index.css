@@ -1,3 +1,4 @@
+
 :root {
     --gradient: linear-gradient(to right, #d12386, #711fb8);
     --primary-font: 'Poppins', sans-serif;
@@ -589,51 +590,89 @@ section {
     padding-top: 40px;
 }
 
-/* Partners Section */
+/* Partners Section - NEW SCROLLER STYLES */
 #home-partners {
     padding: 60px 0;
+    background-color: var(--bg-color);
 }
 #home-partners h2 {
     margin-bottom: 2rem;
 }
-.logo-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 2rem;
-    align-items: center;
+
+.logo-scroller {
+    max-width: 100%;
+    overflow: hidden;
+    position: relative;
 }
+
+/* Gradient fade on the sides */
+.logo-scroller::before,
+.logo-scroller::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100px;
+    z-index: 2;
+    pointer-events: none;
+}
+.logo-scroller::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-color) 0%, transparent 100%);
+}
+.logo-scroller::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-color) 0%, transparent 100%);
+}
+
+.logo-scroller__inner {
+    display: flex;
+    gap: 4rem;
+    width: max-content;
+    animation: scroll-logos 40s linear infinite;
+}
+
+@keyframes scroll-logos {
+  to {
+    transform: translate(calc(-50% - 2rem)); 
+  }
+}
+
 .logo-item {
     text-align: center;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 .logo-item img {
-    max-width: 100%;
-    max-height: 70px;
+    max-height: 60px;
+    width: auto;
+    max-width: 160px;
     object-fit: contain;
-    transition: filter 0.3s, opacity 0.3s;
+    transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
+    filter: grayscale(100%);
+    opacity: 0.7;
 }
-.logo-item img:hover {
+
+.logo-item a:hover img, .logo-item img:hover {
+    transform: scale(1.1);
     filter: grayscale(0%);
     opacity: 1;
 }
 
-/* --- Homepage Partner Logo Overrides --- */
-#home-partners .logo-item img {
-    height: 80px;
-    max-height: 80px;
-    filter: none;
-    opacity: 1;
-    transition: transform 0.3s ease;
-}
-
-#home-partners .logo-item img:hover {
-    filter: none;
-    opacity: 1;
-    transform: scale(1.05);
-}
-
+/* Specific overrides if needed */
 #home-partners .logo-item img.sheraton-logo {
-    height: 450px;
-    max-height: 150px;
+    max-height: 90px;
+}
+#home-partners .logo-item img.eventbrite-logo {
+    max-height: 40px;
+}
+
+/* Pause animation on hover */
+.logo-scroller:hover .logo-scroller__inner {
+    animation-play-state: paused;
 }
 
 
@@ -1120,7 +1159,7 @@ section {
 .urgency-cta-section {
     margin-top: 16rem;
     padding: 2.5rem;
-    background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.pexels.com/photos/2608517/pexels-photo-2608517.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') center/cover;
+    background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.pexels.com/photos/2608517/pexels-photo-2608517.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2&fm=webp') center/cover;
     border-radius: 15px;
     box-shadow: var(--shadow);
     text-align: center;
@@ -3469,171 +3508,3 @@ a.contact-email:hover {
 /* --- Brand Exposure Page Mascot --- */
 .countries-card-with-mascot {
     position: relative;
-    overflow: visible;
-}
-
-.brand-exposure-mascot {
-position: absolute;
-    width: 280px;
-    height: auto;
-    top: -220px;
-    left: 70%;
-    transform: translateX(-50%);
-    z-index: 5;
-    pointer-events: none;
-}
-
-.pre-event-panel-with-mascot {
-    position: relative;
-}
-
-.pre-event-mascot {
-    position: absolute;
-    width: 180px;
-    height: auto;
-    top: -300px;
-    left: 70px;
-    transform: translateX(-50%);
-    z-index: 5;
-    pointer-events: none;
-}
-
-/* --- Contact Page Mascot --- */
-.quick-chat-card-with-mascot {
-    position: relative;
-    overflow: visible;
-}
-
-.contact-quick-chat-mascot {
-    position: absolute;
-    width: 170px;
-    height: auto;
-    top: -210px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 5;
-    pointer-events: none;
-}
-
-.faq-item-with-mascot {
-    position: relative;
-    overflow: visible;
-}
-
-.contact-faq-mascot {
-    position: absolute;
-    width: 160px;
-    height: auto;
-    top: -135px;
-    left: 1%;
-    transform: translateX(-50%) scaleX(-1);
-    z-index: 5;
-    pointer-events: none;
-}
-
-@media (max-width: 1200px) {
-    .benefits-mascot {
-        left: 0px;
-        width: 180px;
-        top: 50px;
-    }
-}
-
-@media (max-width: 992px) {
-    .benefits-mascot {
-        display: none;
-    }
-    .hackathon-intro-mascot {
-        display: none;
-    }
-    .testimonials-mascot {
-        display: none;
-    }
-    .market-mascot {
-        display: none;
-    }
-    .why-attend-mascot {
-        display: none;
-    }
-    .footer-mascot {
-        display: none;
-    }
-    .visa-mascot {
-        display: none;
-    }
-    .agenda-mascot {
-        display: none;
-    }
-    .student-reg-mascot {
-        display: none;
-    }
-    .booth-reg-mascot {
-        display: none;
-    }
-    .sponsorship-reg-mascot {
-        display: none;
-    }
-    .school-group-reg-mascot {
-        display: none;
-    }
-    .exhibit-footer-mascot {
-        display: none;
-    }
-    .booth-features-mascot {
-        display: none;
-    }
-    .tier-mascot {
-        display: none;
-    }
-    .brand-exposure-mascot {
-        display: none;
-    }
-    .pre-event-mascot {
-        display: none;
-    }
-    .contact-quick-chat-mascot {
-        display: none;
-    }
-    .contact-faq-mascot {
-        display: none;
-    }
-    .speaker-reg-mascot {
-        display: none;
-    }
-}
-
-/* --- NEW Mobile Nav Menu Additions --- */
-.mobile-nav-logo,
-.mobile-nav-ctas {
-    display: none;
-}
-
-@media (max-width: 992px) {
-    /* MERGED AND CORRECTED MOBILE NAV STYLES */
-    #main-nav {
-        display: flex; /* This was repeated, but it's essential */
-    }
-
-    .mobile-nav-logo {
-        display: block;
-        padding: 1rem 1.5rem;
-        border-bottom: 1px solid var(--border-color);
-    }
-    .mobile-nav-logo img {
-        height: 50px;
-        width: auto;
-    }
-    
-    .mobile-nav-ctas {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1.5rem;
-        margin-top: auto; /* Pushes to the bottom */
-        border-top: 1px solid var(--border-color);
-    }
-    .mobile-nav-ctas .btn {
-        width: 100%;
-        text-align: center;
-    }
-}
