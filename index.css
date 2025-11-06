@@ -855,7 +855,7 @@ section {
 /* Decision Makers Section */
 .decision-makers-layout {
     display: grid;
-    grid-template-columns: 1fr 1.5fr;
+    grid-template-columns: 1.5fr 1fr;
     gap: 3rem;
     align-items: center;
 }
@@ -3508,3 +3508,57 @@ a.contact-email:hover {
 /* --- Brand Exposure Page Mascot --- */
 .countries-card-with-mascot {
     position: relative;
+    overflow: visible;
+}
+.brand-exposure-mascot {
+    position: absolute;
+    width: 120px;
+    height: auto;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    pointer-events: none;
+}
+.pre-event-panel-with-mascot {
+    position: relative;
+    overflow: visible;
+}
+.pre-event-mascot {
+    position: absolute;
+    width: 150px;
+    height: auto;
+    top: -40px;
+    right: 20px;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* --- Contact Page Mascots --- */
+.quick-chat-card-with-mascot {
+    position: relative;
+    overflow: visible;
+}
+.contact-quick-chat-mascot {
+    position: absolute;
+    width: 120px;
+    height: auto;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    pointer-events: none;
+}
+.faq-item-with-mascot {
+    position: relative;
+    overflow: visible;
+}
+.contact-faq-mascot {
+    position: absolute;
+    width: 100px;
+    height: auto;
+    top: -30px;
+    left: -40px;
+    z-index: 5;
+    pointer-events: none;
+}
