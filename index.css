@@ -3508,3 +3508,79 @@ a.contact-email:hover {
 /* --- Brand Exposure Page Mascot --- */
 .countries-card-with-mascot {
     position: relative;
+    overflow: visible;
+}
+
+.brand-exposure-mascot {
+    position: absolute;
+    width: 180px;
+    height: auto;
+    top: -120px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    pointer-events: none;
+}
+
+.pre-event-panel-with-mascot {
+    position: relative;
+}
+
+.pre-event-mascot {
+    position: absolute;
+    width: 200px;
+    height: auto;
+    top: -50px;
+    right: -40px;
+    z-index: 5;
+    pointer-events: none;
+}
+
+
+/* --- Contact Page Mascots --- */
+.quick-chat-card-with-mascot {
+    position: relative;
+    overflow: visible;
+}
+
+.contact-quick-chat-mascot {
+    position: absolute;
+    width: 150px;
+    height: auto;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    pointer-events: none;
+}
+
+.faq-item-with-mascot {
+    position: relative;
+    overflow: visible;
+}
+.contact-faq-mascot {
+    position: absolute;
+    width: 180px;
+    height: auto;
+    top: 50%;
+    left: -120px;
+    transform: translateY(-50%) scaleX(-1);
+    z-index: 5;
+    pointer-events: none;
+}
+
+
+@media (max-width: 992px) {
+    .contact-faq-mascot,
+    .pre-event-mascot {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .brand-exposure-mascot,
+    .contact-quick-chat-mascot {
+        width: 120px;
+        top: -80px;
+    }
+}
