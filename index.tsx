@@ -1,7 +1,4 @@
 
-
-    declare var Panzoom: any;
-
     document.addEventListener('DOMContentLoaded', () => {
 
     // --- Reusable Form Validation Helpers ---
@@ -143,7 +140,7 @@
             case 'form-speaker-phone':
             case 'deck-form-phone':
             case 'form-school-phone':
-                const phoneRegex = /^[\d\s()+-]+$/;
+                const phoneRegex = /^\+?[\d\s()-]+$/;
                  if ((field.hasAttribute('required') && value === '')) {
                     showError(field, 'Mobile number is required.');
                     isValid = false;
@@ -293,8 +290,8 @@
             mobileNavHeader.href = "index.html";
             mobileNavHeader.classList.add('mobile-nav-logo');
             const logoImg = document.createElement('img');
-            logoImg.src = "https://res.cloudinary.com/dj3vhocuf/image/upload/v1761210698/logo500x250_i8opbv.png";
-            logoImg.alt = "QELE 2026 Logo";
+            logoImg.src = "https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto/v1761210698/logo500x250_i8opbv.webp";
+            logoImg.alt = "Qatar Education Expo 2026 Logo";
             mobileNavHeader.appendChild(logoImg);
             mainNav.prepend(mobileNavHeader);
         }
@@ -372,12 +369,14 @@
 
             // Universal click handler for both mobile and desktop
             toggle.addEventListener('click', (e) => {
-                // Prevent default for all dropdown toggles to handle open/close manually
+                // On mobile, prevent navigation and toggle the dropdown menu.
+                // On desktop, the link's default navigation behavior is prevented to allow
+                // a consistent click-to-toggle experience across devices.
                 e.preventDefault();
                 
                 const isCurrentlyOpen = dropdown.classList.contains('dropdown-open');
 
-                // First, close all other open dropdowns
+                // First, close all other open dropdowns for a cleaner experience.
                 document.querySelectorAll('.has-dropdown.dropdown-open').forEach(openDropdown => {
                     if (openDropdown !== dropdown) {
                         openDropdown.classList.remove('dropdown-open');
@@ -385,14 +384,20 @@
                     }
                 });
 
-                // Then, toggle the state of the clicked dropdown
-                dropdown.classList.toggle('dropdown-open');
-                toggle.setAttribute('aria-expanded', String(!isCurrentlyOpen));
+                // Then, explicitly set the state of the clicked dropdown.
+                // This is a more robust way of toggling and fixes the reported mobile issue
+                // where a second click would not close the menu.
+                if (isCurrentlyOpen) {
+                    dropdown.classList.remove('dropdown-open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                } else {
+                    dropdown.classList.add('dropdown-open');
+                    toggle.setAttribute('aria-expanded', 'true');
+                }
             });
         });
         
         // This listener closes any open dropdown when a click happens anywhere outside a dropdown toggle.
-        // This now works for BOTH mobile and desktop.
         document.addEventListener('click', (e) => {
             const target = e.target as HTMLElement;
             
@@ -561,8 +566,8 @@
                     // --- Trigger download AFTER successful submission ---
                     if ((form.querySelector('#form-interest') as HTMLSelectElement)?.value === 'exhibiting') {
                         const link = document.createElement('a');
-                        link.href = 'assets/QELE2026-Sponsorship-Deck.pdf';
-                        link.download = 'QELE2026-Sponsorship-Deck.pdf';
+                        link.href = 'assets/EduExpoQatar2026-Sponsorship-Deck.pdf';
+                        link.download = 'EduExpoQatar2026-Sponsorship-Deck.pdf';
                         document.body.appendChild(link);
                         link.click();
                         document.body.removeChild(link);
@@ -1050,26 +1055,18 @@
             event.preventDefault();
 
             const isFormValid = inputs.map(input => validateField(input)).every(Boolean);
+            const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
 
             if (isFormValid) {
-                const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
                 if (submitButton) {
                     submitButton.disabled = true;
                     submitButton.textContent = 'Submitting...';
                 }
 
                 // =========================================================================================
-                // --- ROBUST GOOGLE SHEETS INTEGRATION FOR SCHOOL GROUPS ---
+                // --- GOOGLE SHEETS INTEGRATION FOR SCHOOL GROUPS ---
                 // =========================================================================================
-                // !! CRITICAL INSTRUCTIONS !!
-                // 1. Create a new, separate Google Sheet for school group registrations.
-                // 2. Rename the first sheet to "SchoolGroupRegistrations".
-                // 3. In the first row, add these exact headers:
-                //    Timestamp, form_source, school_name, contact_name, country, email, phone, student_count, grade_level, visit_date, message, consent
-                // 4. Go to Extensions > Apps Script and paste the universal script code.
-                // 5. Deploy a new web app, set access to "Anyone", and paste the new URL below.
-                // =========================================================================================
-                const googleSheetWebAppUrl = 'https://script.google.com/macros/s/AKfycbw7gUfTjZ9Q9c9jJvR7n8X3y2A1b0C4d5E6f7G8h9i0j/exec';
+                const googleSheetWebAppUrl = 'https://script.google.com/macros/s/AKfycbzgCIAubolBckuU5yjgeThOWg4iI4pVPDtkMt-jMI1murfQf_Vbah8k7EKWaTT-89cICA/exec';
                 
                 try {
                     const formData = new FormData(form);
@@ -1184,65 +1181,59 @@
         if (!logoGrid) return;
 
         const partners = [
-            { src: 'https://cdn.asp.events/CLIENT_Mark_All_D856883D_926F_07B7_E9D09EE4984A0639/sites/inclusive-education-mena/media/Logos/Ed-logo.png', alt: 'Ministry of Education Logo', customClass: 'moe-logo' },
-            { src: 'https://res.cloudinary.com/dj3vhocuf/image/upload/v1761216928/Blue_Bold_Office_Idea_Logo_50_x_50_px_10_l68irx.png', alt: 'Sheraton Grand Doha Logo' },
+            { src: 'https://www.edarabia.com/wp-content/themes/edarabia/assets/images/logo-en-new.svg', alt: 'Edarabia Logo' },
+            { src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Sheraton_Hotels_and_Resorts_logo.svg/2560px-Sheraton_Hotels_and_Resorts_logo.svg.png', alt: 'Sheraton Hotels & Resorts Logo' },
             { src: 'https://i0.wp.com/blog.10times.com/wp-content/uploads/2019/09/cropped-10times-logo-hd.png?fit=3077%2C937&ssl=1', alt: '10times Logo' },
             { src: 'https://www.eventbrite.com/blog/wp-content/uploads/2025/02/Eventbrite_Hero-Lock-up_Brite-Orange.png', alt: 'Eventbrite Logo', customClass: 'eventbrite-logo' },
-            { src: 'https://res.cloudinary.com/dj3vhocuf/image/upload/v1762105728/NB.hiloop.official.logo_1_wwcxzh.png', alt: 'Hi Loop Logo' },
-            { src: 'https://res.cloudinary.com/dj3vhocuf/image/upload/v1762148595/Untitled_design_-_2025-11-03T111231.113_eejcdu.png', alt: 'Lovable Logo' }
+            { src: 'https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto/v1762105728/NB.hiloop.official.logo_1_wwcxzh.webp', alt: 'Hi Loop Logo' },
+            { src: 'https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto/v1762148595/Untitled_design_-_2025-11-03T111231.113_eejcdu.webp', alt: 'Lovable Logo' },
+            { src: 'https://res.cloudinary.com/dj3vhocuf/image/upload/v1762451007/Untitled_design_-_2025-11-06T231151.489_xy7rwx.png', alt: 'Marhaba Information Guide Logo', href: 'https://marhaba.qa/' }
         ];
         
         logoGrid.innerHTML = '';
 
-        partners.forEach(partner => {
+        const createLogoItem = (partner: typeof partners[0]) => {
             const logoItem = document.createElement('div');
             logoItem.className = 'logo-item';
             
             const img = document.createElement('img');
             img.src = partner.src;
             img.alt = partner.alt;
+            img.loading = 'lazy';
 
-            if (partner.alt === 'Sheraton Grand Doha Logo') {
-                img.classList.add('sheraton-logo');
-            }
-             if (partner.customClass) {
+            if (partner.customClass) {
                 img.classList.add(partner.customClass);
             }
             
-            logoItem.appendChild(img);
-            logoGrid.appendChild(logoItem);
-        });
-    }
+            if (partner.href) {
+                const link = document.createElement('a');
+                link.href = partner.href;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                link.appendChild(img);
+                logoItem.appendChild(link);
+            } else {
+                logoItem.appendChild(img);
+            }
+            
+            return logoItem;
+        };
 
-    // --- Past Partners Page ---
-    function initializePastPartners() {
-        const logoGrid = document.getElementById('past-partners-grid');
-        if (!logoGrid) return;
+        const fragment = document.createDocumentFragment();
 
-        const partners = [
-            { src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/University_of_Cambridge_crest.svg/1200px-University_of_Cambridge_crest.svg.png', alt: 'Cambridge University Logo' },
-            { src: 'https://upload.wikimedia.org/wikipedia/en/thumb/2/29/Harvard_shield_wreath.svg/1200px-Harvard_shield_wreath.svg.png', alt: 'Harvard University Logo' },
-            { src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Microsoft_logo_%282012%29.svg/1280px-Microsoft_logo_%282012%29.svg.png', alt: 'Microsoft Logo' },
-            { src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1200px-Google_%22G%22_logo.svg.png', alt: 'Google Logo' },
-            { src: 'https://upload.wikimedia.org/wikipedia/en/thumb/5/58/Qatar_Foundation_logo.svg/1200px-Qatar_Foundation_logo.svg.png', alt: 'Qatar Foundation Logo' },
-            { src: 'https://upload.wikimedia.org/wikipedia/en/thumb/9/91/Qatar_University_logo.svg/1200px-Qatar_University_logo.svg.png', alt: 'Qatar University Logo' },
-            { src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/GE_logo.svg/1200px-GE_logo.svg.png', alt: 'General Electric Logo' },
-            { src: 'https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg', alt: 'Apple Logo' },
-        ];
-        
-        logoGrid.innerHTML = '';
-
+        // Append original logos
         partners.forEach(partner => {
-            const logoItem = document.createElement('div');
-            logoItem.className = 'logo-item';
-            
-            const img = document.createElement('img');
-            img.src = partner.src;
-            img.alt = partner.alt;
-            
-            logoItem.appendChild(img);
-            logoGrid.appendChild(logoItem);
+            fragment.appendChild(createLogoItem(partner));
         });
+
+        // Append duplicated logos for seamless scroll
+        partners.forEach(partner => {
+            const duplicateItem = createLogoItem(partner);
+            duplicateItem.setAttribute('aria-hidden', 'true');
+            fragment.appendChild(duplicateItem);
+        });
+
+        logoGrid.appendChild(fragment);
     }
 
     // --- Agenda Page Tabs ---
@@ -1268,126 +1259,6 @@
                 panel.classList.toggle('active', panel.id === tabId);
             });
         });
-    }
-
-    // --- Floor Plan Logic ---
-    function initializeFloorPlan() {
-        if (!document.getElementById('floor-plan-section')) return;
-
-        const boothsData = [
-            { id: 'A1', package: 'Platinum', status: 'available' }, { id: 'A2', package: 'Platinum', status: 'sold' },
-            { id: 'A3', package: 'Gold', status: 'available' }, { id: 'A4', package: 'Gold', status: 'reserved' },
-            { id: 'A5', package: 'Gold', status: 'available' }, { id: 'A6', package: 'Gold', status: 'sold' },
-            { id: 'B1', package: 'Silver', status: 'available' }, { id: 'B2', package: 'Silver', status: 'available' },
-            { id: 'B3', package: 'Silver', status: 'reserved' }, { id: 'B4', package: 'Silver', status: 'available' },
-            { id: 'B5', package: 'Silver', status: 'sold' }, { id: 'B6', package: 'Silver', status: 'available' },
-            { id: 'C1', package: 'Basic', status: 'available' }, { id: 'C2', package: 'Basic', status: 'available' },
-            { id: 'C3', package: 'Basic', status: 'available' }, { id: 'C4', package: 'Basic', status: 'available' },
-            { id: 'C5', package: 'Basic', status: 'sold' }, { id: 'C6', package: 'Basic', status: 'sold' },
-        ];
-
-        const map = document.getElementById('floor-plan-map');
-        const tooltip = document.getElementById('floor-plan-tooltip');
-        const detailsModal = document.getElementById('booth-details-modal');
-        const closeModalBtn = detailsModal?.querySelector('.modal-close-btn');
-
-        let activeFilter = 'all';
-        
-        const packageDetails = {
-            'Basic': { size: '3x3 (9 sqm)', benefits: ['Standard-row booth', 'Name on website list', '2 exhibitor passes', 'Access to networking lounge'] },
-            'Silver': { size: '4x3 (12 sqm)', benefits: ['Priority row booth', 'Logo on event website', 'Name in event catalogs', '3 exhibitor passes'] },
-            'Gold': { size: '6x3 (18 sqm)', benefits: ['Prime hall location', 'Logo + 50-word catalog feature', '4 passes + 1 speaking slot', '10% off add-ons'] },
-            'Platinum': { size: '7x3 (21 sqm)', benefits: ['Entrance corner booth', 'Premium furniture & setup', 'Top-tier logo placement', '8 passes + 3 speaking slots', 'Access to VIP lounge'] }
-        };
-
-        const renderBooths = () => {
-            if (!map) return;
-            map.innerHTML = '';
-            boothsData.forEach(booth => {
-                const boothEl = document.createElement('div');
-                boothEl.className = `booth ${booth.status} ${booth.package.toLowerCase()}`;
-                boothEl.textContent = booth.id;
-                boothEl.dataset.id = booth.id;
-
-                if (activeFilter !== 'all' && booth.package.toLowerCase() !== activeFilter) {
-                    boothEl.classList.add('hidden');
-                }
-
-                boothEl.addEventListener('mousemove', (e) => showTooltip(e, booth));
-                boothEl.addEventListener('mouseleave', hideTooltip);
-                boothEl.addEventListener('click', () => {
-                    if (booth.status !== 'sold') {
-                        showDetailsModal(booth);
-                    }
-                });
-
-                map.appendChild(boothEl);
-            });
-        };
-
-        const updateCounts = () => {
-            document.getElementById('available-count')!.textContent = boothsData.filter(b => b.status === 'available').length.toString();
-            document.getElementById('reserved-count')!.textContent = boothsData.filter(b => b.status === 'reserved').length.toString();
-            document.getElementById('sold-count')!.textContent = boothsData.filter(b => b.status === 'sold').length.toString();
-        };
-
-        const showTooltip = (e: MouseEvent, booth: any) => {
-            if (!tooltip) return;
-            tooltip.style.display = 'block';
-            tooltip.innerHTML = `
-                <strong>Booth ${booth.id}</strong>
-                <p>Package: <span>${booth.package}</span></p>
-                <p>Status: <span class="status-${booth.status}">${booth.status}</span></p>
-            `;
-            tooltip.style.left = `${e.pageX + 15}px`;
-            tooltip.style.top = `${e.pageY + 15}px`;
-        };
-
-        const hideTooltip = () => {
-            if (tooltip) tooltip.style.display = 'none';
-        };
-
-        const showDetailsModal = (booth: any) => {
-            if (!detailsModal) return;
-            const details = packageDetails[booth.package as keyof typeof packageDetails];
-            
-            (detailsModal.querySelector('#details-modal-title') as HTMLElement).textContent = `${booth.package} Booth`;
-            (detailsModal.querySelector('#details-modal-booth-id') as HTMLElement).textContent = `ID: ${booth.id}`;
-            (detailsModal.querySelector('#details-modal-size') as HTMLElement).textContent = details.size;
-            
-            const benefitsList = detailsModal.querySelector('#details-modal-benefits') as HTMLElement;
-            benefitsList.innerHTML = details.benefits.map(b => `<li><i class="fas fa-check"></i> ${b}</li>`).join('');
-            
-            const statusEl = detailsModal.querySelector('#details-modal-status') as HTMLElement;
-            statusEl.textContent = booth.status;
-            statusEl.className = `status-tag ${booth.status}`;
-
-            const enquireBtn = detailsModal.querySelector('#enquire-from-details-btn') as HTMLAnchorElement;
-            enquireBtn.href = `booth-registration.html?boothId=${booth.id}&package=${booth.package}`;
-
-            detailsModal.classList.add('visible');
-        };
-
-        const hideDetailsModal = () => {
-            if (detailsModal) detailsModal.classList.remove('visible');
-        };
-
-        closeModalBtn?.addEventListener('click', hideDetailsModal);
-        detailsModal?.addEventListener('click', (e) => {
-            if (e.target === detailsModal) hideDetailsModal();
-        });
-
-        document.querySelectorAll('.fp-filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelector('.fp-filter-btn.active')?.classList.remove('active');
-                btn.classList.add('active');
-                activeFilter = (btn as HTMLElement).dataset.filter || 'all';
-                renderBooths();
-            });
-        });
-
-        renderBooths();
-        updateCounts();
     }
 
     // --- Brand Exposure Page: 360 Marketing Ecosystem Tabs ---
@@ -1551,8 +1422,8 @@
 
                     // Trigger download
                     const link = document.createElement('a');
-                    link.href = 'assets/QELE2026-Sponsorship-Deck.pdf';
-                    link.download = 'QELE2026-Sponsorship-Deck.pdf';
+                    link.href = 'assets/EduExpoQatar2026-Sponsorship-Deck.pdf';
+                    link.download = 'EduExpoQatar2026-Sponsorship-Deck.pdf';
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
@@ -1593,9 +1464,7 @@
     initializeDeckRequestForm();
     initializeEarlyBirdCountdown();
     initializeHomePartners();
-    initializePastPartners();
     initializeAgendaTabs();
-    initializeFloorPlan();
     initializeExposureTabs();
     initializeImpactStats();
 });
