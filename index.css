@@ -645,11 +645,19 @@ section {
 
 #home-partners .logo-item {
     flex-shrink: 0;
+    width: 160px; /* Set a uniform width for all logo containers */
+    height: 80px;  /* Set a uniform height for all logo containers */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #home-partners .logo-item img {
-    height: 70px;
-    max-height: 70px;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
     transition: all 0.3s ease;
 }
 
@@ -659,11 +667,6 @@ section {
     filter: grayscale(0%);
     opacity: 1;
     transform: scale(1.1);
-}
-
-#home-partners .eventbrite-logo {
-   height: 45px !important;
-   max-height: 45px !important;
 }
 
 
