@@ -1177,8 +1177,8 @@
     
     // --- Home Page Partner Logos ---
     function initializeHomePartners() {
-        const logoGrid = document.getElementById('home-partners-grid');
-        if (!logoGrid) return;
+        const logoScrollerInner = document.getElementById('home-partners-grid');
+        if (!logoScrollerInner) return;
 
         const partners = [
             { src: 'https://cdn.asp.events/CLIENT_Mark_All_D856883D_926F_07B7_E9D09EE4984A0639/sites/inclusive-education-mena/media/Logos/Ed-logo.png', alt: 'Ministry of Education Logo', customClass: 'moe-logo' },
@@ -1190,9 +1190,9 @@
             { src: 'https://res.cloudinary.com/dj3vhocuf/image/upload/v1762451007/Untitled_design_-_2025-11-06T231151.489_xy7rwx.png', alt: 'Marhaba Information Guide Logo', href: 'https://marhaba.qa/' }
         ];
         
-        logoGrid.innerHTML = '';
+        logoScrollerInner.innerHTML = '';
 
-        partners.forEach(partner => {
+        const allPartnerElements = [...partners, ...partners].map((partner, index) => {
             const logoItem = document.createElement('div');
             logoItem.className = 'logo-item';
             
@@ -1207,6 +1207,11 @@
                 img.classList.add(partner.customClass);
             }
             
+            // Add aria-hidden to the duplicated logos for accessibility
+            if (index >= partners.length) {
+                logoItem.setAttribute('aria-hidden', 'true');
+            }
+            
             if (partner.href) {
                 const link = document.createElement('a');
                 link.href = partner.href;
@@ -1217,9 +1222,10 @@
             } else {
                 logoItem.appendChild(img);
             }
-            
-            logoGrid.appendChild(logoItem);
+            return logoItem;
         });
+
+        logoScrollerInner.append(...allPartnerElements);
     }
 
     // --- Agenda Page Tabs ---
