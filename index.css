@@ -597,10 +597,11 @@ section {
     margin-bottom: 2rem;
 }
 .logo-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 2rem;
+    display: flex;
+    justify-content: space-around;
     align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
 }
 .logo-item {
     text-align: center;
@@ -631,10 +632,7 @@ section {
     transform: scale(1.05);
 }
 
-#home-partners .logo-item img.sheraton-logo {
-    height: 450px;
-    max-height: 150px;
-}
+
 
 
 /* Market Opportunity Section */
