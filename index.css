@@ -672,6 +672,13 @@ section {
     transform: scale(1.1);
 }
 
+/* --- Sheraton Logo Size Override --- */
+#home-partners .logo-item .sheraton-logo {
+    transform: scale(1.4);
+}
+#home-partners .logo-item .sheraton-logo:hover {
+    transform: scale(1.5);
+}
 
 
 
