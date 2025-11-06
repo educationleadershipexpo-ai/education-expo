@@ -4,18 +4,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>School Group Registration - QELE 2026</title>
+    <meta name="description" content="Register your school for a complimentary group visit to the Qatar Education Expo 2026. An unmissable opportunity for students to explore top international universities and future career paths.">
+    <title>School Group Registration | Qatar Education Fair 2026</title>
     <link rel="stylesheet" href="index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Qatar Education Expo 2026",
+        "url": "/index.html",
+        "logo": "https://res.cloudinary.com/dj3vhocuf/image/upload/v1761210698/logo500x250_i8opbv.png",
+        "sameAs": [
+          "https://twitter.com/qatarexpo2026",
+          "https://linkedin.com/company/qatarexpo2026",
+          "https://instagram.com/qatarexpo2026"
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+974-7444-9111",
+          "contactType": "Customer Service",
+          "email": "partnerships@eduexpoqatar.com"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "/index.html"
+        },{
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Visit",
+          "item": "/why-attend.html"
+        },{
+          "@type": "ListItem",
+          "position": 3,
+          "name": "School Group Registration"
+        }]
+      }
+    ]
+    </script>
 </head>
 <body>
 
     <header class="main-header" id="main-header">
         <div class="container">
-            <a href="index.html" class="logo"><img src="https://res.cloudinary.com/dj3vhocuf/image/upload/v1761210698/logo500x250_i8opbv.png" alt="QELE 2026 Logo"></a>
+            <a href="index.html" class="logo"><img src="https://res.cloudinary.com/dj3vhocuf/image/upload/v1761210698/logo500x250_i8opbv.png" alt="Qatar Education Expo 2026 Logo"></a>
             <button class="nav-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="hamburger-box">
                     <span class="hamburger-inner"></span>
@@ -72,31 +114,31 @@
         <section class="page-header">
             <div class="container">
                 <h1>School Group Registration</h1>
-                <p>Register your school group for an inspiring visit to QELE 2026.</p>
+                <p>Register your school group for an inspiring visit to Qatar Education Expo 2026.</p>
             </div>
         </section>
-
+        
         <section id="school-group-registration-form-section" class="bg-surface">
             <div class="container" style="max-width: 800px;">
-                <h2>Bring Your Students to the Future of Education</h2>
-                <p class="subtitle">We welcome school groups to attend the expo for free. Please fill out the form below to register your group's interest, and we will contact you to coordinate the details of your visit.</p>
+                <h2>Register Your School Group</h2>
+                <p class="subtitle">Provide details below to arrange a complimentary group visit for your students. Our team will contact you to confirm your visit schedule.</p>
                 
                 <div id="school-group-form-success" style="display: none; background: var(--white); padding: 2.5rem; border-radius: 10px; border: 1px solid var(--border-color); text-align: center;">
                      <i class="fas fa-check-circle" style="font-size: 3rem; color: #4db6ac; margin-bottom: 1rem;" aria-hidden="true"></i>
-                     <h3>Thank You!</h3>
-                     <p>Your school group registration request has been received. Our team will be in touch with you shortly to confirm the details and assist with planning your visit. We look forward to welcoming your students!</p>
+                     <h3>Thank You for Registering Your Group!</h3>
+                     <p>Your request has been successfully submitted. Our team will review the details and contact you shortly to confirm your visit and provide further instructions. We look forward to welcoming your students!</p>
                      <a href="index.html" class="btn btn-primary" style="margin-top: 1rem;">Back to Home</a>
                 </div>
 
                 <form id="school-group-registration-form" novalidate style="background: var(--white); padding: 2.5rem; border-radius: 10px; border: 1px solid var(--border-color); color: var(--text-color); box-shadow: var(--shadow);">
                     <input type="hidden" name="form_source" value="School Group Registration">
-                    
+
                     <div class="form-group">
                         <label for="form-school-name">School Name *</label>
                         <input type="text" id="form-school-name" name="school_name" required>
                         <div class="error-message"></div>
                     </div>
-                    
+
                     <div class="form-row">
                         <div class="form-group">
                             <label for="form-school-contact-name">Contact Person Name (Teacher/Counselor) *</label>
@@ -106,19 +148,14 @@
                         <div class="form-group">
                             <label for="form-school-country">Country *</label>
                             <select id="form-school-country" name="country" required>
-                                <option value="" disabled selected>Select country...</option>
+                                <option value="" disabled selected>Select country</option>
                                 <option value="Qatar">Qatar</option>
-                                <option value="Saudi Arabia">Saudi Arabia</option>
-                                <option value="United Arab Emirates">United Arab Emirates</option>
-                                <option value="Kuwait">Kuwait</option>
-                                <option value="Bahrain">Bahrain</option>
-                                <option value="Oman">Oman</option>
                                 <option value="Other">Other</option>
                             </select>
                             <div class="error-message"></div>
                         </div>
                     </div>
-
+                    
                     <div class="form-row">
                         <div class="form-group">
                             <label for="form-school-email">Contact Email *</label>
@@ -148,43 +185,41 @@
                     <div class="form-group">
                         <label for="form-school-staff-count">Number of Accompanying Staff (Optional)</label>
                         <input type="number" id="form-school-staff-count" name="staff_count" min="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="form-school-visit-date">Preferred Visit Date *</label>
+                        <select id="form-school-visit-date" name="visit_date" required>
+                            <option value="" disabled selected>Select a date...</option>
+                            <option value="April 19, 2026">April 19, 2026</option>
+                            <option value="April 20, 2026">April 20, 2026</option>
+                        </select>
                         <div class="error-message"></div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="form-school-visit-date">Preferred Visit Date *</label>
-                        <select id="form-school-visit-date" name="visit_date" required>
-                            <option value="" disabled selected>Select a day...</option>
-                            <option value="Day 1 - April 19, 2026">Day 1 - April 19, 2026</option>
-                            <option value="Day 2 - April 20, 2026">Day 2 - April 20, 2026</option>
-                            <option value="Either Day">Either Day is fine</option>
-                        </select>
-                        <div class="error-message"></div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="form-school-message">Any specific requests or questions? (Optional)</label>
+                        <label for="form-school-message">Message / Questions (Optional)</label>
                         <textarea id="form-school-message" name="message" rows="4"></textarea>
                     </div>
-
+                    
                     <div class="form-group form-group-consent">
                         <input type="checkbox" id="form-school-consent" name="consent" required>
-                        <label for="form-school-consent">I confirm that I am an authorized representative of the school and agree to the event's terms and privacy policy. *</label>
+                        <label for="form-school-consent">I confirm that I am authorized to register on behalf of my school and agree to be contacted by the Qatar Education Expo team. *</label>
                         <div class="error-message"></div>
                     </div>
-
+                    
                     <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1.2rem; padding: 15px;">Submit Group Registration</button>
                 </form>
             </div>
         </section>
-        <img src="https://res.cloudinary.com/dj3vhocuf/image/upload/v1762094160/Untitled_design_-_2025-11-02T200537.194_jcatwi.png" alt="QELE's owl mascot holding a sign to welcome school group registrations." class="school-group-reg-mascot">
+        <img src="https://res.cloudinary.com/dj3vhocuf/image/upload/v1762094160/Untitled_design_-_2025-11-02T200537.194_jcatwi.png" alt="Qatar Education Expo's owl mascot guiding school groups to the registration form." class="school-group-reg-mascot">
     </main>
-    
+
     <footer class="main-footer">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <a href="index.html" class="logo"><img src="https://res.cloudinary.com/dj3vhocuf/image/upload/v1761223357/logo-white_1_pqcaph.png" alt="QELE 2026 Logo"></a>
+                    <a href="index.html" class="logo"><img src="https://res.cloudinary.com/dj3vhocuf/image/upload/v1761223357/logo-white_1_pqcaph.png" alt="Qatar Education Expo 2026 Logo"></a>
                     <p>The premier event connecting educational leaders, institutions, and innovators in the MENA region.</p>
                 </div>
                 <div class="footer-col">
@@ -229,7 +264,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 QELE. All Rights Reserved.</p>
+                <p>&copy; 2024 Qatar Education Expo. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
@@ -238,6 +273,63 @@
     <a href="https://wa.me/97474449111" class="whatsapp-fab" target="_blank" aria-label="Chat on WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
+
+    <!-- Exit Intent Modal -->
+    <div id="exit-intent-modal" class="modal-overlay">
+        <div class="modal-content exit-intent-content" role="dialog" aria-modal="true" aria-labelledby="exit-modal-title">
+            <button class="modal-close-btn" aria-label="Close">&times;</button>
+            <h3 id="exit-modal-title">Download The Deck Before You Leave!</h3>
+            <p>Get our official Exhibitor & Sponsorship Deck, including the floor plan and ROI details, sent straight to your inbox.</p>
+            <button id="open-deck-form-btn" class="btn btn-primary">Get The Deck</button>
+        </div>
+    </div>
+
+    <!-- Deck Request Modal -->
+    <div id="deck-request-modal" class="modal-overlay">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="deck-modal-title">
+            <button class="modal-close-btn" aria-label="Close">&times;</button>
+            <div id="deck-form-container">
+                <h3 id="deck-modal-title">Get The Official Deck</h3>
+                <p>Please provide your details to receive the Exhibitor & Sponsorship Deck instantly.</p>
+                <form id="deck-request-form" novalidate style="margin-top: 1.5rem;">
+                    <input type="hidden" name="form_source" value="Deck Request Popup">
+                    <div class="form-group">
+                        <label for="deck-form-name">Full Name *</label>
+                        <input type="text" id="deck-form-name" name="name" required>
+                        <div class="error-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="deck-form-email">Work Email *</label>
+                        <input type="email" id="deck-form-email" name="email" required>
+                        <div class="error-message"></div>
+                    </div>
+                     <div class="form-group">
+                        <label for="deck-form-phone">Mobile Number *</label>
+                        <input type="tel" id="deck-form-phone" name="phone" required>
+                        <div class="error-message"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="deck-form-designation">Designation *</label>
+                            <input type="text" id="deck-form-designation" name="designation" required>
+                            <div class="error-message"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="deck-form-organization">Organization *</label>
+                            <input type="text" id="deck-form-organization" name="organization" required>
+                            <div class="error-message"></div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Download Now</button>
+                </form>
+            </div>
+            <div id="deck-form-success" style="display: none; text-align: center;">
+                <i class="fas fa-check-circle" style="font-size: 3rem; color: #4db6ac; margin-bottom: 1rem;" aria-hidden="true"></i>
+                <h3>Thank You!</h3>
+                <p>Your download should start automatically. If it doesn't, please check your pop-up blocker or try again.</p>
+            </div>
+        </div>
+    </div>
     
     <!-- Mobile Sticky Bar -->
     <div id="mobile-sticky-bar">
