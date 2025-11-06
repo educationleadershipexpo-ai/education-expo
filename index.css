@@ -578,6 +578,9 @@ section {
     margin: 0 auto;
     opacity: 0.9;
 }
+.about-page .page-header p {
+    max-width: none;
+}
 
 
 /* --- General Section Styles --- */
