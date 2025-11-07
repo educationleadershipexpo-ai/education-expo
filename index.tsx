@@ -1,5 +1,92 @@
 
     document.addEventListener('DOMContentLoaded', () => {
+    const isArabic = document.documentElement.lang === 'ar';
+
+    const translations = {
+        en: {
+            nameRequired: 'Name is required.',
+            companyRequired: 'Company is required.',
+            schoolRequired: 'School/Institution is required.',
+            organizationRequired: 'Organization is required.',
+            emailRequired: 'Email is required.',
+            invalidEmail: 'Please enter a valid email address.',
+            phoneRequired: 'Mobile number is required.',
+            invalidPhone: 'Please enter a valid phone number.',
+            positionRequired: 'Position is required.',
+            designationRequired: 'Designation is required.',
+            jobTitleRequired: 'Job Title is required.',
+            websiteRequired: 'Website is required.',
+            invalidWebsite: 'Please enter a valid website URL.',
+            headshotRequired: 'A professional headshot is required.',
+            invalidFileType: 'Invalid file type. Please upload a JPG, PNG, or WEBP image.',
+            fileTooLarge: 'File is too large. Maximum size is 10 MB.',
+            fieldRequired: 'This field is required.',
+            selectionRequired: 'Please make a selection.',
+            studentCountRequired: 'Please enter a valid number of students.',
+            gradeLevelRequired: 'Please specify the grade level(s).',
+            dobRequired: 'Date of birth is required.',
+            consentRequired: 'You must provide consent to register.',
+            interestRequired: 'Please select at least one area of interest.',
+            specifyInterest: 'Please specify your area of interest.',
+            sessionRequired: 'Please select at least one session from Day 1 or Day 2.',
+            optionRequired: 'Please select an option.',
+            submitting: 'Submitting...',
+            submitInquiry: 'Submit Inquiry',
+            registerNow: 'Register Now',
+            submitRegistration: 'Submit Registration',
+            submitApplication: 'Submit Application',
+            submitGroupRegistration: 'Submit Group Registration',
+            downloadNow: 'Download Now',
+            noFileChosen: 'No file chosen',
+            eventHasStarted: 'The event has started!',
+            earlyBirdEnded: 'The early bird offer has ended!',
+            bookABooth: 'Book a Booth',
+            sponsorNow: 'Sponsor Now'
+        },
+        ar: {
+            nameRequired: 'الاسم مطلوب.',
+            companyRequired: 'اسم الشركة مطلوب.',
+            schoolRequired: 'اسم المدرسة/المؤسسة مطلوب.',
+            organizationRequired: 'اسم المنظمة مطلوب.',
+            emailRequired: 'البريد الإلكتروني مطلوب.',
+            invalidEmail: 'الرجاء إدخال عنوان بريد إلكتروني صالح.',
+            phoneRequired: 'رقم الجوال مطلوب.',
+            invalidPhone: 'الرجاء إدخال رقم هاتف صالح.',
+            positionRequired: 'المنصب مطلوب.',
+            designationRequired: 'المسمى الوظيفي مطلوب.',
+            jobTitleRequired: 'المسمى الوظيفي مطلوب.',
+            websiteRequired: 'الموقع الإلكتروني مطلوب.',
+            invalidWebsite: 'الرجاء إدخال عنوان موقع إلكتروني صالح.',
+            headshotRequired: 'صورة شخصية احترافية مطلوبة.',
+            invalidFileType: 'نوع الملف غير صالح. يرجى تحميل صورة بصيغة JPG, PNG, أو WEBP.',
+            fileTooLarge: 'الملف كبير جدًا. الحجم الأقصى هو 10 ميجابايت.',
+            fieldRequired: 'هذا الحقل مطلوب.',
+            selectionRequired: 'الرجاء الاختيار.',
+            studentCountRequired: 'الرجاء إدخال عدد صالح من الطلاب.',
+            gradeLevelRequired: 'الرجاء تحديد المستوى (المستويات) الدراسي.',
+            dobRequired: 'تاريخ الميلاد مطلوب.',
+            consentRequired: 'يجب تقديم الموافقة للتسجيل.',
+            interestRequired: 'الرجاء اختيار مجال اهتمام واحد على الأقل.',
+            specifyInterest: 'الرجاء تحديد مجال اهتمامك.',
+            sessionRequired: 'الرجاء اختيار جلسة واحدة على الأقل من اليوم الأول أو اليوم الثاني.',
+            optionRequired: 'الرجاء اختيار خيار.',
+            submitting: 'جارٍ الإرسال...',
+            submitInquiry: 'إرسال الاستفسار',
+            registerNow: 'سجل الآن',
+            submitRegistration: 'إرسال التسجيل',
+            submitApplication: 'إرسال الطلب',
+            submitGroupRegistration: 'إرسال تسجيل المجموعة',
+            downloadNow: 'حمّل الآن',
+            noFileChosen: 'لم يتم اختيار ملف',
+            eventHasStarted: 'لقد بدأ الحدث!',
+            earlyBirdEnded: 'لقد انتهى عرض الحجز المبكر!',
+            bookABooth: 'احجز جناحك',
+            sponsorNow: 'كن راعيًا'
+        }
+    };
+    
+    const t = isArabic ? translations.ar : translations.en;
+
 
     // --- Reusable Form Validation Helpers ---
     const showError = (input: HTMLElement, message: string) => {
@@ -97,7 +184,7 @@
             case 'deck-form-name':
             case 'form-school-contact-name':
                 if (value === '') {
-                    showError(field, 'Name is required.');
+                    showError(field, t.nameRequired);
                     isValid = false;
                 }
                 break;
@@ -110,8 +197,12 @@
             case 'deck-form-organization':
             case 'form-school-name':
                 if (value === '') {
-                    const fieldName = (field.id.includes('booth') || field.id.includes('sponsor')) ? 'Company' : (field.id.includes('student') || field.id.includes('school')) ? 'School/Institution' : 'Organization';
-                    showError(field, `${fieldName} is required.`);
+                    const fieldName = (field.id.includes('booth') || field.id.includes('sponsor')) 
+                        ? (isArabic ? 'الشركة' : 'Company') 
+                        : (field.id.includes('student') || field.id.includes('school')) 
+                        ? (isArabic ? 'المدرسة/المؤسسة' : 'School/Institution') 
+                        : (isArabic ? 'المنظمة' : 'Organization');
+                    showError(field, `${fieldName} ${isArabic ? 'مطلوبة.' : 'is required.'}`);
                     isValid = false;
                 }
                 break;
@@ -125,10 +216,10 @@
             case 'form-school-email':
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (value === '') {
-                    showError(field, 'Email is required.');
+                    showError(field, t.emailRequired);
                     isValid = false;
                 } else if (!emailRegex.test(value)) {
-                    showError(field, 'Please enter a valid email address.');
+                    showError(field, t.invalidEmail);
                     isValid = false;
                 }
                 break;
@@ -142,10 +233,10 @@
             case 'form-school-phone':
                 const phoneRegex = /^\+?[\d\s()-]+$/;
                  if ((field.hasAttribute('required') && value === '')) {
-                    showError(field, 'Mobile number is required.');
+                    showError(field, t.phoneRequired);
                     isValid = false;
                 } else if (value !== '' && !phoneRegex.test(value)) {
-                    showError(field, 'Please enter a valid phone number.');
+                    showError(field, t.invalidPhone);
                     isValid = false;
                 }
                 break;
@@ -154,8 +245,8 @@
             case 'form-sponsor-title':
             case 'deck-form-designation':
                  if (value === '') {
-                    const fieldName = (field.id === 'form-sponsor-title') ? 'Position' : (field.id === 'deck-form-designation') ? 'Designation' : 'Job Title';
-                    showError(field, `${fieldName} is required.`);
+                    const fieldName = (field.id === 'form-sponsor-title') ? (isArabic ? 'المنصب' : 'Position') : (field.id === 'deck-form-designation') ? (isArabic ? 'المسمى الوظيفي' : 'Designation') : (isArabic ? 'المسمى الوظيفي' : 'Job Title');
+                    showError(field, `${fieldName} ${isArabic ? 'مطلوب.' : 'is required.'}`);
                     isValid = false;
                 }
                 break;
@@ -165,10 +256,10 @@
             case 'form-speaker-linkedin':
                 const urlRegex = /^(https?:\/\/)?([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?$/i;
                 if (field.hasAttribute('required') && value === '') {
-                     showError(field, 'Website is required.');
+                     showError(field, t.websiteRequired);
                      isValid = false;
                 } else if (value !== '' && !urlRegex.test(value)) {
-                    showError(field, 'Please enter a valid website URL.');
+                    showError(field, t.invalidWebsite);
                     isValid = false;
                 }
                 break;
@@ -176,7 +267,7 @@
             case 'form-speaker-headshot-upload':
                 const files = input.files;
                 if (!files || files.length === 0) {
-                    showError(field, 'A professional headshot is required.');
+                    showError(field, t.headshotRequired);
                     isValid = false;
                 } else {
                     const file = files[0];
@@ -184,10 +275,10 @@
                     const maxSize = 10 * 1024 * 1024; // 10 MB
 
                     if (!allowedTypes.includes(file.type)) {
-                        showError(field, 'Invalid file type. Please upload a JPG, PNG, or WEBP image.');
+                        showError(field, t.invalidFileType);
                         isValid = false;
                     } else if (file.size > maxSize) {
-                        showError(field, 'File is too large. Maximum size is 10 MB.');
+                        showError(field, t.fileTooLarge);
                         isValid = false;
                     }
                 }
@@ -197,7 +288,7 @@
             case 'form-speaker-why':
             case 'form-speaker-bio':
                 if (textarea.value.trim() === '') {
-                    showError(field, 'This field is required.');
+                    showError(field, t.fieldRequired);
                     isValid = false;
                 }
                 break;
@@ -216,27 +307,27 @@
             case 'form-school-country':
             case 'form-school-visit-date':
                 if (select.value === '') {
-                    showError(field, 'Please make a selection.');
+                    showError(field, t.selectionRequired);
                     isValid = false;
                 }
                 break;
             
             case 'form-school-student-count':
                 if (value === '' || parseInt(value) < 1) {
-                    showError(field, 'Please enter a valid number of students.');
+                    showError(field, t.studentCountRequired);
                     isValid = false;
                 }
                 break;
             case 'form-school-grade-level':
                 if (value === '') {
-                    showError(field, 'Please specify the grade level(s).');
+                    showError(field, t.gradeLevelRequired);
                     isValid = false;
                 }
                 break;
 
             case 'form-student-dob':
                 if (input.value === '') {
-                     showError(field, 'Date of birth is required.');
+                     showError(field, t.dobRequired);
                      isValid = false;
                 }
                 break;
@@ -246,7 +337,7 @@
             case 'form-sponsor-consent':
             case 'form-school-consent':
                 if (!checkbox.checked) {
-                    showError(checkbox, 'You must provide consent to register.');
+                    showError(checkbox, t.consentRequired);
                     isValid = false;
                 }
                 break;
@@ -257,7 +348,7 @@
 
     // --- Active Nav Link Highlighting ---
     function highlightActiveNav() {
-        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const currentPage = window.location.pathname.split('/').pop() || (isArabic ? 'index-ar.html' : 'index.html');
         const navLinks = document.querySelectorAll('#main-nav a.nav-link');
 
         navLinks.forEach(link => {
@@ -284,15 +375,42 @@
 
         if (!header || !navToggle || !mainNav) return;
 
-        // --- NEW: Inject mobile nav header and footer if they don't exist ---
+        // --- NEW: Inject language switcher for mobile ---
+        if (!mainNav.querySelector('.mobile-nav-lang-switcher')) {
+            const mobileNavLangSwitcher = document.createElement('div');
+            mobileNavLangSwitcher.classList.add('mobile-nav-lang-switcher');
+            const langLink = document.createElement('a');
+
+            if (isArabic) {
+                const currentPage = window.location.pathname.split('/').pop() || 'index-ar.html';
+                const englishPage = currentPage.replace('-ar.html', '.html');
+                langLink.href = englishPage;
+                langLink.textContent = 'English';
+                langLink.hreflang = 'en';
+                langLink.setAttribute('aria-label', 'Switch to English');
+            } else {
+                const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+                const arabicPage = currentPage.replace('.html', '-ar.html');
+                langLink.href = arabicPage;
+                langLink.textContent = 'العربية';
+                langLink.hreflang = 'ar';
+                langLink.setAttribute('aria-label', 'التحويل إلى العربية');
+            }
+            mobileNavLangSwitcher.appendChild(langLink);
+            mainNav.prepend(mobileNavLangSwitcher);
+        }
+
+        // --- Inject mobile nav header and footer if they don't exist ---
         if (!mainNav.querySelector('.mobile-nav-logo')) {
             const mobileNavHeader = document.createElement('a');
-            mobileNavHeader.href = "index.html";
+            mobileNavHeader.href = isArabic ? "index-ar.html" : "index.html";
             mobileNavHeader.classList.add('mobile-nav-logo');
             const logoImg = document.createElement('img');
             logoImg.src = "https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto/v1761210698/logo500x250_i8opbv.webp";
             logoImg.alt = "Qatar Education Expo 2026 Logo";
             mobileNavHeader.appendChild(logoImg);
+            
+            // Prepend elements
             mainNav.prepend(mobileNavHeader);
         }
 
@@ -301,20 +419,19 @@
             mobileNavCtas.classList.add('mobile-nav-ctas');
             
             const boothBtn = document.createElement('a');
-            boothBtn.href = "booth-registration.html";
+            boothBtn.href = isArabic ? "booth-registration-ar.html" : "booth-registration.html";
             boothBtn.className = "btn btn-primary";
-            boothBtn.textContent = "Book a Booth";
+            boothBtn.textContent = t.bookABooth;
 
             const sponsorBtn = document.createElement('a');
-            sponsorBtn.href = "sponsorship-registration.html";
+            sponsorBtn.href = isArabic ? "sponsorship-registration-ar.html" : "sponsorship-registration.html";
             sponsorBtn.className = "btn btn-primary";
-            sponsorBtn.textContent = "Sponsor Now";
+            sponsorBtn.textContent = t.sponsorNow;
 
             mobileNavCtas.appendChild(boothBtn);
             mobileNavCtas.appendChild(sponsorBtn);
             mainNav.appendChild(mobileNavCtas);
         }
-        // --- END NEW ---
 
         navToggle.addEventListener('click', () => {
         header.classList.toggle('nav-open');
@@ -443,7 +560,7 @@
 
                 if (distance < 0) {
                     clearInterval(timerInterval);
-                    countdownContainer.innerHTML = '<h4>The event has started!</h4>';
+                    countdownContainer.innerHTML = `<h4>${t.eventHasStarted}</h4>`;
                     return;
                 }
 
@@ -493,7 +610,7 @@
 
             if (distance < 0) {
                 clearInterval(timerInterval);
-                countdownContainer.innerHTML = '<h4>The early bird offer has ended!</h4>';
+                countdownContainer.innerHTML = `<h4>${t.earlyBirdEnded}</h4>`;
                 return;
             }
 
@@ -532,7 +649,7 @@
                 const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
                 if (submitButton) {
                     submitButton.disabled = true;
-                    submitButton.textContent = 'Submitting...';
+                    submitButton.textContent = t.submitting;
                 }
 
                 const googleSheetWebAppUrl = 'https://script.google.com/macros/s/AKfycbxUS76iFHL00oqCytiDjvpPfY9wONwwttdI00R6nhhoAkyED2ogZviUb3yXXRDAqAs7tg/exec';
@@ -582,7 +699,7 @@
                     alert('Sorry, there was a problem with your inquiry. Please check your network connection and try again. Error: ' + (error as Error).message);
                     if (submitButton) {
                         submitButton.disabled = false;
-                        submitButton.textContent = 'Submit Inquiry';
+                        submitButton.textContent = t.submitInquiry;
                     }
                 }
             } else {
@@ -621,14 +738,14 @@
             const isGroupValid = checkedCheckboxes.length > 0;
 
             if (!isGroupValid) {
-                showError(interestsContainer, 'Please select at least one area of interest.');
+                showError(interestsContainer, t.interestRequired);
                 return false;
             }
 
             clearError(interestsContainer);
 
             if (otherCheckbox?.checked && otherTextInput?.value.trim() === '') {
-                showError(otherTextInput, 'Please specify your area of interest.');
+                showError(otherTextInput, t.specifyInterest);
                 return false;
             }
 
@@ -654,7 +771,7 @@
                 const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
                 if (submitButton) {
                     submitButton.disabled = true;
-                    submitButton.textContent = 'Submitting...';
+                    submitButton.textContent = t.submitting;
                 }
 
                 // =========================================================================================
@@ -701,7 +818,7 @@
                     alert('Sorry, there was a problem with your registration. Please check your network connection and try again. If the problem persists, contact support. Error: ' + (error as Error).message);
                     if (submitButton) {
                         submitButton.disabled = false;
-                        submitButton.textContent = 'Register Now';
+                        submitButton.textContent = t.registerNow;
                     }
                 }
             } else {
@@ -751,7 +868,7 @@
                 const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
                 if (submitButton) {
                     submitButton.disabled = true;
-                    submitButton.textContent = 'Submitting...';
+                    submitButton.textContent = t.submitting;
                 }
 
                 // =========================================================================================
@@ -796,7 +913,7 @@
                     alert('Sorry, there was a problem with your registration. Please check your network connection and try again. If the problem persists, contact support. Error: ' + (error as Error).message);
                     if (submitButton) {
                         submitButton.disabled = false;
-                        submitButton.textContent = 'Submit Registration';
+                        submitButton.textContent = t.submitRegistration;
                     }
                 }
             } else {
@@ -828,7 +945,7 @@
                 const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
                 if (submitButton) {
                     submitButton.disabled = true;
-                    submitButton.textContent = 'Submitting...';
+                    submitButton.textContent = t.submitting;
                 }
     
                 // =========================================================================================
@@ -874,7 +991,7 @@
                     alert('Sorry, there was a problem with your inquiry. Please check your network and try again. Error: ' + (error as Error).message);
                     if (submitButton) {
                         submitButton.disabled = false;
-                        submitButton.textContent = 'Submit Inquiry';
+                        submitButton.textContent = t.submitInquiry;
                     }
                 }
             } else {
@@ -906,7 +1023,7 @@
                 if (fileInput.files && fileInput.files.length > 0) {
                     fileNameDisplay.textContent = fileInput.files[0].name;
                 } else {
-                    fileNameDisplay.textContent = 'No file chosen';
+                    fileNameDisplay.textContent = t.noFileChosen;
                 }
                 // Trigger validation to show errors immediately if any
                 validateField(fileInput);
@@ -921,7 +1038,7 @@
             const day1Checked = day1Container?.querySelectorAll('input[type="checkbox"]:checked').length > 0;
             const day2Checked = day2Container?.querySelectorAll('input[type="checkbox"]:checked').length > 0;
             if (day1Container && day2Container && !day1Checked && !day2Checked) {
-                showError(day1Container, 'Please select at least one session from Day 1 or Day 2.');
+                showError(day1Container, t.sessionRequired);
                 allValid = false;
             } else {
                 if(day1Container) clearError(day1Container);
@@ -930,7 +1047,7 @@
 
             const promoChecked = consentPromoGroup?.querySelector('input[type="radio"]:checked');
             if(consentPromoGroup && !promoChecked) {
-                showError(consentPromoGroup, 'Please select an option.');
+                showError(consentPromoGroup, t.optionRequired);
                 allValid = false;
             } else if (consentPromoGroup) {
                  clearError(consentPromoGroup);
@@ -938,7 +1055,7 @@
             
             const recordChecked = consentRecordGroup?.querySelector('input[type="radio"]:checked');
             if(consentRecordGroup && !recordChecked) {
-                showError(consentRecordGroup, 'Please select an option.');
+                showError(consentRecordGroup, t.optionRequired);
                 allValid = false;
             } else if (consentRecordGroup) {
                  clearError(consentRecordGroup);
@@ -967,7 +1084,7 @@
                 const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
                 if (submitButton) {
                     submitButton.disabled = true;
-                    submitButton.textContent = 'Submitting...';
+                    submitButton.textContent = t.submitting;
                 }
                 
                 // =========================================================================================
@@ -1027,7 +1144,7 @@
                     alert('Sorry, there was a problem with your application. Please check your network and try again. Error: ' + (error as Error).message);
                     if (submitButton) {
                         submitButton.disabled = false;
-                        submitButton.textContent = 'Submit Application';
+                        submitButton.textContent = t.submitApplication;
                     }
                 }
 
@@ -1060,7 +1177,7 @@
             if (isFormValid) {
                 if (submitButton) {
                     submitButton.disabled = true;
-                    submitButton.textContent = 'Submitting...';
+                    submitButton.textContent = t.submitting;
                 }
 
                 // =========================================================================================
@@ -1092,7 +1209,7 @@
                     alert('Sorry, there was a problem with your registration. Please check your network and try again. Error: ' + (error as Error).message);
                     if (submitButton) {
                         submitButton.disabled = false;
-                        submitButton.textContent = 'Submit Group Registration';
+                        submitButton.textContent = t.submitGroupRegistration;
                     }
                 }
             } else {
@@ -1402,7 +1519,7 @@
             if (isFormValid) {
                 const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
                 submitButton.disabled = true;
-                submitButton.textContent = 'Submitting...';
+                submitButton.textContent = t.submitting;
 
                 // This is the dedicated endpoint for deck requests.
                 const googleSheetWebAppUrl = 'https://script.google.com/macros/s/AKfycbzcmND809zEePZzvOLxxM1GolqWM1Lrh11JV9tdprNxSgkp-u0sjlxRzqXtmjDQDtn_2Q/exec';
@@ -1436,7 +1553,7 @@
                     console.error('Deck Request Submission Error:', error);
                     alert('Sorry, there was a problem submitting your request. Please try again. Error: ' + (error as Error).message);
                     submitButton.disabled = false;
-                    submitButton.textContent = 'Download Now';
+                    submitButton.textContent = t.downloadNow;
                 }
             } else {
                 const firstInvalidField = form.querySelector('.invalid, .error-message[style*="block"]');
