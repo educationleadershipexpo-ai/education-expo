@@ -159,6 +159,7 @@ section {
     display: flex;
     gap: 0.75rem;
     flex-shrink: 0;
+    align-items: center;
 }
 
 
@@ -1569,7 +1570,7 @@ section {
     position: absolute;
     width: 180px;
     height: auto;
-    top: -50px;
+    top: 0;
     right: 9%;
     z-index: 5;
     pointer-events: none;
@@ -3647,9 +3648,31 @@ position: absolute;
     }
 }
 
+/* --- Language Switcher --- */
+.lang-switcher {
+    margin-left: 1rem;
+    display: flex;
+    align-items: center;
+}
+.lang-switcher a {
+    color: var(--text-color);
+    font-weight: 700;
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+.lang-switcher a:hover {
+    background: var(--surface-color);
+    color: #d12386;
+}
+
 /* --- NEW Mobile Nav Menu Additions --- */
 .mobile-nav-logo,
-.mobile-nav-ctas {
+.mobile-nav-ctas,
+.mobile-nav-lang-switcher {
     display: none;
 }
 
@@ -3657,6 +3680,17 @@ position: absolute;
     /* MERGED AND CORRECTED MOBILE NAV STYLES */
     #main-nav {
         display: flex; /* This was repeated, but it's essential */
+    }
+
+    .mobile-nav-lang-switcher {
+        display: block;
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .mobile-nav-lang-switcher a {
+        text-decoration: none;
+        font-weight: 700;
+        color: var(--text-color);
     }
 
     .mobile-nav-logo {
