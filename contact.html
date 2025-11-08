@@ -15,8 +15,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Get in touch with the Qatar Education Expo 2026 team. Contact us for inquiries about exhibiting, sponsoring, attending, or speaking at Qatar's leading international education fair.">
     <title>Contact Us - Qatar Education Expo 2026 | International Education Fair</title>
+    <link rel="icon" href="https://res.cloudinary.com/dj3vhocuf/image/upload/v1762639402/Untitled_design_-_2025-11-09T033152.664_aerlhr.png" type="image/png">
     <link rel="canonical" href="https://eduexpoqatar.com/contact.html" />
     <link rel="alternate" hreflang="en" href="https://eduexpoqatar.com/contact.html" />
+    <link rel="alternate" hreflang="ar" href="https://eduexpoqatar.com/contact-ar.html" />
     <link rel="alternate" hreflang="en-QA" href="https://eduexpoqatar.com/contact.html" />
     <link rel="alternate" hreflang="en-SA" href="https://eduexpoqatar.com/contact.html" />
     <link rel="alternate" hreflang="en-AE" href="https://eduexpoqatar.com/contact.html" />
@@ -129,6 +131,9 @@
             <div class="header-ctas">
                 <a href="booth-registration.html" class="btn btn-primary btn-sm">Book a Booth</a>
                 <a href="sponsorship-registration.html" class="btn btn-primary btn-sm">Sponsor Now</a>
+                <div class="lang-switcher">
+                    <a href="contact-ar.html" hreflang="ar" aria-label="Switch to Arabic"><span>العربية</span><img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/qa.svg" alt="Qatar Flag" class="lang-flag"></a>
+                </div>
             </div>
         </div>
     </header>
@@ -146,27 +151,23 @@
                 <h2>How Can We Help?</h2>
                 <p class="subtitle">Choose the best way to get in touch with our team.</p>
                 <div class="contact-cards-grid">
-                    <!-- Card 1: General -->
                     <div class="contact-card">
                         <i class="fas fa-envelope-open-text"></i>
                         <h4>General & Attendee Inquiries</h4>
-                        <p>For questions about attending, registration, or general information.</p>
+                        <p>For questions about attending, registration, or general event information.</p>
                         <a href="mailto:attendees@eduexpoqatar.com" class="contact-email">attendees@eduexpoqatar.com</a>
                     </div>
-                    <!-- Card 2: Partnerships -->
                      <div class="contact-card">
                         <i class="fas fa-star"></i>
                         <h4>Sponsorship & Exhibiting</h4>
                         <p>Discuss partnership opportunities and book your booth.</p>
                         <a href="mailto:partnerships@eduexpoqatar.com" class="contact-email">partnerships@eduexpoqatar.com</a>
                     </div>
-                    <!-- Card 3: WhatsApp -->
-                     <div class="contact-card quick-chat-card-with-mascot">
-                        <img src="https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto/v1762076631/owl-experience_wn76zs.webp" alt="Qatar Education Expo's owl mascot wearing a headset, representing the quick chat support option." class="contact-quick-chat-mascot">
+                     <div class="contact-card">
                         <i class="fab fa-whatsapp"></i>
                         <h4>Quick Chat</h4>
-                        <p>For quick questions, connect with us directly on WhatsApp.</p>
-                        <a href="https://wa.me/97474449111" target="_blank" class="btn btn-primary">Message on WhatsApp</a>
+                        <p>For quick questions, reach out to us directly on WhatsApp for a fast response.</p>
+                        <a href="https://wa.me/97474449111" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Chat Now</a>
                     </div>
                 </div>
             </div>
@@ -174,19 +175,15 @@
 
         <section id="contact-page-form-section">
             <div class="container" style="max-width: 800px;">
-                 <h2>Send a Message</h2>
-                 <p class="subtitle">Fill out the form to receive our sponsorship deck or for any other inquiries.</p>
-                 <div class="contact-form-wrapper">
-                     <div id="form-success-message" style="display: none;">
+                <h2>Send Us a Message</h2>
+                <p class="subtitle">Use the form below for detailed inquiries. If your message is about exhibiting, we will send you the sponsorship deck automatically.</p>
+                <div class="contact-form-wrapper">
+                    <div id="form-success-message" style="display: none;">
                         <h3>Thank You!</h3>
-                        <p>Your message has been sent. Our team will get back to you shortly, and your sponsorship deck download should begin automatically.</p>
+                        <p>Your message has been sent. Our team will get back to you shortly. If you inquired about exhibiting, the sponsorship deck download should start automatically.</p>
                     </div>
                     <form id="contact-form" novalidate>
-                         <input type="hidden" name="form_source" value="Contact Page Inquiry">
-                         <!-- Basin: Send auto-response to the email provided in the 'email' field -->
-                         <input type="hidden" name="_send_to" value="email">
-                         <!-- Basin: Set the Reply-To header on admin notifications to the user's email -->
-                         <input type="hidden" name="_replyto" value="email">
+                        <input type="hidden" name="form_source" value="Contact Page Inquiry">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="form-name">Full Name *</label>
@@ -201,7 +198,7 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="form-email">Email Address *</label>
+                                <label for="form-email">Email *</label>
                                 <input type="email" id="form-email" name="email" required>
                                 <div class="error-message"></div>
                             </div>
@@ -212,7 +209,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="form-interest">I'm interested in... *</label>
+                            <label for="form-interest">I am interested in... *</label>
                             <select id="form-interest" name="interest" required>
                                 <option value="" disabled selected>Select an option...</option>
                                 <option value="sponsoring">Sponsoring</option>
@@ -228,43 +225,6 @@
                 </div>
             </div>
         </section>
-
-        <section id="contact-faq">
-            <div class="container" style="max-width: 900px;">
-                <h2>Quick Answers</h2>
-                <div class="faq-accordion">
-                    <div class="faq-item faq-item-with-mascot">
-                        <img src="https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto/v1762094160/Untitled_design_-_2025-11-02T200537.194_jcatwi.webp" alt="Qatar Education Expo's owl mascot with a question mark, inviting users to check the FAQ." class="contact-faq-mascot">
-                        <button class="faq-question" aria-expanded="false">
-                            <span>How do I register as a student?</span>
-                            <i class="fas fa-plus"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Student registration is completely free! You can secure your spot by filling out the form on our <a href="student-registration.html">Student Registration page</a>.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            <span>How can I book an exhibitor booth?</span>
-                            <i class="fas fa-plus"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>You can view available packages on the <a href="booth-features.html">Booth Features</a> page and register your interest on the <a href="booth-registration.html">Booth Registration page</a>. Our team will then contact you to finalize the details.</p>
-                        </div>
-                    </div>
-                     <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            <span>What are the event dates?</span>
-                            <i class="fas fa-plus"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>The expo will take place on April 19–20, 2026, at the Sheraton Grand Doha Resort & Convention Hotel in Qatar.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
     </main>
     
     <footer class="main-footer">
@@ -390,8 +350,7 @@
         <a href="student-registration.html" class="mobile-cta-btn"><i class="fas fa-graduation-cap"></i><span>Student</span></a>
         <a href="speaker-registration.html" class="mobile-cta-btn"><i class="fas fa-microphone-alt"></i><span>Speaker</span></a>
     </div>
-
-    <script src="https://unpkg.com/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
+    
     <script type="module" src="index.tsx"></script>
 </body>
 </html>
