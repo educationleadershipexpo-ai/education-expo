@@ -2595,6 +2595,9 @@ a.contact-email:hover {
 
     .hero-mascot {
         display: none;
+        width: 180px;
+        right: 10px;
+        bottom: -20px;
     }
     .exhibit-mascot {
         display: none;
@@ -2688,12 +2691,18 @@ a.contact-email:hover {
         grid-template-columns: 1fr;
         max-width: 320px;
     }
+    .impact-grid {
+        grid-template-columns: 1fr;
+    }
     /* Responsive adjustments for impact cards on smaller grids */
     .impact-number {
         font-size: 2.2rem;
     }
     .impact-label {
         font-size: 0.9rem;
+    }
+    .hero-mascot {
+        width: 150px;
     }
 }
 
