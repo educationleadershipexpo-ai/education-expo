@@ -1,5 +1,4 @@
-
-    document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     const isArabic = document.documentElement.lang === 'ar';
 
     const translations = {
@@ -472,28 +471,25 @@
         const dropdowns = document.querySelectorAll('.has-dropdown');
 
         dropdowns.forEach((dropdown, index) => {
-            const toggle = dropdown.querySelector('a') as HTMLAnchorElement;
+            const toggle = dropdown.querySelector('a.nav-link') as HTMLAnchorElement;
             const menu = dropdown.querySelector('.dropdown-menu') as HTMLElement;
+            // FIX: Use querySelector with a generic type parameter (<HTMLElement>) to ensure the 'icon' constant
+            // is correctly typed as 'HTMLElement | null'. This allows safe access to the 'style' property
+            // within the 'if (icon)' block, resolving the "Property 'style' does not exist on type 'Element'" error.
+            const icon = toggle.querySelector<HTMLElement>('i.fa-angle-down');
 
             if (!toggle || !menu) return;
 
-            // Setup ARIA attributes
             const menuId = `dropdown-menu-${index}`;
             toggle.setAttribute('aria-haspopup', 'true');
             toggle.setAttribute('aria-expanded', 'false');
             menu.id = menuId;
             toggle.setAttribute('aria-controls', menuId);
-
-            // Universal click handler for both mobile and desktop
-            toggle.addEventListener('click', (e) => {
-                // On mobile, prevent navigation and toggle the dropdown menu.
-                // On desktop, the link's default navigation behavior is prevented to allow
-                // a consistent click-to-toggle experience across devices.
+            
+            const handleToggle = (e: Event) => {
                 e.preventDefault();
-                
                 const isCurrentlyOpen = dropdown.classList.contains('dropdown-open');
 
-                // First, close all other open dropdowns for a cleaner experience.
                 document.querySelectorAll('.has-dropdown.dropdown-open').forEach(openDropdown => {
                     if (openDropdown !== dropdown) {
                         openDropdown.classList.remove('dropdown-open');
@@ -501,9 +497,6 @@
                     }
                 });
 
-                // Then, explicitly set the state of the clicked dropdown.
-                // This is a more robust way of toggling and fixes the reported mobile issue
-                // where a second click would not close the menu.
                 if (isCurrentlyOpen) {
                     dropdown.classList.remove('dropdown-open');
                     toggle.setAttribute('aria-expanded', 'false');
@@ -511,20 +504,39 @@
                     dropdown.classList.add('dropdown-open');
                     toggle.setAttribute('aria-expanded', 'true');
                 }
-            });
+            };
+
+            // "Split button" behavior on mobile
+            if (window.innerWidth <= 992) {
+                if(icon) {
+                    // Make the icon a separate, larger tap target
+                    icon.style.padding = '0.5rem';
+                    icon.style.margin = '-0.5rem';
+
+                    // Clicking the icon only toggles
+                    icon.addEventListener('click', handleToggle);
+                    
+                    // Clicking the main link should still navigate, so we don't add a listener to the `toggle` itself
+                } else {
+                     // Fallback for dropdowns without icons (if any)
+                    toggle.addEventListener('click', handleToggle);
+                }
+
+            } else {
+                // Standard click-to-toggle behavior on desktop
+                toggle.addEventListener('click', handleToggle);
+            }
         });
         
-        // This listener closes any open dropdown when a click happens anywhere outside a dropdown toggle.
         document.addEventListener('click', (e) => {
             const target = e.target as HTMLElement;
-            
-            // If the click is on a dropdown toggle, its own listener will handle it.
-            // We do nothing here to avoid immediately closing the menu that was just opened.
-            if (target.closest('.has-dropdown > a')) {
+
+            // Do not close if the click is on the dropdown toggle itself (either link or icon)
+            if (target.closest('.has-dropdown > a.nav-link')) {
                 return;
             }
             
-            // If the click is anywhere else, close all open dropdowns.
+            // Close all dropdowns if clicking anywhere else
             document.querySelectorAll('.has-dropdown.dropdown-open').forEach(openDropdown => {
                 openDropdown.classList.remove('dropdown-open');
                 openDropdown.querySelector('a')?.setAttribute('aria-expanded', 'false');
@@ -1302,8 +1314,8 @@
             { src: 'https://res.cloudinary.com/dj3vhocuf/image/upload/v1761216928/Blue_Bold_Office_Idea_Logo_50_x_50_px_10_l68irx.png', alt: 'Sheraton Hotels & Resorts Logo', customClass: 'sheraton-logo' },
             { src: 'https://i0.wp.com/blog.10times.com/wp-content/uploads/2019/09/cropped-10times-logo-hd.png?fit=3077%2C937&ssl=1', alt: '10times Logo' },
             { src: 'https://www.eventbrite.com/blog/wp-content/uploads/2025/02/Eventbrite_Hero-Lock-up_Brite-Orange.png', alt: 'Eventbrite Logo', customClass: 'eventbrite-logo' },
-            { src: 'https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto/v1762105728/NB.hiloop.official.logo_1_wwcxzh.webp', alt: 'Hi Loop Logo' },
-            { src: 'https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto/v1762148595/Untitled_design_-_2025-11-03T111231.113_eejcdu.webp', alt: 'Lovable Logo' },
+            { src: 'https://res.cloudinary.com/dj3vhocuf/image/upload/v1762105728/NB.hiloop.official.logo_1_wwcxzh.webp', alt: 'Hi Loop Logo' },
+            { src: 'https://res.cloudinary.com/dj3vhocuf/image/upload/v1762148595/Untitled_design_-_2025-11-03T111231.113_eejcdu.webp', alt: 'Lovable Logo' },
             { src: 'https://res.cloudinary.com/dj3vhocuf/image/upload/v1762451007/Untitled_design_-_2025-11-06T231151.489_xy7rwx.png', alt: 'Marhaba Information Guide Logo', href: 'https://marhaba.qa/' }
         ];
         
@@ -1314,10 +1326,19 @@
             logoItem.className = 'logo-item';
             
             const img = document.createElement('img');
-            img.src = partner.src;
             img.alt = partner.alt;
             img.loading = 'lazy';
-
+        
+            // Check if it's a Cloudinary URL to add responsive srcset
+            if (partner.src.includes('res.cloudinary.com')) {
+                const baseUrl = partner.src.replace('/upload/', '/upload/w_160,h_80,c_limit,q_auto,f_auto/');
+                const retinaUrl = partner.src.replace('/upload/', '/upload/w_320,h_160,c_limit,q_auto,f_auto/');
+                img.src = baseUrl;
+                img.srcset = `${baseUrl} 1x, ${retinaUrl} 2x`;
+            } else {
+                img.src = partner.src;
+            }
+        
             if (partner.customClass) {
                 img.classList.add(partner.customClass);
             }
