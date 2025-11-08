@@ -382,16 +382,16 @@
             const langLink = document.createElement('a');
 
             if (isArabic) {
-                const currentPage = window.location.pathname.split('/').pop() || 'index-ar.html';
-                const englishPage = currentPage.replace('-ar.html', '.html');
-                langLink.href = englishPage;
+                const enLink = document.querySelector('link[rel="alternate"][hreflang="en"]');
+                const englishPage = enLink ? enLink.getAttribute('href') : 'index.html';
+                langLink.href = englishPage!;
                 langLink.textContent = 'English';
                 langLink.hreflang = 'en';
                 langLink.setAttribute('aria-label', 'Switch to English');
             } else {
-                const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-                const arabicPage = currentPage.replace('.html', '-ar.html');
-                langLink.href = arabicPage;
+                const arLink = document.querySelector('link[rel="alternate"][hreflang="ar"]');
+                const arabicPage = arLink ? arLink.getAttribute('href') : 'index-ar.html';
+                langLink.href = arabicPage!;
                 langLink.textContent = 'العربية';
                 langLink.hreflang = 'ar';
                 langLink.setAttribute('aria-label', 'التحويل إلى العربية');
@@ -484,13 +484,8 @@
             menu.id = menuId;
             toggle.setAttribute('aria-controls', menuId);
 
-            // Universal click handler for both mobile and desktop
-            toggle.addEventListener('click', (e) => {
-                // On mobile, prevent navigation and toggle the dropdown menu.
-                // On desktop, the link's default navigation behavior is prevented to allow
-                // a consistent click-to-toggle experience across devices.
-                e.preventDefault();
-                
+            // Helper function to handle the logic of opening/closing dropdowns
+            const performToggle = () => {
                 const isCurrentlyOpen = dropdown.classList.contains('dropdown-open');
 
                 // First, close all other open dropdowns for a cleaner experience.
@@ -502,14 +497,33 @@
                 });
 
                 // Then, explicitly set the state of the clicked dropdown.
-                // This is a more robust way of toggling and fixes the reported mobile issue
-                // where a second click would not close the menu.
                 if (isCurrentlyOpen) {
                     dropdown.classList.remove('dropdown-open');
                     toggle.setAttribute('aria-expanded', 'false');
                 } else {
                     dropdown.classList.add('dropdown-open');
                     toggle.setAttribute('aria-expanded', 'true');
+                }
+            };
+
+            // Click handler that implements the split-button behavior
+            toggle.addEventListener('click', (e) => {
+                const target = e.target as HTMLElement;
+
+                // On mobile devices (<= 992px)
+                if (window.innerWidth <= 992) {
+                    // If the click is on the dropdown icon, prevent link navigation and only toggle the menu.
+                    if (target.tagName.toLowerCase() === 'i' && target.classList.contains('fa-angle-down')) {
+                        e.preventDefault();
+                        performToggle();
+                    }
+                    // If the click is on the link text, the browser's default navigation will occur.
+                    // No `e.preventDefault()` is called, so the link works as intended.
+
+                } else { // On desktop devices (> 992px)
+                    // The entire link acts as a toggle.
+                    e.preventDefault();
+                    performToggle();
                 }
             });
         });
@@ -518,8 +532,9 @@
         document.addEventListener('click', (e) => {
             const target = e.target as HTMLElement;
             
-            // If the click is on a dropdown toggle, its own listener will handle it.
-            // We do nothing here to avoid immediately closing the menu that was just opened.
+            // If the click is on a dropdown toggle area (the link or its icon child),
+            // its own listener will handle it. We do nothing here to avoid
+            // immediately closing the menu that was just opened.
             if (target.closest('.has-dropdown > a')) {
                 return;
             }
@@ -1416,7 +1431,7 @@
             if (el.dataset.animated === 'true') return;
             el.dataset.animated = 'true';
             
-            el.textContent = '0+'; // Start from 0 for animation effect
+            el.textContent = isArabic ? '+٠' : '+0'; // Start from 0 for animation effect
 
             const duration = 2000; // 2 seconds
             const frameDuration = 1000 / 60; // 60fps
@@ -1430,11 +1445,11 @@
                 const easedProgress = 1 - Math.pow(1 - progress, 3);
                 const currentCount = Math.round(target * easedProgress);
 
-                el.textContent = currentCount.toLocaleString() + '+';
+                el.textContent = '+' + currentCount.toLocaleString();
 
                 if (frame === totalFrames) {
                     clearInterval(counter);
-                    el.textContent = target.toLocaleString() + '+'; // Ensure final value is accurate
+                    el.textContent = '+' + target.toLocaleString(); // Ensure final value is accurate
                 }
             }, frameDuration);
         };
