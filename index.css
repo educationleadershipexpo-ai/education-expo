@@ -431,6 +431,22 @@ section {
     z-index: 1;
 }
 
+.hero-bg-image {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-bg-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 #hero::before {
     content: '';
     position: absolute;
@@ -729,7 +745,9 @@ section {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-.why-qatar-image img { width: 100%; border-radius: 10px; box-shadow: var(--shadow); }
+.why-qatar-image img, .why-qatar-image picture { width: 100%; border-radius: 10px; box-shadow: var(--shadow); display: block; }
+.why-qatar-image img {width: 100%;}
+
 
 /* Exhibitor Benefits Section */
 .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
@@ -1470,10 +1488,15 @@ section {
     transform: translateY(-8px);
     box-shadow: 0 12px 35px rgba(113, 31, 184, 0.25);
 }
-.way-card img { 
+.way-card img, .way-card picture { 
     width: 100%; 
     height: 220px;
+    display: block;
+}
+.way-card img {
     object-fit: cover;
+    width: 100%;
+    height: 100%;
 }
 .way-card-content {
     padding: 1.5rem;
@@ -1651,171 +1674,6 @@ section {
     padding: 1rem;
     background: var(--white);
     border: 1px solid var(--border-color);
-}
-
-
-/* --- NEW 2D FLOOR PLAN --- */
-#floor-plan-container {
-    display: grid;
-    grid-template-columns: 1fr 350px;
-    gap: 2rem;
-    background-color: var(--white);
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: var(--shadow);
-}
-
-.floor-plan-main {
-    background-color: var(--surface-color);
-    padding: 1rem;
-    border-radius: 10px;
-    position: relative;
-    overflow: hidden;
-}
-
-#floor-plan-map {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 5px;
-    position: relative;
-}
-
-.booth {
-    aspect-ratio: 1 / 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #333;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.3s ease;
-}
-
-.booth:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 15px rgba(0,0,0,0.3);
-    z-index: 10;
-}
-
-.booth.available { background-color: var(--status-available); color: var(--status-available-dark); }
-.booth.reserved { background-color: var(--status-reserved); color: var(--status-reserved-dark); }
-.booth.sold { background-color: var(--status-sold); color: var(--status-sold-dark); cursor: not-allowed;}
-
-.booth.hidden {
-    opacity: 0.2;
-    pointer-events: none;
-}
-
-/* Tooltip */
-#floor-plan-tooltip {
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.85);
-    color: var(--white);
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-    display: none;
-    pointer-events: none;
-    z-index: 100;
-    font-size: 0.9rem;
-    white-space: nowrap;
-    transition: opacity 0.2s;
-}
-#floor-plan-tooltip strong {
-    font-size: 1rem;
-    display: block;
-    margin-bottom: 0.5rem;
-}
-#floor-plan-tooltip p {
-    margin: 0.25rem 0;
-    color: #ddd;
-}
-#floor-plan-tooltip p span {
-    font-weight: bold;
-    color: var(--white);
-    text-transform: capitalize;
-}
-#floor-plan-tooltip .status-available { color: #81e9d1; }
-#floor-plan-tooltip .status-reserved { color: #fce8b3; }
-#floor-plan-tooltip .status-sold { color: #f8c5d3; }
-
-/* Sidebar */
-.floor-plan-sidebar {
-    background-color: var(--surface-color);
-    padding: 1.5rem;
-    border-radius: 10px;
-}
-.floor-plan-sidebar h4 {
-    font-size: 1.2rem;
-    margin-top: 0;
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 0.75rem;
-}
-.status-legend {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 2rem;
-}
-.status-legend li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.75rem;
-    background-color: var(--white);
-    border-radius: 8px;
-    margin-bottom: 0.5rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-}
-.status-legend .legend-label {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-weight: 600;
-}
-.legend-dot {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-}
-.legend-dot.available { background-color: var(--status-available); }
-.legend-dot.reserved { background-color: var(--status-reserved); }
-.legend-dot.sold { background-color: var(--status-sold); }
-.legend-count {
-    background-color: #e9ecef;
-    padding: 2px 8px;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 700;
-}
-.filter-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-.fp-filter-btn {
-    flex-grow: 1;
-    background: var(--white);
-    border: 1px solid var(--border-color);
-    color: var(--text-color);
-    padding: 8px 12px;
-    border-radius: 50px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: var(--heading-font);
-    font-size: 0.9rem;
-}
-.fp-filter-btn:hover {
-    background-color: #e2e6ea;
-}
-.fp-filter-btn.active {
-    background: var(--gradient);
-    color: var(--white);
-    border-color: transparent;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 
@@ -2298,41 +2156,6 @@ a.contact-email:hover {
     margin-top: 0;
 }
 
-/* Booth Details Modal Specifics */
-.modal-divider {
-    height: 1px;
-    background: var(--border-color);
-    margin: 1.5rem 0;
-}
-.modal-benefits-list {
-    list-style: none;
-    padding: 0;
-}
-.modal-benefits-list li {
-    display: flex;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
-}
-.modal-benefits-list i {
-    color: #d12386;
-    margin-top: 4px;
-}
-.modal-status-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.status-tag {
-    padding: 5px 12px;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 0.9rem;
-    text-transform: capitalize;
-}
-.status-tag.available { background-color: var(--status-available); color: var(--status-available-dark); }
-.status-tag.reserved { background-color: var(--status-reserved); color: var(--status-reserved-dark); }
-.status-tag.sold { background-color: var(--status-sold); color: var(--status-sold-dark); }
-
 /* --- Mobile Sticky Bar --- */
 #mobile-sticky-bar {
     display: none;
@@ -2753,9 +2576,6 @@ a.contact-email:hover {
     .lead-capture-image {
         order: -1;
     }
-    #floor-plan-container {
-        grid-template-columns: 1fr;
-    }
     .form-row {
         grid-template-columns: 1fr;
     }
@@ -2786,6 +2606,7 @@ a.contact-email:hover {
 
 @media (max-width: 768px) {
     #hero { padding: 80px 0; }
+
     .timer-unit span { font-size: 2rem; }
     .timer-unit { min-width: 70px; padding: 0.8rem; }
     #countdown-timer { gap: 0.5rem; }
