@@ -3546,3 +3546,10 @@ position: absolute;
     grid-template-columns: 1fr;
   }
 }
+
+/* Desktop Header Button Positioning Fix */
+@media (min-width: 1201px) {
+  #main-nav {
+    flex: initial;
+  }
+}
