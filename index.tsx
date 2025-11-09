@@ -192,6 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'form-speaker-name':
             case 'deck-form-name':
             case 'form-school-contact-name':
+            case 'form-hackathon-name':
                 if (value === '') {
                     showError(field, t.nameRequired);
                     isValid = false;
@@ -205,12 +206,16 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'form-speaker-job-org':
             case 'deck-form-organization':
             case 'form-school-name':
+            case 'form-hackathon-school':
                 if (value === '') {
-                    const fieldName = (field.id.includes('booth') || field.id.includes('sponsor')) 
-                        ? (isArabic ? 'الشركة' : 'Company') 
-                        : (field.id.includes('student') || field.id.includes('school')) 
-                        ? (isArabic ? 'المدرسة/المؤسسة' : 'School/Institution') 
-                        : (isArabic ? 'المنظمة' : 'Organization');
+                    let fieldName = '';
+                    if (field.id.includes('booth') || field.id.includes('sponsor')) {
+                        fieldName = isArabic ? 'الشركة' : 'Company';
+                    } else if (field.id.includes('student') || field.id.includes('school') || field.id.includes('hackathon')) {
+                        fieldName = isArabic ? 'المدرسة/المؤسسة' : 'School/Institution';
+                    } else {
+                        fieldName = isArabic ? 'المنظمة' : 'Organization';
+                    }
                     showError(field, `${fieldName} ${isArabic ? 'مطلوبة.' : 'is required.'}`);
                     isValid = false;
                 }
@@ -223,6 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'form-speaker-email':
             case 'deck-form-email':
             case 'form-school-email':
+            case 'form-hackathon-email':
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (value === '') {
                     showError(field, t.emailRequired);
@@ -240,6 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'form-speaker-phone':
             case 'deck-form-phone':
             case 'form-school-phone':
+            case 'form-hackathon-phone':
                 const phoneRegex = /^\+?[\d\s()-]+$/;
                  if ((field.hasAttribute('required') && value === '')) {
                     showError(field, t.phoneRequired);
@@ -315,6 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'form-speaker-country':
             case 'form-school-country':
             case 'form-school-visit-date':
+            case 'form-hackathon-grade':
                 if (select.value === '') {
                     showError(field, t.selectionRequired);
                     isValid = false;
@@ -335,6 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
 
             case 'form-student-dob':
+            case 'form-hackathon-dob':
                 if (input.value === '') {
                      showError(field, t.dobRequired);
                      isValid = false;
@@ -345,6 +354,7 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'form-student-consent':
             case 'form-sponsor-consent':
             case 'form-school-consent':
+            case 'form-hackathon-consent':
                 if (!checkbox.checked) {
                     showError(checkbox, t.consentRequired);
                     isValid = false;
@@ -1259,6 +1269,67 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    function initializeHackathonRegistrationForm() {
+        const form = document.getElementById('hackathon-registration-form') as HTMLFormElement;
+        const successMessage = document.getElementById('hackathon-form-success');
+        if (!form || !successMessage) return;
+
+        const inputs: HTMLElement[] = Array.from(form.querySelectorAll('[required]'));
+        inputs.forEach(input => {
+            const eventType = ['select-one', 'date', 'checkbox'].includes((input as HTMLInputElement).type) ? 'change' : 'input';
+            input.addEventListener(eventType, () => validateField(input));
+        });
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const isFormValid = inputs.map(input => validateField(input)).every(Boolean);
+
+            if (isFormValid) {
+                const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+                if (submitButton) {
+                    submitButton.disabled = true;
+                    submitButton.textContent = t.submitting;
+                }
+
+                const googleSheetWebAppUrl = 'https://script.google.com/macros/s/AKfycbzL5gAJ3wL06k6-2N6_f0j7Vq-1F-9a8E_d7kCj3b-gH_iG-1kL_wZ-jI-9/exec'; // Placeholder URL
+
+                try {
+                    const formData = new FormData(form);
+                    const response = await fetch(googleSheetWebAppUrl, {
+                        method: 'POST',
+                        body: new URLSearchParams(formData as any)
+                    });
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        if (result.result === 'success') {
+                            form.style.display = 'none';
+                            successMessage.style.display = 'block';
+                            window.scrollTo(0, 0);
+                        } else {
+                            throw new Error(result.error || 'The script returned an unknown error.');
+                        }
+                    } else {
+                        throw new Error(`Submission failed. Status: ${response.status}`);
+                    }
+                } catch (error) {
+                    console.error('Hackathon Registration Error:', error);
+                    alert(t.submissionErrorApplication + (error as Error).message);
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                        submitButton.textContent = t.submitApplication;
+                    }
+                }
+            } else {
+                const firstInvalidField = form.querySelector('.invalid, .error-message[style*="block"]');
+                if (firstInvalidField) {
+                    firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        });
+    }
+
     // --- FAQ Accordion ---
     function initializeFaqAccordion() {
         const faqQuestions = document.querySelectorAll('.faq-question');
@@ -1622,6 +1693,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeSponsorshipRegistrationForm();
     initializeSpeakerRegistrationForm();
     initializeSchoolGroupRegistrationForm();
+    initializeHackathonRegistrationForm();
     initializeFaqAccordion();
     initializeExitIntentModal();
     initializeDeckRequestModal();

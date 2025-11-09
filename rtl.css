@@ -19,14 +19,14 @@ h1, h2, h3, h4, .btn, .nav-link, .timer-unit p {
 }
 
 .dropdown-menu {
-  left: auto;
-  right: 50%;
-  transform: translateX(50%) translateY(10px);
+  left: 50%;
+  right: auto; /* Unset right property from any previous attempts */
+  transform: translateX(-50%) translateY(10px); /* Universal centering */
 }
 
 .has-dropdown.dropdown-open > .dropdown-menu {
-  margin-left: 0;
-  transform: translateX(50%) translateY(0);
+  margin-left: 0; /* Remove the problematic margin from the LTR stylesheet */
+  transform: translateX(-50%) translateY(0); /* Re-apply centering transform on open */
 }
 
 .dropdown-menu a {
@@ -161,9 +161,13 @@ h1, h2, h3, h4, .btn, .nav-link, .timer-unit p {
 }
 
 /* Mascot Positioning */
+html[lang="ar"] .benefits-mascot {
+    right: auto;
+    left: 6%;
+    transform: scaleX(-1);
+}
 .hero-mascot { right: auto; left: 6%; transform: scaleX(-1); }
 .testimonials-mascot { right: auto; left: 0; }
-.benefits-mascot { right: auto; left: 6%; transform: none; }
 .exhibit-mascot { right: auto; left: 9%; }
 .why-attend-mascot { left: auto; right: 0; transform: scaleX(-1); }
 .footer-mascot { right: auto; left: -150px; transform: scaleX(-1); }
@@ -180,11 +184,16 @@ h1, h2, h3, h4, .btn, .nav-link, .timer-unit p {
 .contact-quick-chat-mascot { left: 50%; }
 .contact-faq-mascot { left: auto; right: 1%; transform: translateX(50%); }
 
+#exhibitor-benefits .benefits-grid {
+    margin-top: 80px;
+}
+
 @media (max-width: 1200px) {
-    .benefits-mascot {
+    html[lang="ar"] .benefits-mascot {
         left: 0px;
         width: 180px;
         top: 50px;
+        transform: scaleX(-1); /* Ensure flip is maintained */
     }
 }
 
@@ -195,10 +204,9 @@ h1, h2, h3, h4, .btn, .nav-link, .timer-unit p {
     .nav-toggle {
         order: -1;
     }
-    .benefits-mascot,
-    .hackathon-intro-mascot,
+    .hero-mascot,
     .testimonials-mascot,
-    .market-mascot,
+    .exhibit-mascot,
     .why-attend-mascot,
     .footer-mascot,
     .visa-mascot,
@@ -214,7 +222,12 @@ h1, h2, h3, h4, .btn, .nav-link, .timer-unit p {
     .pre-event-mascot,
     .contact-quick-chat-mascot,
     .contact-faq-mascot,
-    .speaker-reg-mascot {
+    .speaker-reg-mascot,
+    .benefits-mascot {
         display: none;
+    }
+
+    #exhibitor-benefits .benefits-grid {
+        margin-top: 0;
     }
 }

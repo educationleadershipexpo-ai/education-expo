@@ -1600,7 +1600,7 @@ section {
     position: absolute;
     width: 180px;
     height: auto;
-    top: 0;
+    top: -50px;
     right: 9%;
     z-index: 5;
     pointer-events: none;
@@ -3129,11 +3129,9 @@ a.contact-email:hover {
     width: 180px;
     height: auto;
     right: 6%;
-    left: 20px;
     top: -55px;
     z-index: 5;
     pointer-events: none;
-    transform: scaleX(-1);
 }
 
 /* --- About Page Mascot --- */
