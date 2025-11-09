@@ -3549,6 +3549,9 @@ position: absolute;
 
 /* Desktop Header Button Positioning Fix */
 @media (min-width: 1201px) {
+  .main-header .container {
+    max-width: 1800px;
+  }
   #main-nav {
     flex: initial;
   }
