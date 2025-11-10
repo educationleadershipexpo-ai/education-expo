@@ -2716,50 +2716,114 @@ a.contact-email:hover {
 }
 
 /* --- Guidance Process Section --- */
-.guidance-process {
-    max-width: 800px;
-    margin: 3rem auto 0;
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
+#your-journey {
+    padding-bottom: 100px;
 }
 
-.guidance-step {
-    text-align: left;
+.journey-timeline {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 4rem;
+    position: relative;
 }
 
-.guidance-step .step-indicator {
+.journey-timeline::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 12.5%;
+    right: 12.5%;
+    height: 4px;
+    background-color: var(--border-color);
+    z-index: 1;
+}
+
+.journey-step {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.step-icon-wrapper {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.step-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 4px solid var(--border-color);
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.5rem;
+    justify-content: center;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+}
+.journey-step:hover .step-icon {
+    border-color: #711fb8;
+    transform: scale(1.1);
 }
 
-.step-indicator .step-number {
-    font-size: 0.9rem;
+.step-icon i {
+    font-size: 2rem;
+    color: #711fb8;
+}
+
+.step-number {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 50%;
+    background: var(--gradient);
+    color: var(--white);
     font-weight: 700;
-    color: #999;
+    font-family: var(--heading-font);
 }
 
-.step-indicator i {
-    font-size: 1.1rem;
-    color: var(--text-color);
-}
-
-.guidance-step h3 {
-    text-align: left;
-    font-size: 1.8rem;
-    margin-top: 0;
+.journey-step h3 {
+    font-size: 1.2rem;
     margin-bottom: 0.5rem;
-    font-weight: 800;
 }
 
-.guidance-step p {
-    margin-bottom: 0;
+.journey-step p {
+    font-size: 0.9rem;
     color: #555;
-    font-size: 1rem;
-    line-height: 1.7;
+    margin: 0;
 }
+
+
+/* --- Meet the Experts Section --- */
+#meet-the-experts .speaker-card {
+    text-align: center;
+}
+#meet-the-experts .speaker-card p.speaker-org {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+@media (max-width: 992px) {
+    .journey-timeline {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem 2rem;
+    }
+    .journey-timeline::before {
+        display: none; /* Hide horizontal line on 2x2 grid */
+    }
+}
+@media (max-width: 576px) {
+    .journey-timeline {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+}
+
 
 /* --- Agenda Page (Redesigned) --- */
 #agenda {
