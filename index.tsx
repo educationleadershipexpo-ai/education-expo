@@ -462,7 +462,7 @@ document.addEventListener('DOMContentLoaded', () => {
             logoLink.href = isArabic ? "index-ar.html" : "index.html";
             logoLink.classList.add('mobile-nav-logo');
             const logoImg = document.createElement('img');
-            logoImg.src = "https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto/v1762814952/logo_500_x_250_px_1_kup9qd.png";
+            logoImg.src = "https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto/v1762817230/logo_500_x_250_px_450_x_250_px_180_x_75_px_or55ec.png";
             logoImg.alt = "Qatar Education Expo 2026 Logo";
             logoLink.appendChild(logoImg);
     
