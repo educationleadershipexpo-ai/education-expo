@@ -2715,53 +2715,7 @@ a.contact-email:hover {
     }
 }
 
-/* --- Guidance Process Section --- */
-.guidance-process {
-    max-width: 800px;
-    margin: 3rem auto 0;
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-}
-
-.guidance-step {
-    text-align: left;
-}
-
-.guidance-step .step-indicator {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.5rem;
-}
-
-.step-indicator .step-number {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #999;
-}
-
-.step-indicator i {
-    font-size: 1.1rem;
-    color: var(--text-color);
-}
-
-.guidance-step h3 {
-    text-align: left;
-    font-size: 1.8rem;
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-    font-weight: 800;
-}
-
-.guidance-step p {
-    margin-bottom: 0;
-    color: #555;
-    font-size: 1rem;
-    line-height: 1.7;
-}
-
-/* --- Agenda Page (Redesigned) --- */
+/* Agenda Page (Redesigned) */
 #agenda {
     padding-top: 40px;
 }
@@ -3555,4 +3509,252 @@ position: absolute;
   #main-nav {
     flex: initial;
   }
+}
+
+/* =================================================== */
+/* == NEW STYLES FOR CAREER COUNSELLING PAGE V2      == */
+/* =================================================== */
+
+/* V2 Hero Section */
+.counselling-hero-v2 {
+    background-color: var(--surface-color);
+    padding: 60px 0;
+}
+
+.counselling-hero-v2 .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.counselling-hero-v2 .hero-text h1 {
+    color: var(--text-color);
+    text-shadow: none;
+    font-size: 3.2rem;
+    text-align: left;
+}
+
+.counselling-hero-v2 .hero-text p {
+    font-size: 1.1rem;
+    color: #555;
+    max-width: 90%;
+    margin-bottom: 2rem;
+}
+
+.counselling-hero-v2 .cta-group {
+    justify-content: flex-start;
+    margin-bottom: 2.5rem;
+}
+
+.counselling-hero-v2 .hero-stats {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.5rem;
+}
+
+.counselling-hero-v2 .hero-stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.counselling-hero-v2 .hero-stat-item i {
+    font-size: 1.5rem;
+    color: #711fb8;
+}
+
+.counselling-hero-v2 .hero-stat-item p {
+    margin: 0;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.hero-image-v2 {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.hero-image-v2 img, .hero-image-v2 picture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Feature Section */
+.feature-section {
+    padding: 80px 0;
+}
+
+.feature-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+.feature-icon {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f2e7fc;
+}
+
+.feature-icon i {
+    font-size: 1.8rem;
+    color: #711fb8;
+}
+
+.feature-text h4 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    text-align: left;
+}
+
+.feature-text p {
+    margin: 0;
+    color: #555;
+}
+
+
+/* Meet the Experts V2 */
+#meet-the-experts-v2 {
+    padding-top: 0; /* Since it follows another bg-surface section */
+}
+.counselor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+.counselor-card-v2 {
+    background: var(--white);
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    gap: 1.5rem;
+    padding: 2rem;
+    align-items: flex-start;
+}
+.counselor-card-v2:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+.counselor-card-v2 .speaker-photo {
+    margin: 0;
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+}
+.counselor-card-v2 .speaker-info {
+    text-align: left;
+}
+.counselor-card-v2 .speaker-info h4 {
+    text-align: left;
+}
+.counselor-card-v2 .speaker-org {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+.counselor-specialty {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #711fb8;
+    margin: 0;
+}
+
+/* Counselling FAQ Section */
+#counselling-faq {
+    background-color: var(--white);
+}
+
+/* Counselling Final CTA */
+.counselling-final-cta {
+    background: var(--gradient);
+    color: var(--white);
+    text-align: center;
+}
+.counselling-final-cta h2, .counselling-final-cta p {
+    color: var(--white);
+}
+.counselling-final-cta h2 {
+    font-size: 2.5rem;
+}
+.counselling-final-cta p {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.counselling-final-cta .cta-group {
+    margin-top: 2rem;
+}
+.counselling-final-cta .btn-primary {
+    background: var(--white);
+    color: #711fb8;
+}
+.counselling-final-cta .btn-primary:hover {
+    background: #f2e7fc;
+    color: #711fb8;
+}
+
+/* Responsive styles for V2 */
+@media (max-width: 992px) {
+    .counselling-hero-v2 .container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .counselling-hero-v2 .hero-text h1 {
+        text-align: center;
+        font-size: 2.8rem;
+    }
+    .counselling-hero-v2 .hero-text p {
+        max-width: 100%;
+    }
+    .counselling-hero-v2 .cta-group {
+        justify-content: center;
+    }
+    .counselling-hero-v2 .hero-stats {
+        justify-content: center;
+    }
+    .hero-image-v2 {
+        order: -1;
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 576px) {
+    .counselling-hero-v2 .hero-text h1 {
+        font-size: 2.2rem;
+    }
+    .feature-list {
+        grid-template-columns: 1fr;
+    }
+    .counselor-card-v2 {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .counselor-card-v2 .speaker-info,
+    .counselor-card-v2 .speaker-info h4 {
+        text-align: center;
+    }
 }
