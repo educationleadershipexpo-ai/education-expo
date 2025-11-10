@@ -1,3 +1,4 @@
+
 :root {
     --arabic-font: 'Cairo', sans-serif;
 }
@@ -263,4 +264,68 @@ html[lang="ar"] .benefits-mascot {
     .counselor-card-v2 .speaker-info h4 {
         text-align: center;
     }
+}
+
+
+/* --- RTL BLOG STYLES --- */
+.article-card__content h3 {
+    text-align: right;
+}
+
+.article-card__read-more {
+    align-self: flex-end;
+}
+
+.blog-post-content h2 {
+    text-align: right;
+}
+
+.blog-post-content ul {
+    padding-left: 0;
+    padding-right: 1rem;
+}
+
+
+/* RTL Adjustments for Blog Post Enhancements */
+.read-progress-bar {
+    left: auto;
+    right: 0;
+}
+
+.social-share-sticky {
+    float: right;
+    margin-left: 0;
+    margin-right: -120px;
+}
+
+.key-takeaway {
+    border-left: none;
+    border-right: 5px solid #711fb8;
+    border-radius: 8px 0 0 8px;
+}
+.key-takeaway h3 {
+    text-align: right;
+}
+.key-takeaway ul {
+    padding-left: 0;
+    padding-right: 0; /* Resetting just in case */
+}
+.key-takeaway li {
+    padding-left: 0;
+    padding-right: 2rem;
+}
+.key-takeaway li::before {
+    left: auto;
+    right: 0;
+}
+
+.author-box {
+    gap: 0 1.5rem;
+}
+.author-box__info h4 {
+    text-align: right;
+}
+.author-box__social a {
+    margin-right: 0;
+    margin-left: 1rem;
 }
