@@ -231,3 +231,29 @@ html[lang="ar"] .benefits-mascot {
         margin-top: 0;
     }
 }
+
+/* --- Career Counselling RTL --- */
+html[lang="ar"] #your-journey .journey-timeline::before {
+    left: 12.5%;
+    right: 12.5%;
+}
+
+html[lang="ar"] .journey-step .step-number {
+    left: auto;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+@media (max-width: 992px) {
+    html[lang="ar"] #your-journey .journey-timeline::before {
+        display: none;
+    }
+}
+
+
+/* Desktop Header Button Positioning Fix for RTL */
+@media (min-width: 1201px) {
+    .main-header .container {
+        max-width: 1800px;
+    }
+}
