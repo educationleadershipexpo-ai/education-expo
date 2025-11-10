@@ -101,7 +101,7 @@ section {
     flex-shrink: 0;
 }
 .logo img {
-    height: 65px;
+    height: 85px;
     width: auto;
     object-fit: contain;
 }
