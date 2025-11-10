@@ -226,8 +226,41 @@ html[lang="ar"] .benefits-mascot {
     .benefits-mascot {
         display: none;
     }
+}
 
-    #exhibitor-benefits .benefits-grid {
-        margin-top: 0;
+/* Desktop Header Button Positioning Fix for RTL */
+@media (min-width: 1201px) {
+    .main-header .container {
+        max-width: 1800px;
+    }
+}
+
+/* =================================================== */
+/* == RTL STYLES FOR CAREER COUNSELLING PAGE         == */
+/* =================================================== */
+
+.feature-text h4 {
+    text-align: right;
+}
+
+.counselor-card-v2 .speaker-info,
+.counselor-card-v2 .speaker-info h4 {
+    text-align: right;
+}
+
+@media (max-width: 992px) {
+    .counselling-hero-v2 .hero-text,
+    .counselling-hero-v2 .hero-text h1 { 
+        text-align: center; 
+    }
+    .counselling-hero-v2 .cta-group { 
+        justify-content: center; 
+    }
+}
+
+@media (max-width: 576px) {
+    .counselor-card-v2 .speaker-info,
+    .counselor-card-v2 .speaker-info h4 {
+        text-align: center;
     }
 }
