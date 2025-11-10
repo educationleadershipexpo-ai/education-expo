@@ -459,6 +459,12 @@ section {
     z-index: 2;
 }
 
+/* ADDED FOR career-counselling.html hero */
+#hero.counselling-hero {
+    background-image: url('https://res.cloudinary.com/dj3vhocuf/image/upload/w_1920,q_auto,f_auto/v1762464000/pexels-photo-3184418.webp');
+    padding: 80px 0;
+}
+
 .hero-content {
     position: relative;
     z-index: 3;
@@ -2609,6 +2615,9 @@ a.contact-email:hover {
 
 @media (max-width: 768px) {
     #hero { padding: 80px 0; }
+    #hero.counselling-hero {
+        background-image: url('https://res.cloudinary.com/dj3vhocuf/image/upload/w_800,q_auto,f_auto/v1762464000/pexels-photo-3184418.webp');
+    }
 
     .timer-unit span { font-size: 2rem; }
     .timer-unit { min-width: 70px; padding: 0.8rem; }
@@ -2703,6 +2712,738 @@ a.contact-email:hover {
     }
     .hero-mascot {
         width: 150px;
+    }
+}
+
+/* --- Guidance Process Section --- */
+.guidance-process {
+    max-width: 800px;
+    margin: 3rem auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.guidance-step {
+    text-align: left;
+}
+
+.guidance-step .step-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.step-indicator .step-number {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #999;
+}
+
+.step-indicator i {
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+.guidance-step h3 {
+    text-align: left;
+    font-size: 1.8rem;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 800;
+}
+
+.guidance-step p {
+    margin-bottom: 0;
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+/* --- Agenda Page (Redesigned) --- */
+#agenda {
+    padding-top: 40px;
+}
+
+.agenda-container {
+    max-width: 1000px;
+}
+
+.agenda-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    background-color: var(--surface-color);
+    border-radius: 50px;
+    padding: 5px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.agenda-tabs .tab-btn {
+    flex: 1;
+    padding: 1rem;
+    border: none;
+    background: transparent;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: var(--heading-font);
+    cursor: pointer;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    color: var(--text-color);
+}
+
+.agenda-tabs .tab-btn:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+.agenda-tabs .tab-btn.active {
+    background: var(--gradient);
+    color: var(--white);
+    box-shadow: var(--shadow);
+}
+
+.agenda-content {
+    display: none;
+}
+.agenda-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.agenda-timeline {
+    border-left: 3px solid var(--border-color);
+    padding-left: 2rem;
+}
+
+.timeline-block {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 2rem;
+    position: relative;
+    padding-bottom: 3rem;
+}
+
+.timeline-block::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 15px;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 4px solid #711fb8;
+    z-index: 1;
+}
+
+.timeline-time h3 {
+    text-align: left;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+    position: sticky;
+    top: 120px;
+}
+
+.timeline-time span {
+    font-weight: 700;
+    color: #777;
+}
+
+.timeline-events {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.timeline-events .track-title {
+    font-family: var(--heading-font);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--surface-color);
+    color: #711fb8;
+}
+.timeline-events .track-title:first-child {
+    margin-top: 0;
+}
+
+.session-card {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    border-left: 5px solid #ccc;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.session-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.session-icon {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--surface-color);
+    font-size: 1.5rem;
+}
+
+.session-content h4 {
+    margin: 0 0 0.25rem;
+    font-size: 1.05rem;
+    font-family: var(--primary-font);
+    font-weight: 700;
+}
+
+.session-content p {
+    margin: 0;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.session-tag {
+    position: absolute;
+    top: 10px;
+    right: -35px;
+    background: #6c757d;
+    color: var(--white);
+    padding: 5px 30px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    transform: rotate(45deg);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.session-card.keynote { background: var(--gradient); color: var(--white); border-color: #d12386; }
+.session-card.keynote .session-icon { background: rgba(255,255,255,0.2); color: var(--white); }
+.session-card.keynote .session-content p { color: rgba(255,255,255,0.8); }
+
+.session-card.panel { border-color: #17a2b8; }
+.session-card.panel .session-icon { color: #17a2b8; }
+
+.session-card.track { border-color: #ffc107; }
+.session-card.track .session-icon { color: #ffc107; }
+
+.session-card.break { border-color: #6c757d; }
+.session-card.break .session-icon { color: #6c757d; }
+
+.session-card.closed { border-color: #dc3545; }
+.session-card.closed .session-icon { color: #dc3545; }
+
+.session-card.award { background: linear-gradient(to right, #f2c94c, #f2994a); color: var(--text-color); border-color: #f2994a; }
+.session-card.award .session-icon { background: rgba(255,255,255,0.4); color: #a06c14; }
+
+#event-highlights h2, #event-highlights .subtitle { text-align: center; }
+#event-highlights .content-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+#event-highlights .content-card { padding: 2rem 1.5rem; }
+#event-highlights .content-card h3 { font-size: 1.1rem; min-height: 0; flex-grow: 1; justify-content: center; }
+#event-highlights .content-card h3 i { font-size: 2rem; margin-bottom: 0.75rem; }
+
+@media(max-width: 768px) {
+    .agenda-tabs { flex-direction: column; border-radius: 10px; }
+    .agenda-tabs .tab-btn { font-size: 1rem; }
+    .timeline-block { grid-template-columns: 1fr; gap: 1.5rem; padding-left: 1.5rem; }
+    .agenda-timeline { padding-left: 1rem; }
+    .timeline-block::before { left: -1rem; }
+    .timeline-time { padding-bottom: 1rem; border-bottom: 1px solid var(--border-color); }
+    .timeline-time h3 { position: static; }
+    .session-tag { top: 5px; right: -40px; font-size: 0.7rem; }
+}
+
+/* --- About Page Font Size Increase --- */
+.about-page #market-opportunity .subtitle {
+    font-size: 1.3rem;
+}
+
+.about-page .stat-card p {
+    font-size: 1rem;
+}
+
+.about-page .why-qatar-text li {
+    font-size: 1.2rem;
+}
+
+/* --- Brand Exposure Page Redesign --- */
+/* Impact Dashboard - REMOVED */
+
+/* Audience Persona Cards with Avatars */
+#target-audience .audience-card {
+    padding: 0;
+    text-align: left;
+    overflow: hidden;
+}
+.audience-avatar {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+.audience-card-content {
+    padding: 1.5rem;
+}
+#target-audience .audience-card h4 {
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+#target-audience .audience-card i {
+    font-size: 1.3rem;
+    margin-bottom: 0;
+}
+
+/* 360 Marketing Ecosystem Tabs */
+#marketing-ecosystem {
+    padding-top: 40px;
+}
+.exposure-tabs-container {
+    background: var(--white);
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    margin-top: 3rem;
+}
+.exposure-tabs {
+    display: flex;
+    background-color: var(--surface-color);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+.exposure-tab-btn {
+    flex: 1;
+    padding: 1.25rem 1rem;
+    border: none;
+    background: transparent;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: var(--heading-font);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #555;
+    border-bottom: 3px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+.exposure-tab-btn:hover {
+    color: var(--text-color);
+    background-color: #e9ecef;
+}
+.exposure-tab-btn.active {
+    color: #711fb8;
+    border-bottom-color: #711fb8;
+    background: var(--white);
+}
+
+.exposure-content-panels {
+    padding: 2.5rem;
+}
+.exposure-content {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+.exposure-content.active {
+    display: block;
+}
+.exposure-content h3 {
+    text-align: center;
+    font-size: 1.6rem;
+    margin-top: 0;
+    margin-bottom: 2rem;
+}
+.exposure-panel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+.exposure-benefit-item {
+    text-align: center;
+}
+.exposure-benefit-item i {
+    font-size: 2rem;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+}
+.exposure-benefit-item h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+.exposure-benefit-item p {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    /* Brand Exposure Page Responsive */
+    .exposure-tabs {
+        flex-direction: column;
+        border-radius: 10px;
+    }
+    .exposure-tab-btn {
+        border-bottom: 1px solid var(--border-color);
+        border-radius: 0;
+    }
+    .exposure-tab-btn.active {
+        border-bottom-color: #711fb8;
+    }
+    .exposure-content-panels {
+        padding: 1.5rem;
+    }
+    .audience-avatar {
+        height: 150px;
+    }
+}
+
+/* --- Exhibitor Benefits Mascot --- */
+#exhibitor-benefits .container {
+    position: relative;
+}
+
+.benefits-mascot {
+    position: absolute;
+    width: 180px;
+    height: auto;
+    right: 6%;
+    top: -55px;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* --- About Page Mascot --- */
+#about-expo .container {
+    position: relative;
+}
+.market-mascot {
+    position: absolute;
+    width: 120px;
+    height: auto;
+    top: -105px;
+    right: 40px;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* --- Why Attend Page Mascot --- */
+#why-attend-benefits .container {
+    position: relative;
+}
+.why-attend-mascot {
+    position: absolute;
+    width: 260px;
+    height: auto;
+    top: -35px;
+    left: 0px;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* --- Why Attend Page Footer Mascot --- */
+#decision-makers .container {
+    position: relative;
+}
+.footer-mascot {
+    position: absolute;
+    width: 180px;
+    height: auto;
+    bottom: -105px;
+    right: -150px;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* --- Plan Your Trip Page Mascot --- */
+.content-card.hayya-card {
+    position: relative;
+    overflow: visible; /* Allow mascot to overflow */
+}
+
+.visa-mascot {
+    position: absolute;
+    width: 300px;
+    height: auto;
+    top: -350px;
+    left: -20px;
+    right: -30px;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* --- Agenda Page Mascot --- */
+.admission-zone-card {
+    position: relative;
+    overflow: visible;
+}
+
+.agenda-mascot {
+    position: absolute;
+    width: 180px;
+    height: auto;
+    top: -160px;
+    left: 70%;
+    transform: translateX(-50%);
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* --- Student Registration Page Mascot --- */
+.student-reg-mascot {
+    position: absolute;
+    width: 230px;
+    height: auto;
+    top: 110px;
+    bottom: 150px;
+    right: 5%;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* --- Booth Registration Page Mascot --- */
+.booth-reg-mascot {
+    position: absolute;
+    width: 230px;
+    height: auto;
+    top: 110px;
+    right: 5%;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* --- Sponsorship Registration Page Mascot --- */
+.sponsorship-reg-mascot {
+    position: absolute;
+    width: 230px;
+    height: auto;
+    top: 110px;
+    right: 5%;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* --- School Group Registration Page Mascot --- */
+.school-group-reg-mascot {
+    position: absolute;
+    width: 230px;
+    height: auto;
+    top: 110px;
+    right: 5%;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* --- Speaker Registration Page Mascot --- */
+.speaker-reg-mascot {
+    position: absolute;
+    width: 230px;
+    height: auto;
+    top: 110px;
+    right: 5%;
+    z-index: 5;
+    pointer-events: none;
+}
+
+
+/* --- Why Exhibit Page Mascot --- */
+.benefit-card.partnership-card-with-mascot {
+    position: relative;
+    overflow: visible;
+}
+.card-top-mascot {
+    position: absolute;
+    width: 240px;
+    height: auto;
+    top: -190px;
+    left: 60%;
+    transform: translateX(-50%);
+    z-index: 5;
+    pointer-events: none;
+}
+
+.exhibit-footer-mascot {
+    position: absolute;
+    width: 230px;
+    height: auto;
+    bottom: -105px;
+    left: -110px;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* --- Booth Features Page Mascot --- */
+.booth-features-mascot {
+    position: absolute;
+    width: 300px;
+    height: auto;
+    top: -240px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* --- Hackathon Page Mascot --- */
+.hackathon-intro-mascot {
+    position: absolute;
+    width: 200px;
+    height: auto;
+    top: -150px;
+    right: -220px;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* --- Sponsorship Tiers Page Mascot --- */
+.tier-card.startup-card-with-mascot {
+    position: relative;
+    overflow: visible;
+}
+
+.tier-mascot {
+    position: absolute;
+    width: 180px;
+    height: auto;
+    top: -160px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    pointer-events: none;
+}
+
+.impressions-card-with-mascot {
+    position: relative;
+    overflow: visible;
+}
+
+.sponsorship-intro-mascot {
+    position: absolute;
+    width: 250px;
+    height: auto;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* --- Brand Exposure Page Mascot --- */
+.countries-card-with-mascot {
+    position: relative;
+    overflow: visible;
+}
+
+.brand-exposure-mascot {
+position: absolute;
+    width: 280px;
+    height: auto;
+    top: -220px;
+    left: 70%;
+    transform: translateX(-50%);
+    z-index: 5;
+    pointer-events: none;
+}
+
+.pre-event-panel-with-mascot {
+    position: relative;
+}
+
+.pre-event-mascot {
+    position: absolute;
+    width: 180px;
+    height: auto;
+    top: -300px;
+    left: 70px;
+    transform: translateX(-50%);
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* --- Contact Page Mascot --- */
+.quick-chat-card-with-mascot {
+    position: relative;
+    overflow: visible;
+}
+
+.contact-quick-chat-mascot {
+    position: absolute;
+    width: 170px;
+    height: auto;
+    top: -210px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    pointer-events: none;
+}
+
+.faq-item-with-mascot {
+    position: relative;
+    overflow: visible;
+}
+
+.contact-faq-mascot {
+    position: absolute;
+    width: 160px;
+    height: auto;
+    top: -135px;
+    left: 1%;
+    transform: translateX(-50%) scaleX(-1);
+    z-index: 5;
+    pointer-events: none;
+}
+
+@media (max-width: 1200px) {
+    .benefits-mascot {
+        left: 0px;
+        width: 180px;
+        top: 50px;
+    }
+}
+
+@media (max-width: 992px) {
+    .benefits-mascot,
+    .hackathon-intro-mascot,
+    .testimonials-mascot,
+    .market-mascot,
+    .why-attend-mascot,
+    .footer-mascot,
+    .visa-mascot,
+    .agenda-mascot,
+    .student-reg-mascot,
+    .booth-reg-mascot,
+    .sponsorship-reg-mascot,
+    .school-group-reg-mascot,
+    .exhibit-footer-mascot,
+    .booth-features-mascot,
+    .tier-mascot,
+    .brand-exposure-mascot,
+    .pre-event-mascot,
+    .contact-quick-chat-mascot,
+    .contact-faq-mascot,
+    .speaker-reg-mascot {
+        display: none;
     }
 }
 
@@ -2815,973 +3556,3 @@ a.contact-email:hover {
     flex: initial;
   }
 }
-
-/* =================================================== */
-/* == NEW STYLES FOR CAREER COUNSELLING PAGE V2      == */
-/* =================================================== */
-.counselling-hero-v2 {
-    padding: 80px 0;
-    background: #101c35;
-}
-.counselling-hero-v2 .container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: center;
-}
-.counselling-hero-v2 .hero-text {
-    text-align: left;
-    max-width: none;
-}
-.counselling-hero-v2 .hero-text h1 {
-    font-size: 2.8rem;
-    line-height: 1.2;
-    text-shadow: none;
-}
-.counselling-hero-v2 .hero-text p {
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.8);
-    max-width: 100%;
-}
-.counselling-hero-v2 .cta-group {
-    justify-content: flex-start;
-}
-.hero-image-v2 img {
-    width: 100%;
-    height: auto;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
-.hero-stats {
-    display: flex;
-    gap: 1.5rem;
-    margin-top: 2rem;
-    flex-wrap: wrap;
-}
-.hero-stat-item {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    color: var(--white);
-}
-.hero-stat-item i {
-    font-size: 1.5rem;
-    opacity: 0.8;
-}
-.hero-stat-item p {
-    margin: 0;
-    font-weight: 700;
-}
-
-.feature-section .container { max-width: 900px; }
-.feature-section h2, .feature-section .subtitle { text-align: center; }
-.feature-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    margin-top: 3rem;
-}
-.feature-item {
-    display: flex;
-    gap: 1.5rem;
-    align-items: flex-start;
-}
-.feature-icon {
-    flex-shrink: 0;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: #f2e7fc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.feature-icon i {
-    font-size: 1.8rem;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-.feature-text h4 {
-    font-size: 1.2rem;
-    margin: 0 0 0.5rem;
-    text-align: left;
-}
-.feature-text p {
-    font-size: 0.95rem;
-    color: #555;
-    margin: 0;
-}
-
-.vertical-timeline {
-    position: relative;
-    max-width: 800px;
-    margin: 3rem auto 0;
-}
-.vertical-timeline::before {
-    content: '';
-    position: absolute;
-    left: 24px;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: var(--gradient);
-    border-radius: 2px;
-}
-.timeline-step-v2 {
-    position: relative;
-    padding-left: 70px;
-    margin-bottom: 3rem;
-}
-.timeline-step-v2:last-child {
-    margin-bottom: 0;
-}
-.timeline-step-v2-icon {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: var(--gradient);
-    color: var(--white);
-    font-size: 1.5rem;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 4px solid var(--white);
-    box-shadow: 0 0 0 4px #711fb8;
-}
-.timeline-step-v2-content h4 {
-    text-align: left;
-    margin: 0 0 0.5rem;
-    font-size: 1.3rem;
-}
-.timeline-step-v2-content p {
-    margin: 0;
-    color: #555;
-}
-
-.counselor-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
-    max-width: 800px;
-    margin: 3rem auto 0;
-}
-.counselor-card-v2 {
-    background: var(--white);
-    border-radius: 15px;
-    box-shadow: var(--shadow);
-    text-align: center;
-    padding: 2rem;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-.counselor-card-v2:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-}
-.counselor-card-v2 .speaker-photo {
-    width: 140px;
-    height: 140px;
-}
-.counselor-card-v2 .speaker-info {
-    margin-top: 1.5rem;
-}
-.counselor-card-v2 .speaker-title {
-    font-size: 1.1rem;
-}
-.counselor-card-v2 .speaker-org {
-    margin-bottom: 1rem;
-}
-.counselor-specialty {
-    font-style: italic;
-    color: #555;
-    font-size: 0.9rem;
-}
-#counselling-faq h2 { text-align: center; }
-
-.counselling-final-cta {
-    position: relative;
-    color: var(--white);
-    background-image: url('https://res.cloudinary.com/dj3vhocuf/image/upload/w_1920,q_auto,f_auto/v1762464000/pexels-photo-3184418.webp');
-    background-size: cover;
-    background-position: center;
-    text-align: center;
-}
-.counselling-final-cta::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(16, 28, 53, 0.8);
-}
-.counselling-final-cta .container {
-    position: relative;
-    z-index: 2;
-}
-.counselling-final-cta h2, .counselling-final-cta p {
-    color: var(--white);
-}
-
-@media (max-width: 992px) {
-    .counselling-hero-v2 .container { grid-template-columns: 1fr; }
-    .counselling-hero-v2 .hero-text { text-align: center; }
-    .counselling-hero-v2 .cta-group { justify-content: center; }
-    .hero-stats { justify-content: center; }
-    .hero-image-v2 { order: -1; }
-    .feature-list { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 768px) {
-    .counselling-hero-v2 .hero-text h1 { font-size: 2.2rem; }
-}
-```
-  </change>
-  <change>
-    <file>rtl.css</file>
-    <description>Added RTL-specific overrides for the newly designed Career Counselling page elements, ensuring correct layout and alignment for Arabic language users.</description>
-    <content><![CDATA[:root {
-    --arabic-font: 'Cairo', sans-serif;
-}
-
-body {
-  direction: rtl;
-  text-align: right;
-  font-family: var(--arabic-font);
-}
-
-h1, h2, h3, h4, .btn, .nav-link, .timer-unit p {
-    font-family: var(--arabic-font);
-}
-
-/* Header & Navigation */
-.has-dropdown > a .fa-angle-down {
-  margin-right: 0.3rem;
-  margin-left: 0;
-}
-
-.dropdown-menu {
-  left: 50%;
-  right: auto; /* Unset right property from any previous attempts */
-  transform: translateX(-50%) translateY(10px); /* Universal centering */
-}
-
-.has-dropdown.dropdown-open > .dropdown-menu {
-  margin-left: 0; /* Remove the problematic margin from the LTR stylesheet */
-  transform: translateX(-50%) translateY(0); /* Re-apply centering transform on open */
-}
-
-.dropdown-menu a {
-  text-align: right;
-}
-
-/* Mobile Nav */
-@media (max-width: 992px) {
-    #main-nav {
-        left: 0;
-        right: auto;
-        transform: translateX(-100%);
-    }
-    .main-header.nav-open #main-nav {
-        transform: translateX(0);
-    }
-     #main-nav > ul {
-        align-items: flex-end;
-    }
-    .nav-link {
-        justify-content: flex-end;
-    }
-    .dropdown-menu a {
-        padding-right: 2.5rem;
-        padding-left: 1.5rem;
-    }
-    .mobile-header-lang-switcher {
-        margin-right: auto;
-        margin-left: 0.5rem;
-    }
-}
-
-
-/* Language Switcher */
-.lang-switcher {
-    margin-left: 0;
-    margin-right: 1rem;
-}
-
-
-/* General Layout & Content */
-.why-qatar-text li {
-  padding-left: 0;
-  padding-right: 2.5rem;
-}
-.why-qatar-text li::before {
-  left: auto;
-  right: 0;
-}
-
-.lead-capture-features li {
-    gap: 0 0.75rem;
-}
-.lead-capture-features li i {
-    margin-left: 0.5rem;
-    margin-right: 0;
-}
-
-.testimonial-card blockquote {
-    border-left: none;
-    border-right: 3px solid #d12386;
-    padding-left: 0;
-    padding-right: 1.5rem;
-}
-.testimonial-author {
-  gap: 0 1rem;
-}
-
-.timeline-item {
-    padding-left: 0;
-    padding-right: 60px;
-}
-.marketing-timeline::before {
-    left: auto;
-    right: 20px;
-}
-.timeline-icon {
-    left: auto;
-    right: 0;
-}
-.timeline-content h4, .timeline-content p {
-    text-align: right;
-}
-
-/* Forms */
-.form-group-consent, .interest-checkbox-item, .session-checkbox-item, .consent-radio-item {
-  gap: 0 0.75rem;
-}
-#speaker-registration-form-section legend {
-    margin-left: auto;
-    margin-right: -0.5rem;
-}
-.file-upload-btn i {
-    margin-right: 0;
-    margin-left: 0.5rem;
-}
-
-
-/* Agenda */
-.agenda-timeline {
-    border-left: none;
-    border-right: 3px solid var(--border-color);
-    padding-left: 0;
-    padding-right: 2rem;
-}
-.timeline-block::before {
-    left: auto;
-    right: -2rem;
-    transform: translateX(50%);
-}
-.timeline-time h3 { text-align: right; }
-.session-card {
-    border-left: none;
-    border-right: 5px solid #ccc;
-    gap: 0 1.5rem;
-}
-.session-tag {
-    right: auto;
-    left: -35px;
-    transform: rotate(-45deg);
-}
-
-/* Footer */
-.footer-contact-info li, .social-links {
-    gap: 0 1rem;
-}
-
-/* WhatsApp FAB */
-.whatsapp-fab {
-    right: auto;
-    left: 25px;
-}
-
-/* Mascot Positioning */
-html[lang="ar"] .benefits-mascot {
-    right: auto;
-    left: 6%;
-    transform: scaleX(-1);
-}
-.hero-mascot { right: auto; left: 6%; transform: scaleX(-1); }
-.testimonials-mascot { right: auto; left: 0; }
-.exhibit-mascot { right: auto; left: 9%; }
-.why-attend-mascot { left: auto; right: 0; transform: scaleX(-1); }
-.footer-mascot { right: auto; left: -150px; transform: scaleX(-1); }
-.student-reg-mascot, .booth-reg-mascot, .sponsorship-reg-mascot, .school-group-reg-mascot, .speaker-reg-mascot {
-    right: auto;
-    left: 5%;
-}
-.card-top-mascot { left: 40%; }
-.exhibit-footer-mascot { left: auto; right: -110px; }
-.hackathon-intro-mascot { right: auto; left: -220px; }
-.sponsorship-intro-mascot, .tier-mascot, .booth-features-mascot { left: 50%; }
-.brand-exposure-mascot { left: 30%; }
-.pre-event-mascot { left: auto; right: 70px; }
-.contact-quick-chat-mascot { left: 50%; }
-.contact-faq-mascot { left: auto; right: 1%; transform: translateX(50%); }
-
-#exhibitor-benefits .benefits-grid {
-    margin-top: 80px;
-}
-
-@media (max-width: 1200px) {
-    html[lang="ar"] .benefits-mascot {
-        left: 0px;
-        width: 180px;
-        top: 50px;
-        transform: scaleX(-1); /* Ensure flip is maintained */
-    }
-}
-
-@media (max-width: 992px) {
-    .logo {
-        margin-right: 0;
-    }
-    .nav-toggle {
-        order: -1;
-    }
-    .hero-mascot,
-    .testimonials-mascot,
-    .exhibit-mascot,
-    .why-attend-mascot,
-    .footer-mascot,
-    .visa-mascot,
-    .agenda-mascot,
-    .student-reg-mascot,
-    .booth-reg-mascot,
-    .sponsorship-reg-mascot,
-    .school-group-reg-mascot,
-    .exhibit-footer-mascot,
-    .booth-features-mascot,
-    .tier-mascot,
-    .brand-exposure-mascot,
-    .pre-event-mascot,
-    .contact-quick-chat-mascot,
-    .contact-faq-mascot,
-    .speaker-reg-mascot,
-    .benefits-mascot {
-        display: none;
-    }
-
-    #exhibitor-benefits .benefits-grid {
-        margin-top: 0;
-    }
-}
-
-/* Desktop Header Button Positioning Fix for RTL */
-@media (min-width: 1201px) {
-    .main-header .container {
-        max-width: 1800px;
-    }
-}
-
-
-/* =================================================== */
-/* == NEW RTL STYLES FOR CAREER COUNSELLING PAGE V2  == */
-/* =================================================== */
-.counselling-hero-v2 .hero-text {
-    text-align: right;
-}
-.counselling-hero-v2 .cta-group {
-    justify-content: flex-start;
-}
-
-.feature-text h4 {
-    text-align: right;
-}
-
-.vertical-timeline::before {
-    left: auto;
-    right: 24px;
-}
-.timeline-step-v2 {
-    padding-left: 0;
-    padding-right: 70px;
-}
-.timeline-step-v2-icon {
-    left: auto;
-    right: 0;
-}
-.timeline-step-v2-content h4 {
-    text-align: right;
-}
-
-@media (max-width: 992px) {
-    .counselling-hero-v2 .hero-text { text-align: center; }
-    .counselling-hero-v2 .cta-group { justify-content: center; }
-}
-```
-  </change>
-  <change>
-    <file>career-counselling.html</file>
-    <description>Overhauled the entire structure and content of the Career Counselling page to align with the new, modern UI/UX design. Introduced new sections, improved layout for better readability, and added more engaging visuals.</description>
-    <content><![CDATA[
-
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7VMH5W3FET"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-7VMH5W3FET');
-</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Get expert guidance to study abroad at our global education expo. We offer specialized advice for students looking to study in the UK, study in Canada, and other top destinations from Qatar at this premier international education fair.">
-    <title>Free Study Abroad Guidance | Study in UK & Canada | Gulf Education Exhibition</title>
-    <link rel="icon" type="image/png" sizes="16x16" href="https://res.cloudinary.com/dj3vhocuf/image/upload/w_16,h_16,c_fit/v1762639402/Untitled_design_-_2025-11-09T033152.664_aerlhr.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://res.cloudinary.com/dj3vhocuf/image/upload/w_32,h_32,c_fit/v1762639402/Untitled_design_-_2025-11-09T033152.664_aerlhr.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://res.cloudinary.com/dj3vhocuf/image/upload/w_180,h_180,c_fit/v1762639402/Untitled_design_-_2025-11-09T033152.664_aerlhr.png">
-    <link rel="canonical" href="https://eduexpoqatar.com/career-counselling.html" />
-    <link rel="alternate" hreflang="en" href="https://eduexpoqatar.com/career-counselling.html" />
-    <link rel="alternate" hreflang="ar" href="https://eduexpoqatar.com/career-counselling-ar.html" />
-    <link rel="alternate" hreflang="en-QA" href="https://eduexpoqatar.com/career-counselling.html" />
-    <link rel="alternate" hreflang="en-SA" href="https://eduexpoqatar.com/career-counselling.html" />
-    <link rel="alternate" hreflang="en-AE" href="https://eduexpoqatar.com/career-counselling.html" />
-    <link rel="alternate" hreflang="en-KW" href="https://eduexpoqatar.com/career-counselling.html" />
-    <link rel="alternate" hreflang="en-BH" href="https://eduexpoqatar.com/career-counselling.html" />
-    <link rel="alternate" hreflang="en-OM" href="https://eduexpoqatar.com/career-counselling.html" />
-    <link rel="alternate" hreflang="en-GB" href="https://eduexpoqatar.com/career-counselling.html" />
-    <link rel="alternate" hreflang="en-CA" href="https://eduexpoqatar.com/career-counselling.html" />
-    <link rel="alternate" hreflang="en-US" href="https://eduexpoqatar.com/career-counselling.html" />
-    <link rel="alternate" hreflang="x-default" href="https://eduexpoqatar.com/career-counselling.html" />
-    <link rel="stylesheet" href="index.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <script type="application/ld+json">
-    [
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Qatar Education Expo 2026",
-        "url": "/index.html",
-        "logo": "https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto/v1761210698/logo500x250_i8opbv.webp",
-        "sameAs": [
-          "https://twitter.com/qatarexpo2026",
-          "https://linkedin.com/company/qatarexpo2026",
-          "https://instagram.com/qatarexpo2026"
-        ],
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "telephone": "+974-7444-9111",
-          "contactType": "Customer Service",
-          "email": "partnerships@eduexpoqatar.com"
-        }
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [{
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "/index.html"
-        },{
-          "@type": "ListItem",
-          "position": 2,
-          "name": "For Students",
-          "item": "/student-registration.html"
-        },{
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Career Counselling"
-        }]
-      }
-    ]
-    </script>
-    <script type="text/javascript">
-        (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "u1z7soldc8");
-    </script>
-</head>
-<body>
-
-    <header class="main-header" id="main-header">
-        <div class="container">
-            <a href="index.html" class="logo"><img src="https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto/v1761210698/logo500x250_i8opbv.webp" alt="Qatar Education Expo 2026 Logo"></a>
-            <button class="nav-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="hamburger-box">
-                    <span class="hamburger-inner"></span>
-                </span>
-            </button>
-            <nav id="main-nav">
-                 <ul>
-                    <li><a href="index.html" class="nav-link">Home</a></li>
-                    <li><a href="about.html" class="nav-link">About Expo</a></li>
-                    <li class="has-dropdown">
-                        <a href="why-attend.html" class="nav-link">Visit <i class="fas fa-angle-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="why-attend.html">Why Attend</a></li>
-                            <li><a href="plan-your-trip.html">Plan Your Trip</a></li>
-                            <li><a href="school-group-registration.html">School Group Registration</a></li>
-                            <li><a href="workshops.html">Agenda</a></li>
-                        </ul>
-                    </li>
-                    <li class="has-dropdown">
-                        <a href="student-registration.html" class="nav-link">For Students <i class="fas fa-angle-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="student-registration.html">Student Registration</a></li>
-                            <li><a href="career-counselling.html">Career Counselling</a></li>
-                            <li><a href="qatar-expo-hackathon.html">Hackathon 2026</a></li>
-                        </ul>
-                    </li>
-                    <li class="has-dropdown">
-                        <a href="why-exhibit.html" class="nav-link">For Exhibitors <i class="fas fa-angle-down"></i></a>
-                         <ul class="dropdown-menu">
-                            <li><a href="why-exhibit.html">Why Exhibit</a></li>
-                            <li><a href="booth-features.html">Booth Features</a></li>
-                             <li><a href="booth-registration.html">Book Your Booth</a></li>
-                        </ul>
-                    </li>
-                    <li class="has-dropdown">
-                        <a href="sponsorship-tiers.html" class="nav-link">For Sponsors <i class="fas fa-angle-down"></i></a>
-                         <ul class="dropdown-menu">
-                            <li><a href="sponsorship-tiers.html">Sponsorship Tiers</a></li>
-                            <li><a href="brand-exposure.html">Brand Exposure</a></li>
-                            <li><a href="sponsorship-registration.html">Become a Sponsor</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="contact.html" class="nav-link">Contact</a></li>
-                </ul>
-            </nav>
-            <div class="header-ctas">
-                <a href="booth-registration.html" class="btn btn-primary btn-sm">Book a Booth</a>
-                <a href="sponsorship-registration.html" class="btn btn-primary btn-sm">Sponsor Now</a>
-                <div class="lang-switcher">
-                    <a href="career-counselling-ar.html" hreflang="ar" aria-label="Switch to Arabic"><span>العربية</span><img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/qa.svg" alt="Qatar Flag" class="lang-flag"></a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <main>
-        <section class="counselling-hero-v2">
-            <div class="container">
-                <div class="hero-text">
-                    <h1>Navigate Your Future with Confidence</h1>
-                    <p>Unlock your potential with free, personalized career counselling at Qatar Education Expo 2026. We help you discover your path, choose the right university, and build a standout profile for success.</p>
-                    <div class="cta-group">
-                        <a href="student-registration.html" class="btn btn-primary">Book Your Free Session</a>
-                    </div>
-                    <div class="hero-stats">
-                        <div class="hero-stat-item"><i class="fas fa-university"></i> <p>100+ Partner Universities</p></div>
-                        <div class="hero-stat-item"><i class="fas fa-certificate"></i> <p>Certified Global Counselors</p></div>
-                        <div class="hero-stat-item"><i class="fas fa-check-circle"></i> <p>Free Psychometric Tests</p></div>
-                    </div>
-                </div>
-                <div class="hero-image-v2">
-                    <picture>
-                        <source srcset="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=800&fm=webp" media="(max-width: 768px)">
-                        <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="A diverse group of students and professionals collaborating around a table." loading="lazy">
-                    </picture>
-                </div>
-            </div>
-        </section>
-        
-        <section class="feature-section bg-surface">
-            <div class="container">
-                <h2>Unlock Your Potential</h2>
-                <p class="subtitle">Our complimentary services are designed to provide clarity and direction for your academic and professional journey.</p>
-                <div class="feature-list">
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-user-friends"></i></div>
-                        <div class="feature-text">
-                            <h4>Personalized Counselling</h4>
-                            <p>One-on-one sessions to discuss your aspirations, strengths, and academic options with an experienced advisor.</p>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-chart-pie"></i></div>
-                        <div class="feature-text">
-                            <h4>Psychometric Analysis</h4>
-                            <p>Gain deep insights into your personality and career aptitude with internationally recognized assessment tools.</p>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-file-signature"></i></div>
-                        <div class="feature-text">
-                            <h4>Profile & CV Building</h4>
-                            <p>Learn to craft a compelling CV and personal statement that university admissions officers notice.</p>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-graduation-cap"></i></div>
-                        <div class="feature-text">
-                            <h4>University Matching</h4>
-                            <p>Get expert help in shortlisting universities that align perfectly with your academic profile and career goals.</p>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-award"></i></div>
-                        <div class="feature-text">
-                            <h4>Scholarship Guidance</h4>
-                            <p>Find and apply for global scholarships with expert help on crafting strong applications.</p>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon"><i class="fas fa-route"></i></div>
-                        <div class="feature-text">
-                            <h4>Career Pathway Planning</h4>
-                            <p>Get clarity on emerging career fields and future job trends that align with your long-term ambitions.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="how-it-works">
-            <div class="container">
-                <h2>How It Works: Your 4-Step Journey to Clarity</h2>
-                <p class="subtitle">A simple, structured process to get the most out of your free counselling experience at the expo.</p>
-                <div class="vertical-timeline">
-                    <div class="timeline-step-v2">
-                        <div class="timeline-step-v2-icon">1</div>
-                        <div class="timeline-step-v2-content">
-                            <h4>Register for the Expo</h4>
-                            <p>Your free student registration is your all-access pass to book a one-on-one counselling slot.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-step-v2">
-                        <div class="timeline-step-v2-icon">2</div>
-                        <div class="timeline-step-v2-content">
-                            <h4>Book Your Session</h4>
-                            <p>Closer to the event, you'll receive an exclusive email link to book a time slot with a counsellor that fits your schedule.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-step-v2">
-                        <div class="timeline-step-v2-icon">3</div>
-                        <div class="timeline-step-v2-content">
-                            <h4>Prepare for Your Meeting</h4>
-                            <p>Bring your questions, ideas, and any relevant documents like transcripts to make your session as productive as possible.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-step-v2">
-                        <div class="timeline-step-v2-icon">4</div>
-                        <div class="timeline-step-v2-content">
-                            <h4>Meet Your Counsellor</h4>
-                            <p>Attend your scheduled session at the dedicated Counselling Zone and walk away with a clearer action plan for your future.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="meet-the-experts-v2" class="bg-surface">
-            <div class="container">
-                <h2>Meet Your Counsellors</h2>
-                <p class="subtitle">Our team of certified counsellors brings years of experience from top educational institutions worldwide.</p>
-                <div class="counselor-grid">
-                    <div class="counselor-card-v2">
-                        <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Headshot of Dr. Aisha Al-Marri" class="speaker-photo">
-                        <div class="speaker-info">
-                            <h4>Dr. Aisha Al-Marri</h4>
-                            <p class="speaker-title">Lead Career Counselor</p>
-                            <p class="speaker-org">With over 15 years in higher education guidance, Dr. Aisha specializes in helping students navigate admissions for top universities.</p>
-                            <p class="counselor-specialty">Specializes in: UK & USA Admissions</p>
-                        </div>
-                    </div>
-                    <div class="counselor-card-v2">
-                        <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Headshot of Mr. Omar Hassan" class="speaker-photo">
-                        <div class="speaker-info">
-                            <h4>Mr. Omar Hassan</h4>
-                            <p class="speaker-title">Admissions & Scholarship Advisor</p>
-                            <p class="speaker-org">An expert in profile building and scholarship applications, with a track record of helping students secure funding for their dream universities.</p>
-                             <p class="counselor-specialty">Specializes in: Scholarship Applications</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="counselling-faq">
-            <div class="container">
-                <h2>Have Questions? We Have Answers.</h2>
-                <div class="faq-accordion">
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            <span>Is the career counselling really free?</span>
-                            <i class="fas fa-plus"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Yes, all career counselling services, including one-on-one sessions and psychometric tests, are completely free for all registered students attending the expo.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            <span>How do I book a specific time for my session?</span>
-                            <i class="fas fa-plus"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>After you <a href="student-registration.html">register for the event</a>, you will receive an email closer to the expo date with a link to book your preferred time slot. Slots are limited and are on a first-come, first-served basis.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            <span>Can my parents join the counselling session?</span>
-                            <i class="fas fa-plus"></i>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Absolutely! We encourage parents to be part of the conversation. Just let us know when you book your session so we can accommodate everyone comfortably.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="counselling-final-cta">
-            <div class="container">
-                 <h2>Ready to Take the First Step?</h2>
-                 <p>Your future is waiting. Register for your free Qatar Education Expo 2026 pass today to unlock access to our expert career counselling services, meet top universities, and more.</p>
-                 <div class="cta-group">
-                    <a href="student-registration.html" class="btn btn-primary">Register for Free Now</a>
-                 </div>
-            </div>
-        </section>
-    </main>
-    
-    <div id="cookie-banner"></div>
-
-    <footer class="main-footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <a href="index.html" class="logo"><img src="https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto/v1761223357/logo-white_1_pqcaph.webp" alt="Qatar Education Expo 2026 Logo"></a>
-                    <p>The premier event connecting educational leaders, institutions, and innovators in the MENA region.</p>
-                </div>
-                <div class="footer-col">
-                    <h3>Explore</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Expo</a></li>
-                        <li><a href="why-exhibit.html">For Exhibitors</a></li>
-                        <li><a href="sponsorship-tiers.html">For Sponsors</a></li>
-                        <li><a href="student-registration.html">Student Registration</a></li>
-                    </ul>
-                </div>
-                 <div class="footer-col">
-                    <h3>Support</h3>
-                    <ul class="footer-links">
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="faq.html">FAQ</a></li>
-                        <li><a href="privacy.html">Privacy Policy</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Connect With Us</h3>
-                    <ul class="footer-contact-info">
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Sheraton Grand Doha, Qatar</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-envelope"></i>
-                            <a href="mailto:partnerships@eduexpoqatar.com">partnerships@eduexpoqatar.com</a>
-                        </li>
-                        <li>
-                            <i class="fas fa-phone"></i>
-                            <a href="tel:+97474449111">+974 7444 9111</a>
-                        </li>
-                    </ul>
-                    <div class="social-links">
-                        <a href="https://twitter.com/qatarexpo2026" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="https://linkedin.com/company/qatarexpo2026" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://instagram.com/qatarexpo2026" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Qatar Education Expo. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- WhatsApp Chat -->
-    <a href="https://wa.me/97474449111" class="whatsapp-fab" target="_blank" aria-label="Chat on WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <!-- Exit Intent Modal -->
-    <div id="exit-intent-modal" class="modal-overlay">
-        <div class="modal-content exit-intent-content" role="dialog" aria-modal="true" aria-labelledby="exit-modal-title">
-            <button class="modal-close-btn" aria-label="Close">&times;</button>
-            <h3 id="exit-modal-title">Download The Deck Before You Leave!</h3>
-            <p>Get our official Exhibitor & Sponsorship Deck, including the floor plan and ROI details, sent straight to your inbox.</p>
-            <button id="open-deck-form-btn" class="btn btn-primary">Get The Deck</button>
-        </div>
-    </div>
-
-    <!-- Deck Request Modal -->
-    <div id="deck-request-modal" class="modal-overlay">
-        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="deck-modal-title">
-            <button class="modal-close-btn" aria-label="Close">&times;</button>
-            <div id="deck-form-container">
-                <h3 id="deck-modal-title">Get The Official Deck</h3>
-                <p>Please provide your details to receive the Exhibitor & Sponsorship Deck instantly.</p>
-                <form id="deck-request-form" novalidate style="margin-top: 1.5rem;">
-                    <input type="hidden" name="form_source" value="Deck Request Popup">
-                    <div class="form-group">
-                        <label for="deck-form-name">Full Name *</label>
-                        <input type="text" id="deck-form-name" name="name" required>
-                        <div class="error-message"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="deck-form-email">Work Email *</label>
-                        <input type="email" id="deck-form-email" name="email" required>
-                        <div class="error-message"></div>
-                    </div>
-                     <div class="form-group">
-                        <label for="deck-form-phone">Mobile Number *</label>
-                        <input type="tel" id="deck-form-phone" name="phone" required>
-                        <div class="error-message"></div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="deck-form-designation">Designation *</label>
-                            <input type="text" id="deck-form-designation" name="designation" required>
-                            <div class="error-message"></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="deck-form-organization">Organization *</label>
-                            <input type="text" id="deck-form-organization" name="organization" required>
-                            <div class="error-message"></div>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Download Now</button>
-                </form>
-            </div>
-            <div id="deck-form-success" style="display: none; text-align: center;">
-                <i class="fas fa-check-circle" style="font-size: 3rem; color: #4db6ac; margin-bottom: 1rem;" aria-hidden="true"></i>
-                <h3>Thank You!</h3>
-                <p>Your download should start automatically. If it doesn't, please check your pop-up blocker or try again.</p>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Mobile Sticky Bar -->
-    <div id="mobile-sticky-bar">
-        <a href="booth-registration.html" class="mobile-cta-btn"><i class="fas fa-chalkboard-user"></i><span>Exhibitor</span></a>
-        <a href="sponsorship-registration.html" class="mobile-cta-btn"><i class="fas fa-star"></i><span>Sponsor</span></a>
-        <a href="student-registration.html" class="mobile-cta-btn"><i class="fas fa-graduation-cap"></i><span>Student</span></a>
-        <a href="speaker-registration.html" class="mobile-cta-btn"><i class="fas fa-microphone-alt"></i><span>Speaker</span></a>
-    </div>
-
-    
-    <script type="module" src="index.tsx"></script>
-</body>
-</html>
