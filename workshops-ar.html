@@ -146,7 +146,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <a href="booth-registration-ar.html" class="btn btn-primary btn-sm">احجز جناحك</a>
                 <a href="sponsorship-registration-ar.html" class="btn btn-primary btn-sm">كن راعيًا</a>
                 <div class="lang-switcher">
-                    <a href="workshops.html" hreflang="en" aria-label="Switch to English">English</a>
+                    <a href="workshops.html" hreflang="en" aria-label="Switch to English"><span>English</span><img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/gb.svg" alt="UK Flag" class="lang-flag"></a>
                 </div>
             </div>
         </div>
@@ -162,18 +162,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <section id="agenda">
             <div class="container agenda-container">
-                <div class="agenda-tabs">
-                    <button class="tab-btn active" data-tab="day-1">اليوم الأول: 19 أبريل 2026</button>
-                    <button class="tab-btn" data-tab="day-2">اليوم الثاني: 20 أبريل 2026</button>
+                <div class="agenda-tabs" role="tablist" aria-label="أيام الحدث">
+                    <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="day-1-panel" id="day-1-tab">اليوم الأول: 19 أبريل 2026</button>
+                    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="day-2-panel" id="day-2-tab">اليوم الثاني: 20 أبريل 2026</button>
                 </div>
                 
-                <div id="day-1" class="agenda-content active">
+                <div id="day-1-panel" class="agenda-content active" role="tabpanel" aria-labelledby="day-1-tab" tabindex="0">
                     <div class="agenda-timeline">
                         <!-- Morning Block -->
                         <div class="timeline-block">
                             <div class="timeline-time"><h3>صباحًا</h3></div>
                             <div class="timeline-events">
-                                <div class="session-card break"><div class="session-icon"><i class="fas fa-id-card"></i></div><div class="session-content"><h4>08:00–09:00 — التسجيل ووجبة إفطار ترحيبية</h4><p>التواصل مع العارضين في الأجنحة مفتوح</p></div></div>
+                                <div class="session-card break"><div class="session-icon"><i class="fas fa-id-card"></i></div><div class="session-content"><h4>08:00–09:00 — التسجيل ووجبة إفطار ترحيبية</h4><p>افتتاح أجنحة العارضين والتواصل</p></div></div>
                                 <div class="session-card"><div class="session-icon"><i class="fas fa-ribbon"></i></div><div class="session-content"><h4>09:00–09:30 — حفل الافتتاح + كلمة ترحيبية</h4><p>مؤسس ديوان الطلاب + ممثل وزارة التعليم</p></div></div>
                                 <div class="session-card keynote"><div class="session-icon"><i class="fas fa-star"></i></div><div class="session-content"><h4>09:30–10:15 — كلمة رئيسية: "مستقبل التعليم في العصر الرقمي"</h4></div></div>
                                 <div class="session-card panel"><div class="session-icon"><i class="fas fa-comments"></i></div><div class="session-content"><h4>10:15–11:00 — حلقة نقاش: "الذكاء الاصطناعي والابتكار في المشهد التعليمي في قطر"</h4></div></div>
@@ -185,10 +185,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <div class="timeline-block">
                             <div class="timeline-time"><h3>أواخر الصباح</h3></div>
                             <div class="timeline-events">
-                                <h4 class="track-title">11:30–12:30 — مسارات تعلم تفاعلية</h4>
+                                <h4 class="track-title">11:30–12:30 — مسارات تعليمية تفاعلية</h4>
                                 <div class="session-card track"><div class="session-icon"><i class="fas fa-cogs"></i></div><div class="session-content"><h4>مختبر المستقبل: ورشة عمل</h4><p>"تحديث أنظمة إدارة التعلم/تخطيط موارد المؤسسات لمدارس الجيل القادم"</p></div></div>
                                 <div class="session-card track"><div class="session-icon"><i class="fas fa-shield-alt"></i></div><div class="session-content"><h4>مركز التعليم الآمن: حلقة نقاش</h4><p>"الأمن السيبراني وحماية البيانات في التعليم"</p></div></div>
-                                <div class="session-card track"><div class="session-icon"><i class="fas fa-rocket"></i></div><div class="session-content"><h4>مسرح الشركات الناشئة: عرض مشاريع تكنولوجيا التعليم</h4><p>5 شركات ناشئة × 5 دقائق + أسئلة وأجوبة من لجنة التحكيم</p></div></div>
+                                <div class="session-card track"><div class="session-icon"><i class="fas fa-rocket"></i></div><div class="session-content"><h4>منصة الشركات الناشئة: عرض مشاريع تكنولوجيا التعليم</h4><p>5 شركات ناشئة × 5 دقائق + أسئلة وأجوبة من لجنة التحكيم</p></div></div>
                             </div>
                         </div>
 
@@ -198,7 +198,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <div class="timeline-events">
                                  <div class="session-card break">
                                     <div class="session-icon"><i class="fas fa-utensils"></i></div>
-                                    <div class="session-content"><h4>12:30–14:00 — الغداء + تفاعل في أرض المعرض</h4><p>وقت مخصص للأجنحة #2. طاولات تواصل لكبار الشخصيات (بدعوة فقط)</p></div>
+                                    <div class="session-content"><h4>12:30–14:00 — الغداء + التفاعل في أرض المعرض</h4><p>وقت مخصص للأجنحة #2. طاولات تواصل لكبار الشخصيات (بدعوة فقط)</p></div>
                                     <span class="session-tag">بدعوة فقط</span>
                                 </div>
                             </div>
@@ -209,7 +209,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <div class="timeline-time"><h3>بعد الظهر</h3></div>
                             <div class="timeline-events">
                                 <h4 class="track-title">14:00–15:00 — مسارات القيادة والابتكار</h4>
-                                <div class="session-card track"><div class="session-icon"><i class="fas fa-lightbulb"></i></div><div class="session-content"><h4>مسرح الابتكار: ماستر كلاس</h4><p>"أدوات الذكاء الاصطناعي للمعلمين: حالات استخدام حقيقية"</p></div></div>
+                                <div class="session-card track"><div class="session-icon"><i class="fas fa-lightbulb"></i></div><div class="session-content"><h4>منصة الابتكار: ماستر كلاس</h4><p>"أدوات الذكاء الاصطناعي للمعلمين: حالات استخدام حقيقية"</p></div></div>
                                 <div class="session-card track"><div class="session-icon"><i class="fas fa-tasks"></i></div><div class="session-content"><h4>منطقة الإدارة الرقمية: ورشة عمل</h4><p>"أدوات ذكية لإدارة المدارس والجامعات"</p></div></div>
                                 <div class="session-card track closed">
                                     <div class="session-icon"><i class="fas fa-landmark"></i></div>
@@ -217,8 +217,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                     <span class="session-tag">مغلقة</span>
                                 </div>
                                 <h4 class="track-title">15:00–15:45 — تسليط الضوء على الأبحاث والرؤى</h4>
-                                <div class="session-card panel"><div class="session-icon"><i class="fas fa-chart-pie"></i></div><div class="session-content"><h4>مسرح الرؤى: حلقة نقاش</h4><p>"التعلم المدمج في دول مجلس التعاون الخليجي: ما ينجح وما لا ينجح"</p></div></div>
-                                <div class="session-card panel"><div class="session-icon"><i class="fas fa-book-reader"></i></div><div class="session-content"><h4>ركن أبحاث التعليم: حلقة نقاش</h4><p>"محفزات التحول في أنظمة إدارة التعلم: دروس من قصص نجاح المدارس"</p></div></div>
+                                <div class="session-card panel"><div class="session-icon"><i class="fas fa-chart-pie"></i></div><div class="session-content"><h4>منصة الرؤى: حلقة نقاش</h4><p>"التعلم المدمج في دول مجلس التعاون الخليجي: ما ينجح وما لا ينجح"</p></div></div>
+                                <div class="session-card panel"><div class="session-icon"><i class="fas fa-book-reader"></i></div><div class="session-content"><h4>ركن الأبحاث التعليمية: حلقة نقاش</h4><p>"محفزات التحول في أنظمة إدارة التعلم: دروس من قصص نجاح المدارس"</p></div></div>
                             </div>
                         </div>
                         
@@ -226,21 +226,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                          <div class="timeline-block">
                             <div class="timeline-time"><h3>أواخر بعد الظهر</h3></div>
                             <div class="timeline-events">
-                                <h4 class="track-title">15:45–16:45 — أصوات أولياء الأمور والطلاب + الختام</h4>
+                                <h4 class="track-title">15:45–16:45 — أصوات أولياء الأمور والشباب + الختام</h4>
                                 <div class="session-card panel"><div class="session-icon"><i class="fas fa-users"></i></div><div class="session-content"><h4>حلقة نقاش أولياء الأمور، حلقة نقاش الشباب وجزء تفاعلي</h4><p>حوار مباشر حول التوقعات وبيئات التعلم المثالية.</p></div></div>
-                                <div class="session-card"><div class="session-icon"><i class="fas fa-flag-checkered"></i></div><div class="session-content"><h4>16:45–17:00 — إعلانات ختامية + معاينة لليوم الثاني</h4></div></div>
+                                <div class="session-card"><div class="session-icon"><i class="fas fa-flag-checkered"></i></div><div class="session-content"><h4>16:45–17:00 — إعلانات ختامية + معاينة اليوم الثاني</h4></div></div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div id="day-2" class="agenda-content">
+                <div id="day-2-panel" class="agenda-content" role="tabpanel" aria-labelledby="day-2-tab" hidden tabindex="0">
                     <div class="agenda-timeline">
                         <div class="timeline-block">
                             <div class="timeline-time"><h3>صباحًا</h3></div>
                             <div class="timeline-events">
-                                <div class="session-card break"><div class="session-icon"><i class="fas fa-mug-hot"></i></div><div class="session-content"><h4>08:00–09:15 — فطور للتواصل وانطلاق الابتكار</h4><p>عرض طلابي خفيف أو عرض تقني.</p></div></div>
-                                <div class="session-card keynote"><div class="session-icon"><i class="fas fa-star"></i></div><div class="session-content"><h4>09:15–10:00 — كلمة رئيسية: "تشكيل مدارس الغد"</h4><p>يقدمها رائد مستقبلي في التعليم أو قائد إقليمي.</p></div></div>
+                                <div class="session-card break"><div class="session-icon"><i class="fas fa-mug-hot"></i></div><div class="session-content"><h4>08:00–09:15 — انطلاق الابتكار ووجبة إفطار للتواصل</h4><p>عرض طلابي خفيف أو عرض تقني.</p></div></div>
+                                <div class="session-card keynote"><div class="session-icon"><i class="fas fa-star"></i></div><div class="session-content"><h4>09:15–10:00 — كلمة رئيسية: "تشكيل مدارس الغد"</h4><p>يقدمها خبير مستقبلي في التعليم أو قائد إقليمي.</p></div></div>
                                 <div class="session-card panel"><div class="session-icon"><i class="fas fa-comments"></i></div><div class="session-content"><h4>10:00–10:45 — حلقة نقاش: "العدالة الرقمية والوصول في التعليم"</h4></div></div>
                                 <div class="session-card break"><div class="session-icon"><i class="fas fa-walking"></i></div><div class="session-content"><h4>10:45–11:30 — جولة في أرض المعرض + استراحة قهوة</h4></div></div>
                             </div>
@@ -250,7 +250,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <div class="timeline-events">
                                 <h4 class="track-title">11:30–12:15 — جلسات منتصف النهار (مسارات متوازية)</h4>
                                 <div class="session-card track"><div class="session-icon"><i class="fas fa-drafting-compass"></i></div><div class="session-content"><h4>مختبر الرؤية: ماستر كلاس</h4><p>"كيفية تصميم منهج دراسي مقاوم للمستقبل"</p></div></div>
-                                <div class="session-card track"><div class="session-icon"><i class="fas fa-handshake"></i></div><div class="session-content"><h4>مسرح التعاون: حلقة نقاش</h4><p>"التعاون بين القطاعين العام والخاص في التعليم"</p></div></div>
+                                <div class="session-card track"><div class="session-icon"><i class="fas fa-handshake"></i></div><div class="session-content"><h4>منصة التعاون: حلقة نقاش</h4><p>"التعاون بين القطاعين العام والخاص في التعليم"</p></div></div>
                                 <div class="session-card track"><div class="session-icon"><i class="fas fa-brain"></i></div><div class="session-content"><h4>ساحة الفكر: عرض</h4><p>مشاريع مشاركة الجامعات</p></div></div>
                             </div>
                         </div>
@@ -265,20 +265,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <div class="timeline-events">
                                  <h4 class="track-title">13:30–14:15 — جلسات بعد الظهر</h4>
                                 <div class="session-card track"><div class="session-icon"><i class="fas fa-chalkboard-teacher"></i></div><div class="session-content"><h4>استوديو التمكين: ورشة عمل</h4><p>"تمكين المعلمين من خلال التكنولوجيا"</p></div></div>
-                                <div class="session-card track"><div class="session-icon"><i class="fas fa-file-invoice-dollar"></i></div><div class="session-content"><h4>منتدى التمويل: تدريب</h4><p>"التخطيط المالي لنمو المدارس"</p></div></div>
+                                <div class="session-card track"><div class="session-icon"><i class="fas fa-file-invoice-dollar"></i></div><div class="session-content"><h4>منتدى المالية: تدريب</h4><p>"التخطيط المالي لنمو المدارس"</p></div></div>
                                 <div class="session-card track closed"><div class="session-icon"><i class="fas fa-users-cog"></i></div><div class="session-content"><h4>دائرة القيادة: طاولة مستديرة</h4><p>"مستقبل التعليم الخاص في دول مجلس التعاون الخليجي" (للعمداء والملاك فقط)</p></div><span class="session-tag">مغلقة</span></div>
-                                <div class="session-card"><div class="session-icon"><i class="fas fa-microphone-alt"></i></div><div class="session-content"><h4>14:15–14:30 — استوديو التمكين المباشر: "أضواء على ابتكارات المعلمين"</h4><p>مشاركة سريعة للابتكارات عالية التأثير من الفصول الدراسية.</p></div></div>
-                                <h4 class="track-title">14:30–15:15 — الأبحاث والابتكار</h4>
+                                <div class="session-card"><div class="session-icon"><i class="fas fa-microphone-alt"></i></div><div class="session-content"><h4>14:15–14:30 — مباشرة من استوديو التمكين: "أضواء على ابتكارات المعلمين"</h4><p>مشاركة سريعة للابتكارات عالية التأثير من الفصول الدراسية.</p></div></div>
+                                <h4 class="track-title">14:30–15:15 — البحث والابتكار</h4>
                                 <div class="session-card track"><div class="session-icon"><i class="fas fa-lightbulb"></i></div><div class="session-content"><h4>مركز الابتكار: حلقة نقاش</h4><p>"تكنولوجيا التعليم في الشرق الأوسط وشمال أفريقيا: الإنجازات والتحديات"</p></div></div>
-                                <div class="session-card track"><div class="session-icon"><i class="fas fa-briefcase"></i></div><div class="session-content"><h4>منطقة جيل المستقبل: حلقة نقاش</h4><p>"التحضير لوظائف المستقبل"</p></div></div>
-                                <div class="session-card track"><div class="session-icon"><i class="fas fa-bullhorn"></i></div><div class="session-content"><h4>ساحة الأبحاث: عرض أكاديمي</h4><p>"اعرض بحثك"</p></div></div>
+                                <div class="session-card track"><div class="session-icon"><i class="fas fa-briefcase"></i></div><div class="session-content"><h4>منطقة الجيل القادم: حلقة نقاش</h4><p>"التحضير لوظائف المستقبل"</p></div></div>
+                                <div class="session-card track"><div class="session-icon"><i class="fas fa-bullhorn"></i></div><div class="session-content"><h4>منصة البحث: عرض أكاديمي</h4><p>"اعرض بحثك"</p></div></div>
                             </div>
                         </div>
                         <div class="timeline-block">
                             <div class="timeline-time"><h3>الجلسة الختامية</h3></div>
                             <div class="timeline-events">
-                                <div class="session-card award"><div class="session-icon"><i class="fas fa-trophy"></i></div><div class="session-content"><h4>15:15–16:15 — حفل توزيع جوائز ديوان الطلاب للتميز التعليمي</h4><p>مدير المدرسة صاحب الرؤية للعام، أفضل مبتكر في التعليم العالي، جوائز الأجنحة المبتكرة، المدرسة الأكثر تحولًا رقميًا.</p></div></div>
-                                <div class="session-card"><div class="session-icon"><i class="fas fa-camera"></i></div><div class="session-content"><h4>16:15–17:00 — كلمات ختامية وجلسة تصوير جماعية</h4></div></div>
+                                <div class="session-card award"><div class="session-icon"><i class="fas fa-trophy"></i></div><div class="session-content"><h4>15:15–16:15 — جوائز ديوان الطلاب للتميز التعليمي</h4><p>مدير المدرسة صاحب الرؤية للعام، أفضل مبتكر في التعليم العالي، جوائز الأجنحة المبتكرة، المدرسة الأكثر تحولاً رقميًا.</p></div></div>
+                                <div class="session-card"><div class="session-icon"><i class="fas fa-camera"></i></div><div class="session-content"><h4>16:15–17:00 — الكلمات الختامية وجلسة الصور الجماعية</h4></div></div>
                             </div>
                         </div>
                     </div>
@@ -288,17 +288,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <section id="event-highlights" class="bg-surface">
             <div class="container">
-                <h2>أبرز الفعاليات الإضافية</h2>
-                <p class="subtitle">بالإضافة إلى جدول الأعمال، انغمس في مناطق ديناميكية وتجارب حصرية.</p>
+                <h2>أبرز فعاليات الحدث الإضافية</h2>
+                <p class="subtitle">بعيدًا عن جدول الأعمال، انغمس في مناطق ديناميكية وتجارب حصرية.</p>
                 <div class="content-grid">
-                    <div class="content-card"><h3><i class="fas fa-user-tie"></i>صالة القيادة – غرفة اجتماعات التعليم</h3></div>
-                    <div class="content-card"><h3><i class="fas fa-flask"></i>معرض ابتكارات الطلاب / عرض</h3></div>
+                    <div class="content-card"><h3><i class="fas fa-user-tie"></i>صالة القيادة – المجلس التعليمي</h3></div>
+                    <div class="content-card"><h3><i class="fas fa-flask"></i>معرض ابتكارات الطلاب</h3></div>
                     <div class="content-card admission-zone-card">
                         <img src="https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto/v1761916444/Blue_Bold_Office_Idea_Logo_50_x_50_px_29_dru4pr.webp" alt="تميمة معرض قطر للتعليم" class="agenda-mascot">
                         <h3><i class="fas fa-graduation-cap"></i>منطقة القبول المهني والجامعي</h3>
                     </div>
-                    <div class="content-card"><h3><i class="fas fa-file-invoice"></i>جناح التوظيف والسيرة الذاتية</h3></div>
-                    <div class="content-card"><h3><i class="fas fa-rocket"></i>مسابقة عرض الأفكار للشركات الناشئة في تكنولوجيا التعليم</h3></div>
+                    <div class="content-card"><h3><i class="fas fa-file-invoice"></i>عيادة السيرة الذاتية والمهن</h3></div>
+                    <div class="content-card"><h3><i class="fas fa-rocket"></i>مسابقة عروض الشركات الناشئة في تكنولوجيا التعليم</h3></div>
                     <div class="content-card"><h3><i class="fas fa-chalkboard"></i>عيادة العلامة التجارية للمدارس (ورش عمل مصغرة)</h3></div>
                     <div class="content-card"><h3><i class="fas fa-users"></i>منطقة مشاركة أولياء الأمور</h3></div>
                     <div class="content-card"><h3><i class="fas fa-vial"></i>منطقة اختبار منتجات تكنولوجيا التعليم</h3></div>
