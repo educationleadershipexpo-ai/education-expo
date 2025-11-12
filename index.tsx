@@ -1,5 +1,4 @@
 
-
 document.addEventListener('DOMContentLoaded', () => {
     const isArabic = document.documentElement.lang === 'ar';
 
@@ -1693,10 +1692,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function initializeCookieBanner() {
         const banner = document.getElementById('cookie-banner');
         if (!banner) return;
-
-        const consentValue = localStorage.getItem('cookieConsent');
         
-        // This is a type assertion for window.gtag
+        const overlay = document.createElement('div');
+        overlay.id = 'cookie-banner-overlay';
+        document.body.appendChild(overlay);
+
         const gtag = (window as any).gtag as Function | undefined;
 
         const updateGtagConsent = (accepted: boolean) => {
@@ -1710,16 +1710,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         };
 
-        // The banner is designed to appear only once for new visitors.
-        // Their choice is stored in localStorage. To re-test the banner, clear localStorage for this site.
-        // In Chrome DevTools: Application tab > Local Storage > Right-click on the site URL > Clear.
-        // If consent has already been given, update gtag and do nothing else.
-        if (consentValue) {
-            updateGtagConsent(consentValue === 'accepted');
-            return;
-        }
-
-        // If no consent is stored, build and show the banner.
+        // Banner is now shown on every visit, regardless of past choices.
         banner.innerHTML = `
             <p>${t.cookieMessage} <a href="${isArabic ? 'privacy-ar.html' : 'privacy.html'}" class="cookie-learn-more">${t.cookieLearnMore}</a></p>
             <div class="cookie-banner-actions">
@@ -1728,19 +1719,22 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
         banner.style.display = 'flex';
+        overlay.style.display = 'block';
 
         const acceptBtn = document.getElementById('acceptCookies');
         const rejectBtn = document.getElementById('rejectCookies');
 
         acceptBtn?.addEventListener('click', () => {
-            localStorage.setItem('cookieConsent', 'accepted');
+            // Choice is not saved, banner will reappear on next visit.
             banner.style.display = 'none';
+            overlay.style.display = 'none';
             updateGtagConsent(true);
         });
 
         rejectBtn?.addEventListener('click', () => {
-            localStorage.setItem('cookieConsent', 'declined');
+            // Choice is not saved, banner will reappear on next visit.
             banner.style.display = 'none';
+            overlay.style.display = 'none';
             updateGtagConsent(false);
         });
     }
