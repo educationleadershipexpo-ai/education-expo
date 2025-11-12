@@ -1710,7 +1710,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         };
 
-        // Banner is now shown on every visit, regardless of past choices.
+        // This logic ensures the banner is displayed on every single visit.
+        // The user's choice is not stored, so they will be prompted on each new page load.
         banner.innerHTML = `
             <p>${t.cookieMessage} <a href="${isArabic ? 'privacy-ar.html' : 'privacy.html'}" class="cookie-learn-more">${t.cookieLearnMore}</a></p>
             <div class="cookie-banner-actions">
@@ -1725,14 +1726,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const rejectBtn = document.getElementById('rejectCookies');
 
         acceptBtn?.addEventListener('click', () => {
-            // Choice is not saved, banner will reappear on next visit.
             banner.style.display = 'none';
             overlay.style.display = 'none';
             updateGtagConsent(true);
         });
 
         rejectBtn?.addEventListener('click', () => {
-            // Choice is not saved, banner will reappear on next visit.
             banner.style.display = 'none';
             overlay.style.display = 'none';
             updateGtagConsent(false);
