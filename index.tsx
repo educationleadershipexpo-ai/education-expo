@@ -1715,9 +1715,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // In Chrome DevTools: Application tab > Local Storage > Right-click on the site URL > Clear.
         // If consent has already been given, update gtag and do nothing else.
         if (consentValue) {
-            if (consentValue === 'accepted') {
-                updateGtagConsent(true);
-            }
+            updateGtagConsent(consentValue === 'accepted');
             return;
         }
 
