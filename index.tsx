@@ -1,4 +1,5 @@
 
+
 document.addEventListener('DOMContentLoaded', () => {
     const isArabic = document.documentElement.lang === 'ar';
 
@@ -1710,8 +1711,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         };
 
-        // This logic ensures the banner is displayed on every single visit.
-        // The user's choice is not stored, so they will be prompted on each new page load.
+        // This logic ensures the banner is displayed every time the user visits.
+        // The user's choice is not stored.
         banner.innerHTML = `
             <p>${t.cookieMessage} <a href="${isArabic ? 'privacy-ar.html' : 'privacy.html'}" class="cookie-learn-more">${t.cookieLearnMore}</a></p>
             <div class="cookie-banner-actions">
