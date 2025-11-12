@@ -136,7 +136,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <a href="booth-registration-ar.html" class="btn btn-primary btn-sm">احجز جناحك</a>
                 <a href="sponsorship-registration-ar.html" class="btn btn-primary btn-sm">كن راعيًا</a>
                 <div class="lang-switcher">
-                    <a href="career-counselling.html" hreflang="en" aria-label="Switch to English">English</a>
+                    <a href="career-counselling.html" hreflang="en" aria-label="Switch to English"><span>English</span><img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/gb.svg" alt="UK Flag" class="lang-flag"></a>
                 </div>
             </div>
         </div>
@@ -335,6 +335,63 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a href="https://wa.me/97474449111" class="whatsapp-fab" target="_blank" aria-label="Chat on WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
+
+    <!-- Exit Intent Modal -->
+    <div id="exit-intent-modal" class="modal-overlay">
+        <div class="modal-content exit-intent-content" role="dialog" aria-modal="true" aria-labelledby="exit-modal-title">
+            <button class="modal-close-btn" aria-label="Close">&times;</button>
+            <h3 id="exit-modal-title">حمّل الملف التعريفي قبل المغادرة!</h3>
+            <p>احصل على الملف التعريفي الرسمي للعارضين والرعاة، شاملاً مخطط الأرضية وتفاصيل عائد الاستثمار، مباشرة إلى بريدك الإلكتروني.</p>
+            <button id="open-deck-form-btn" class="btn btn-primary">احصل على الملف</button>
+        </div>
+    </div>
+
+    <!-- Deck Request Modal -->
+    <div id="deck-request-modal" class="modal-overlay">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="deck-modal-title">
+            <button class="modal-close-btn" aria-label="Close">&times;</button>
+            <div id="deck-form-container">
+                <h3 id="deck-modal-title">احصل على الملف التعريفي الرسمي</h3>
+                <p>يرجى تقديم التفاصيل الخاصة بك لتلقي ملف العارضين والرعاة على الفور.</p>
+                <form id="deck-request-form" novalidate style="margin-top: 1.5rem;">
+                    <input type="hidden" name="form_source" value="Deck Request Popup">
+                    <div class="form-group">
+                        <label for="deck-form-name">الاسم الكامل *</label>
+                        <input type="text" id="deck-form-name" name="name" required>
+                        <div class="error-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="deck-form-email">البريد الإلكتروني للعمل *</label>
+                        <input type="email" id="deck-form-email" name="email" required>
+                        <div class="error-message"></div>
+                    </div>
+                     <div class="form-group">
+                        <label for="deck-form-phone">رقم الجوال *</label>
+                        <input type="tel" id="deck-form-phone" name="phone" required>
+                        <div class="error-message"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="deck-form-designation">المسمى الوظيفي *</label>
+                            <input type="text" id="deck-form-designation" name="designation" required>
+                            <div class="error-message"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="deck-form-organization">المنظمة *</label>
+                            <input type="text" id="deck-form-organization" name="organization" required>
+                            <div class="error-message"></div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">حمّل الآن</button>
+                </form>
+            </div>
+            <div id="deck-form-success" style="display: none; text-align: center;">
+                <i class="fas fa-check-circle" style="font-size: 3rem; color: #4db6ac; margin-bottom: 1rem;" aria-hidden="true"></i>
+                <h3>شكرًا لك!</h3>
+                <p>يجب أن يبدأ التنزيل تلقائيًا. إذا لم يحدث ذلك، يرجى التحقق من مانع النوافذ المنبثقة أو المحاولة مرة أخرى.</p>
+            </div>
+        </div>
+    </div>
     
     <!-- Mobile Sticky Bar -->
     <div id="mobile-sticky-bar">
