@@ -1710,6 +1710,9 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         };
 
+        // The banner is designed to appear only once for new visitors.
+        // Their choice is stored in localStorage. To re-test the banner, clear localStorage for this site.
+        // In Chrome DevTools: Application tab > Local Storage > Right-click on the site URL > Clear.
         // If consent has already been given, update gtag and do nothing else.
         if (consentValue) {
             if (consentValue === 'accepted') {
