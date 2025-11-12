@@ -1300,6 +1300,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (item) {
                     const isOpened = item.classList.toggle('open');
                     button.setAttribute('aria-expanded', String(isOpened));
+
+                    // Add scroll into view for better mobile UX
+                    if (isOpened && window.innerWidth < 768) {
+                        setTimeout(() => {
+                            item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 300); // Delay to allow accordion to open
+                    }
                 }
             });
         });
@@ -1317,12 +1324,15 @@ document.addEventListener('DOMContentLoaded', () => {
             return; // Don't set up anything if it's already been shown
         }
 
+        let timerId: number;
+
         const showModal = () => {
+            if (modal.classList.contains('visible')) return; // Prevent multiple triggers
             modal.classList.add('visible');
             sessionStorage.setItem('exitModalShown', 'true');
             // Clean up all triggers once shown
             document.removeEventListener('mouseout', handleMouseOut);
-            window.removeEventListener('scroll', handleScroll);
+            clearTimeout(timerId);
         };
 
         const hideModal = () => {
@@ -1336,16 +1346,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        const handleScroll = () => {
-            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-            if (scrollPercent >= 50) {
-                showModal();
-            }
-        };
-
         // Add triggers
         document.addEventListener('mouseout', handleMouseOut);
-        window.addEventListener('scroll', handleScroll);
+        timerId = window.setTimeout(showModal, 22000); // Replaced scroll trigger with a 22-second timer
+
 
         // Add closing event listeners
         closeModalBtn?.addEventListener('click', hideModal);
@@ -1431,55 +1435,40 @@ document.addEventListener('DOMContentLoaded', () => {
         logoGrid.appendChild(fragment);
     }
 
-    // --- Agenda Page Tabs ---
-    function initializeAgendaTabs() {
-        const tabsContainer = document.querySelector('.agenda-tabs');
+    // --- Accessible Tabs Initializer ---
+    function initializeTabs(containerSelector: string) {
+        const tabsContainer = document.querySelector(containerSelector);
         if (!tabsContainer) return;
 
-        const tabButtons = tabsContainer.querySelectorAll('.tab-btn');
-        const contentPanels = document.querySelectorAll('.agenda-content');
+        const tabButtons = tabsContainer.querySelectorAll<HTMLElement>('[role="tab"]');
+        const tabPanels = tabsContainer.querySelectorAll<HTMLElement>('[role="tabpanel"]');
 
         tabsContainer.addEventListener('click', (e) => {
-            const clickedButton = (e.target as HTMLElement).closest('.tab-btn');
+            const clickedButton = (e.target as HTMLElement).closest<HTMLElement>('[role="tab"]');
             if (!clickedButton) return;
 
-            const tabId = (clickedButton as HTMLElement).dataset.tab;
-            
-            // Update buttons
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            clickedButton.classList.add('active');
-
-            // Update content panels
-            contentPanels.forEach(panel => {
-                panel.classList.toggle('active', panel.id === tabId);
+            // Deactivate all tabs and hide all panels
+            tabButtons.forEach(btn => {
+                btn.classList.remove('active');
+                btn.setAttribute('aria-selected', 'false');
             });
+            tabPanels.forEach(panel => {
+                panel.hidden = true;
+            });
+
+            // Activate clicked tab and show corresponding panel
+            clickedButton.classList.add('active');
+            clickedButton.setAttribute('aria-selected', 'true');
+            
+            const panelId = clickedButton.getAttribute('aria-controls');
+            const correspondingPanel = document.getElementById(panelId!);
+            if (correspondingPanel) {
+                correspondingPanel.hidden = false;
+                correspondingPanel.focus();
+            }
         });
     }
 
-    // --- Brand Exposure Page: 360 Marketing Ecosystem Tabs ---
-    function initializeExposureTabs() {
-        const tabsContainer = document.querySelector('.exposure-tabs-container');
-        if (!tabsContainer) return;
-
-        const tabButtons = tabsContainer.querySelectorAll('.exposure-tab-btn');
-        const contentPanels = tabsContainer.querySelectorAll('.exposure-content');
-
-        tabsContainer.addEventListener('click', (e) => {
-            const clickedButton = (e.target as HTMLElement).closest('.exposure-tab-btn');
-            if (!clickedButton) return;
-
-            const tabId = (clickedButton as HTMLElement).dataset.tab;
-            
-            // Update buttons
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            clickedButton.classList.add('active');
-
-            // Update content panels
-            contentPanels.forEach(panel => {
-                panel.classList.toggle('active', panel.id === tabId);
-            });
-        });
-    }
 
     // --- NEW: Impact Stats Number Animation on Scroll ---
     function initializeImpactStats() {
@@ -1717,8 +1706,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeFaqAccordion();
     initializeExitIntentModal();
     initializeHomePartners();
-    initializeAgendaTabs();
-    initializeExposureTabs();
+    initializeTabs('.agenda-tabs');
+    initializeTabs('.exposure-tabs-container');
     initializeImpactStats();
     initializeDeckRequestModal();
     initializeDeckRequestForm();
