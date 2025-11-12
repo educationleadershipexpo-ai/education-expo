@@ -1694,12 +1694,25 @@ document.addEventListener('DOMContentLoaded', () => {
         const banner = document.getElementById('cookie-banner');
         if (!banner) return;
         
-        // Create and show the overlay.
         const overlay = document.createElement('div');
         overlay.id = 'cookie-banner-overlay';
         document.body.appendChild(overlay);
 
-        // Populate and show the banner. All logic and conditions are removed for UI review.
+        const gtag = (window as any).gtag as Function | undefined;
+
+        const updateGtagConsent = (accepted: boolean) => {
+            if (typeof gtag !== 'function') return;
+            const consentState = accepted ? 'granted' : 'denied';
+             gtag('consent', 'update', {
+                'analytics_storage': consentState,
+                'ad_storage': consentState,
+                'ad_user_data': consentState,
+                'ad_personalization': consentState
+            });
+        };
+
+        // This logic ensures the banner is displayed every time the user visits.
+        // The user's choice is not stored.
         banner.innerHTML = `
             <p>${t.cookieMessage} <a href="${isArabic ? 'privacy-ar.html' : 'privacy.html'}" class="cookie-learn-more">${t.cookieLearnMore}</a></p>
             <div class="cookie-banner-actions">
@@ -1709,6 +1722,21 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         banner.style.display = 'flex';
         overlay.style.display = 'block';
+
+        const acceptBtn = document.getElementById('acceptCookies');
+        const rejectBtn = document.getElementById('rejectCookies');
+
+        acceptBtn?.addEventListener('click', () => {
+            banner.style.display = 'none';
+            overlay.style.display = 'none';
+            updateGtagConsent(true);
+        });
+
+        rejectBtn?.addEventListener('click', () => {
+            banner.style.display = 'none';
+            overlay.style.display = 'none';
+            updateGtagConsent(false);
+        });
     }
 
     
