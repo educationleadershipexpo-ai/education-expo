@@ -1689,6 +1689,61 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Cookie Consent Banner ---
+    function initializeCookieBanner() {
+        const banner = document.getElementById('cookie-banner');
+        if (!banner) return;
+
+        const consentValue = localStorage.getItem('cookieConsent');
+        
+        // This is a type assertion for window.gtag
+        const gtag = (window as any).gtag as Function | undefined;
+
+        const updateGtagConsent = (accepted: boolean) => {
+            if (typeof gtag !== 'function') return;
+            const consentState = accepted ? 'granted' : 'denied';
+             gtag('consent', 'update', {
+                'analytics_storage': consentState,
+                'ad_storage': consentState,
+                'ad_user_data': consentState,
+                'ad_personalization': consentState
+            });
+        };
+
+        // If consent has already been given, update gtag and do nothing else.
+        if (consentValue) {
+            if (consentValue === 'accepted') {
+                updateGtagConsent(true);
+            }
+            return;
+        }
+
+        // If no consent is stored, build and show the banner.
+        banner.innerHTML = `
+            <p>${t.cookieMessage} <a href="${isArabic ? 'privacy-ar.html' : 'privacy.html'}" class="cookie-learn-more">${t.cookieLearnMore}</a></p>
+            <div class="cookie-banner-actions">
+                <button id="rejectCookies" class="btn btn-sm">${t.cookieDecline}</button>
+                <button id="acceptCookies" class="btn btn-sm">${t.cookieAccept}</button>
+            </div>
+        `;
+        banner.style.display = 'flex';
+
+        const acceptBtn = document.getElementById('acceptCookies');
+        const rejectBtn = document.getElementById('rejectCookies');
+
+        acceptBtn?.addEventListener('click', () => {
+            localStorage.setItem('cookieConsent', 'accepted');
+            banner.style.display = 'none';
+            updateGtagConsent(true);
+        });
+
+        rejectBtn?.addEventListener('click', () => {
+            localStorage.setItem('cookieConsent', 'declined');
+            banner.style.display = 'none';
+            updateGtagConsent(false);
+        });
+    }
+
     
     // --- Call Initializers on DOMContentLoaded ---
     highlightActiveNav();
@@ -1713,4 +1768,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeDeckRequestForm();
     initializeReadingProgressBar();
     initializeCopyLinkButtons();
+    initializeCookieBanner();
 });
