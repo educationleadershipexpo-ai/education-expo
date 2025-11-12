@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -31,40 +29,74 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     [
       {
         "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "معرض قطر للتعليم 2026",
-        "url": "/index-ar.html",
-        "logo": "https://res.cloudinary.com/dj3vhocuf/image/upload/f_auto,q_auto/v1762817230/logo_500_x_250_px_450_x_250_px_180_x_75_px_or55ec.png",
-        "sameAs": [
-          "https://twitter.com/qatarexpo2026",
-          "https://linkedin.com/company/qatarexpo2026",
-          "https://instagram.com/qatarexpo2026"
-        ],
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "telephone": "+974-7444-9111",
-          "contactType": "Customer Service",
-          "email": "partnerships@eduexpoqatar.com"
-        }
-      },
-      {
-        "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         "itemListElement": [{
           "@type": "ListItem",
           "position": 1,
           "name": "الرئيسية",
-          "item": "/index-ar.html"
+          "item": "https://eduexpoqatar.com/index-ar.html"
         },{
           "@type": "ListItem",
           "position": 2,
           "name": "للعارضين",
-          "item": "/why-exhibit-ar.html"
+          "item": "https://eduexpoqatar.com/why-exhibit-ar.html"
         },{
           "@type": "ListItem",
           "position": 3,
           "name": "ميزات الأجنحة"
         }]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "الباقة الأساسية",
+        "description": "جناح في صف عادي (3x3، 9 متر مربع) مع إدراج الاسم في موقع الحدث، 2 تصريح للعارضين، ودخول إلى صالة التواصل.",
+        "brand": { "@type": "Organization", "name": "معرض قطر للتعليم 2026", "url": "https://eduexpoqatar.com/index-ar.html" },
+        "offers": {
+          "@type": "Offer",
+          "url": "https://eduexpoqatar.com/booth-registration-ar.html?package=Basic",
+          "priceCurrency": "QAR",
+          "availability": "https://schema.org/InStock"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "الباقة الفضية",
+        "description": "جناح في صف ذي أولوية (4x3، 12 متر مربع) مع شعار على موقع الحدث، والاسم في كتالوجات الحدث، و3 تصاريح للعارضين، ودخول إلى صالة التواصل مع مشروبات ووجبات خفيفة مجانية.",
+        "brand": { "@type": "Organization", "name": "معرض قطر للتعليم 2026", "url": "https://eduexpoqatar.com/index-ar.html" },
+        "offers": {
+          "@type": "Offer",
+          "url": "https://eduexpoqatar.com/booth-registration-ar.html?package=Silver",
+          "priceCurrency": "QAR",
+          "availability": "https://schema.org/InStock"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "الباقة الذهبية",
+        "description": "جناح في موقع متميز بالقاعة (6x3، 18 متر مربع) مع شعار ونبذة من 50 كلمة في الكتالوج، و4 تصاريح، وفرصة للتحدث، وخصم 10% على الإضافات، ودخول إلى صالة التواصل ومنطقة المتحدثين.",
+        "brand": { "@type": "Organization", "name": "معرض قطر للتعليم 2026", "url": "https://eduexpoqatar.com/index-ar.html" },
+        "offers": {
+          "@type": "Offer",
+          "url": "https://eduexpoqatar.com/booth-registration-ar.html?package=Gold",
+          "priceCurrency": "QAR",
+          "availability": "https://schema.org/InStock"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "الباقة البلاتينية",
+        "description": "جناح زاوية عند المدخل (7x3، 21 متر مربع) لأقصى رؤية، مع أثاث فاخر، ووضع الشعار في مكان بارز، وعرض في الصفحة الرئيسية، و8 تصاريح، و3 فرص للتحدث، ودخول إلى صالة كبار الشخصيات.",
+        "brand": { "@type": "Organization", "name": "معرض قطر للتعليم 2026", "url": "https://eduexpoqatar.com/index-ar.html" },
+        "offers": {
+          "@type": "Offer",
+          "url": "https://eduexpoqatar.com/booth-registration-ar.html?package=Platinum",
+          "priceCurrency": "QAR",
+          "availability": "https://schema.org/InStock"
+        }
       }
     ]
     </script>
@@ -252,7 +284,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <p>ثواني</p>
                         </div>
                     </div>
-                    <a href="sponsorship-registration-ar.html" class="btn btn-primary">اطلب ملف الرعاية الكامل</a>
+                    <button id="open-deck-form-btn" class="btn btn-primary">حمّل الآن</button>
                 </div>
             </div>
         </section>
